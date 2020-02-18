@@ -12,19 +12,21 @@ Maak een project waar je alle leerdoelen van Semester 2 Software in aan kunt ton
 ## Mijn project
 Ik ga een kassasysteem voor een winkel maken.
 ### Requirements
-1. Het systeem heeft een database van producten.
-2. Het systeem kan bepaalde producten verzamelen en daar een totaal prijs van berekenen. (een bonnetje maken)
-3. Het systeem heeft een webinterface voor de kassiere.
-4. Het systeem houd bij welke producten worden verkocht, en kan hier een overzicht van maken.
-5. Het systeem kan btw berekeningen doen en hier een overzicht van maken.
-6. **C** Het systeem heeft een klantenbestand en kan aankopen op rekening toevoegen.
+1. **M** Het systeem heeft een webinterface voor de kassamedewerker, waar producten mee opgezocht kunnen worden.
+2. **M** Het systeem heeft een database van producten.
+3. **S** Het systeem kan bepaalde producten verzamelen en daar een totaal prijs van berekenen. (een order opstellen) 
+4. **S** Het systeem heeft een klantenbestand en orders op rekening toevoegen
+5. **C** Het systeem houd bij welke producten worden verkocht, en kan hier een overzicht van maken.
 ### Use cases
-- [ ] Als klant wil ik een overzicht hebben van de gekochte producten en de prijzen die hierbij horen.
-- [ ] Als klant wil ik een btw bon kunnen krijgen van mijn aankopen.
-- [ ] **C** Als klant wil ik een rekening kunnen openen.
-- [ ] **C** Als klant wil ik producten aan mijn rekening kunnen toevoegen.
-- [ ] Als kassiere wil ik producten kunnen toevoegen/verwijderen aan de bon voor de klant.
-- [ ] Als kassiere wil ik korting kunnen toevoegen op bepaalde producten
-- [ ] Als kassiere/ medewerker wil ik handmatig producten kunnen toevoegen/verwijderen aan de voorraad.
-- [ ] Als medewerker wil ik een overzicht kunnen printen van de verkochte producten.
-- [ ] **C** Als eigenaar wil ik rekeningen kunnen uitprinten.
+- [ ] **M** Als medewerker wil ik producten kunnen toevoegen/weizigen aan de database.
+- [ ] **M** Als medewerker wil ik producten kunnen weizigen in de database.
+- [ ] **M** Als kassamedewerker wil ik producten kunnen toevoegen/verwijderen aan een order.
+- [ ] **S** Als klant wil ik een overzicht met totaal prijs kunnen zien van mijn order.
+- [ ] **C** Als medewerker wil ik voor een klant een order kunnen plaatsen op rekening.
+- [ ] **W** Als klant wil ik een btw bon kunnen krijgen van mijn order.
+- [ ] **W** Als kassamedewerker wil ik korting kunnen toevoegen op bepaalde producten op een order.
+- [ ] **W** Als kassamedewerker/ medewerker wil ik handmatig producten kunnen toevoegen/verwijderen aan de voorraad.
+- [ ] **W** Als medewerker wil ik een overzicht kunnen printen van de verkochte producten.
+### Conceptueel Model
+#### Iteratie 1
+![I1](/img/Conceptueel_Model_I1.png)
