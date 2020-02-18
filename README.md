@@ -30,3 +30,6 @@ Ik ga een kassasysteem voor een winkel maken.
 ### Conceptueel Model
 #### Iteratie 1
 ![I1](/img/Conceptueel_Model_I1.png)
+### UI Schetsen
+### Iteratie 1 
+![I1](/img/UI_Schetsen_I1.png)
