@@ -29,7 +29,7 @@ Ik ga een kassasysteem voor een winkel maken.
 - [ ] **W** Als medewerker wil ik een overzicht kunnen printen van de verkochte producten.
 ### Conceptueel Model
 #### Iteratie 1
-![I1](/img/Conceptueel_Model_I1.png)
+![I1](/Diagrams/img/Conceptueel_Model_I1.png)
 ### UI Schetsen
 ### Iteratie 1 
-![I1](/img/UI_Schetsen_I1.png)
+![I1](/Diagrams/img/UI_Schetsen_I1.png)
