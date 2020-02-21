@@ -1,0 +1,11 @@
+C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Algoritmiek\Puzzles\Opdracht2\Opdracht2\bin\Debug\netcoreapp3.1\Opdracht2.exe
+C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Algoritmiek\Puzzles\Opdracht2\Opdracht2\bin\Debug\netcoreapp3.1\Opdracht2.deps.json
+C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Algoritmiek\Puzzles\Opdracht2\Opdracht2\bin\Debug\netcoreapp3.1\Opdracht2.runtimeconfig.json
+C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Algoritmiek\Puzzles\Opdracht2\Opdracht2\bin\Debug\netcoreapp3.1\Opdracht2.runtimeconfig.dev.json
+C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Algoritmiek\Puzzles\Opdracht2\Opdracht2\bin\Debug\netcoreapp3.1\Opdracht2.dll
+C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Algoritmiek\Puzzles\Opdracht2\Opdracht2\bin\Debug\netcoreapp3.1\Opdracht2.pdb
+C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Algoritmiek\Puzzles\Opdracht2\Opdracht2\obj\Debug\netcoreapp3.1\Opdracht2.csprojAssemblyReference.cache
+C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Algoritmiek\Puzzles\Opdracht2\Opdracht2\obj\Debug\netcoreapp3.1\Opdracht2.AssemblyInfoInputs.cache
+C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Algoritmiek\Puzzles\Opdracht2\Opdracht2\obj\Debug\netcoreapp3.1\Opdracht2.AssemblyInfo.cs
+C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Algoritmiek\Puzzles\Opdracht2\Opdracht2\obj\Debug\netcoreapp3.1\Opdracht2.dll
+C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Algoritmiek\Puzzles\Opdracht2\Opdracht2\obj\Debug\netcoreapp3.1\Opdracht2.pdb
