@@ -26,6 +26,7 @@ namespace Circustrein
                     return false;
                 }
             }
+            waarde += dier.GetPuntIndex();
             dieren.Add(dier);
             return true;
         }
@@ -33,19 +34,30 @@ namespace Circustrein
 
         bool bijElkaar(Dier dierEen, Dier dierTwee)
         {
-            if (dierEen.vleesEter && dierEen.GetFormaatIndex() >= dierTwee.GetFormaatIndex())
+            if (dierEen.vleesEter && dierEen.GetPuntIndex() >= dierTwee.GetPuntIndex())
             {
                 return false;
             }
-            if (dierTwee.vleesEter && dierTwee.GetFormaatIndex() >= dierEen.GetFormaatIndex())
+            if (dierTwee.vleesEter && dierTwee.GetPuntIndex() >= dierEen.GetPuntIndex())
             {
                 return false;
             }
             return true;
         }
 
+        public override string ToString()
+        {
 
+            string str = "";
+            int waarde = 0;
+            foreach(Dier dier in dieren)
+            {
+                str += dier.ToString();
+                waarde += dier.GetPuntIndex();
+            }
 
-
+            str +=" points: "+ waarde;
+            return str;
+        }
     }
 }

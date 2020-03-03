@@ -11,6 +11,7 @@ namespace DeKinderenKassa.Controllers
         public ActionResult Index()
         {
             return View();
+
         }
 
         public ActionResult About()
@@ -22,8 +23,8 @@ namespace DeKinderenKassa.Controllers
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
-
+            ViewBag.Message = "Your contact page test.";
+            ViewBag.Henkie = "testie";
             return View();
         }
     }

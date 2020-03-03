@@ -1,0 +1,11 @@
+C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Algoritmiek\Puzzles\Circustrein\Circustrein\bin\Debug\netcoreapp3.1\Circustrein.exe
+C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Algoritmiek\Puzzles\Circustrein\Circustrein\bin\Debug\netcoreapp3.1\Circustrein.deps.json
+C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Algoritmiek\Puzzles\Circustrein\Circustrein\bin\Debug\netcoreapp3.1\Circustrein.runtimeconfig.json
+C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Algoritmiek\Puzzles\Circustrein\Circustrein\bin\Debug\netcoreapp3.1\Circustrein.runtimeconfig.dev.json
+C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Algoritmiek\Puzzles\Circustrein\Circustrein\bin\Debug\netcoreapp3.1\Circustrein.dll
+C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Algoritmiek\Puzzles\Circustrein\Circustrein\bin\Debug\netcoreapp3.1\Circustrein.pdb
+C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Algoritmiek\Puzzles\Circustrein\Circustrein\obj\Debug\netcoreapp3.1\Circustrein.csprojAssemblyReference.cache
+C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Algoritmiek\Puzzles\Circustrein\Circustrein\obj\Debug\netcoreapp3.1\Circustrein.AssemblyInfoInputs.cache
+C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Algoritmiek\Puzzles\Circustrein\Circustrein\obj\Debug\netcoreapp3.1\Circustrein.AssemblyInfo.cs
+C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Algoritmiek\Puzzles\Circustrein\Circustrein\obj\Debug\netcoreapp3.1\Circustrein.dll
+C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Algoritmiek\Puzzles\Circustrein\Circustrein\obj\Debug\netcoreapp3.1\Circustrein.pdb

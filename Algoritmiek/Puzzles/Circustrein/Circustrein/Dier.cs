@@ -21,22 +21,26 @@ namespace Circustrein
             this.formaat = formaat;
         }
 
-        public int GetFormaatIndex()
-        {
-            return (int)formaat;
-        }
 
         public int GetPuntIndex()
         {
             switch (formaat)
             {
+                case Formaat.klein:
+                    return 1;
                 case Formaat.middel:
                     return 3;
                 case Formaat.groot:
                     return 5;
-                default:
-                    return 1;
+
             }
+            return 0;
+        }
+
+        public override string ToString()
+        {
+            string eter = vleesEter ? "vleesEter" : "nietVleesEter";
+            return formaat.ToString() + " " + eter + "| " ;
         }
     }
 }
