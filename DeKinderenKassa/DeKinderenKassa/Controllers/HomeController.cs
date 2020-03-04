@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using DeKinderenKassa.Models;
 
 namespace DeKinderenKassa.Controllers
 {
@@ -24,7 +25,19 @@ namespace DeKinderenKassa.Controllers
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page test.";
-            ViewBag.Henkie = "testie";
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult AddProduct()
+        {
+            return View();
+        }
+
+
+        [HttpPost]
+        public ActionResult AddProduct(Product product)
+        {
             return View();
         }
     }

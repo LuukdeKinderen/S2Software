@@ -23,19 +23,18 @@
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("Product toevoegen", "AddProduct", "Home")</li>
                 </ul>
             </div>
         </div>
     </div>
     <div class="container body-content">
-        <div class="col-md-8">
-            @RenderBody()
-        </div>
-        <div class="col-md-4">
-            <h1>Order Hier</h1>
-        </div>
+
+        @RenderBody()
+
+
         <hr />
-        <footer class="col-md-12">
+        <footer>
             <p>&copy; @DateTime.Now.Year - Luuk de Kinderen</p>
         </footer>
     </div>
