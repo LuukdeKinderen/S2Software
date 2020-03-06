@@ -15,7 +15,7 @@ namespace Circustrein
 
         public bool AddDier(Dier dier)
         {
-            if(waarde + dier.GetPuntIndex() > 10)
+            if (waarde + dier.GetPuntIndex() > 10)
             {
                 return false;
             }
@@ -49,14 +49,12 @@ namespace Circustrein
         {
 
             string str = "";
-            int waarde = 0;
             foreach(Dier dier in dieren)
             {
                 str += dier.ToString();
-                waarde += dier.GetPuntIndex();
             }
 
-            str +=" points: "+ waarde;
+            str += "Beladingswaarde: " + waarde.ToString() + "\n\n\n\n\n";
             return str;
         }
     }
