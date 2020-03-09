@@ -6,14 +6,15 @@ namespace Circustrein
 {
     enum Formaat
     {
-        klein,
-        middel,
-        groot
+        klein= 1,
+        middel=3,
+        groot=5
     }
     class Dier
     {
         public bool vleesEter{ private set; get; }
-        Formaat formaat;
+        public Formaat formaat { private set; get; }
+
 
         public Dier(bool vleesEter, Formaat formaat)
         {
@@ -22,24 +23,10 @@ namespace Circustrein
         }
 
 
-        public int GetPuntIndex()
-        {
-            switch (formaat)
-            {
-                case Formaat.klein:
-                    return 1;
-                case Formaat.middel:
-                    return 3;
-                case Formaat.groot:
-                    return 5;
-
-            }
-            return 0;
-        }
 
         public override string ToString()
         {
-            string eter = vleesEter ? "vleesEter" : "nietVleesEter";
+            string eter = vleesEter ? "vleesEter" : "PlantentEter";
             string dier = "| " + eter + " " + formaat.ToString() + " |";
             int strl = dier.Length-2;
             dier = "+\n" + dier + "\n+";
