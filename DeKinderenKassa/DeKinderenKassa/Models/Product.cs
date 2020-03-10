@@ -9,23 +9,6 @@ namespace DeKinderenKassa.Models
 {
     public class Product
     {
-        public long Id { get; set; }
-
-        private string _key;
-
-        public string Key
-        {
-            get
-            {
-                if(_key == null)
-                {
-                    _key = Regex.Replace(Naam.ToLower(), "[^a-z0-9]", "-");
-                }
-                return _key;
-            }
-            set { _key = value; }
-        }
-
 
         [Required(ErrorMessage = "Naam is verplicht")]
         [StringLength(100,MinimumLength =3,ErrorMessage = "Naam moet tussen de 3 en 100 letters bevatten")]
