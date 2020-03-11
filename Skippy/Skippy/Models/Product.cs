@@ -18,7 +18,8 @@ namespace Skippy.Models
         public string Omschrijving { get; set; }
 
         [Required(ErrorMessage = "Prijs is verplicht")]
-        [Range(0.01, 10000.00, ErrorMessage = "Prijs moet tussen de 0,01 en 10.000 zijn")]
+        //[Range(0.01, 10000.00, ErrorMessage = "Prijs moet tussen de 0,01 en 10.000 zijn")]
+        [DataType(DataType.Currency)]
         public decimal Prijs { get; set; }
     }
 }

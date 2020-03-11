@@ -12,9 +12,9 @@ namespace Skippy.Controllers
 {
     public class ProductsController : Controller
     {
-        private readonly SkippyContext _context;
+        private readonly ProductContext _context;
 
-        public ProductsController(SkippyContext context)
+        public ProductsController(ProductContext context)
         {
             _context = context;
         }
