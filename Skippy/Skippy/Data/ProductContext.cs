@@ -15,5 +15,7 @@ namespace Skippy.Data
         }
 
         public DbSet<Skippy.Models.Product> Product { get; set; }
+
+        public DbSet<Skippy.Models.Categorie> Categorie { get; set; }
     }
 }
