@@ -6,8 +6,7 @@ namespace Circustrein
 {
     class Wagon
     {
-        List<Dier> dieren = new List<Dier>();
-        int waarde = 0;
+        private List<Dier> dieren = new List<Dier>();
         public Wagon()
         {
 
@@ -15,7 +14,8 @@ namespace Circustrein
 
         public bool AddDier(Dier dier)
         {
-            if(waarde + dier.GetPuntIndex() > 10)
+            
+            if (Waarde() + (int)dier.formaat > 10)
             {
                 return false;
             }
@@ -26,19 +26,27 @@ namespace Circustrein
                     return false;
                 }
             }
-            waarde += dier.GetPuntIndex();
             dieren.Add(dier);
             return true;
         }
 
+        private int Waarde()
+        {
+            int waarde = 0;
+            foreach (Dier dier in dieren)
+            {
+                waarde += (int)dier.formaat;
+            }
+            return waarde;
+        }
 
         bool bijElkaar(Dier dierEen, Dier dierTwee)
         {
-            if (dierEen.vleesEter && dierEen.GetPuntIndex() >= dierTwee.GetPuntIndex())
+            if (dierEen.vleesEter && dierEen.formaat >= dierTwee.formaat)
             {
                 return false;
             }
-            if (dierTwee.vleesEter && dierTwee.GetPuntIndex() >= dierEen.GetPuntIndex())
+            if (dierTwee.vleesEter && dierTwee.formaat >= dierEen.formaat)
             {
                 return false;
             }
@@ -49,14 +57,12 @@ namespace Circustrein
         {
 
             string str = "";
-            int waarde = 0;
             foreach(Dier dier in dieren)
             {
                 str += dier.ToString();
-                waarde += dier.GetPuntIndex();
             }
 
-            str +=" points: "+ waarde;
+            str += "Beladingswaarde: " + Waarde().ToString() + "\n\n\n\n\n";
             return str;
         }
     }

@@ -7,35 +7,40 @@ namespace Circustrein
     {
         static void Main(string[] args)
         {
+            
 
-            List<Dier> dieren = new List<Dier>() { new Dier(false, Formaat.groot), new Dier(false, Formaat.middel), new Dier(false, Formaat.middel), new Dier(false, Formaat.klein), new Dier(false, Formaat.klein), new Dier(false, Formaat.klein), new Dier(false, Formaat.groot), new Dier(false, Formaat.groot) };
-            List<Wagon> trein = new List<Wagon>() { new Wagon() };
+            List<Dier> dieren = new List<Dier>();
 
-
-            while (dieren.Count != 0)
+            Random r = new Random();
+            for (int i = 0; i < 10; i++)
             {
-                for (int w = 0; w < trein.Count; w++)
-                {
-                    for (int d = 0; d < dieren.Count; d++)
-                    {
-                        if (trein[w].AddDier(dieren[d]))
-                        {
-                            dieren.Remove(dieren[d]);
-                            d = 0;
-                            //break;
-                        }
-                    }
-                }
-                trein.Add(new Wagon());
-                // voeg de beste dieren toe per wagon
+                dieren.Add(new Dier(r.Next(2) > 0, (Formaat)(r.Next(3) * 2 + 1)));
             }
 
-            foreach(Wagon wagon in trein)
-            {
-                Console.WriteLine(wagon.ToString());
-            }
-            Console.WriteLine("test");
+            PrintDieren("random gegenereerde dieren: ", dieren);
 
+
+
+            Ordener ordener = new Ordener();
+            ordener.OrdenDieren(dieren);            
+            PrintDieren("Dieren geordend op type en groote:", dieren);
+
+            Trein trein = new Trein();
+            trein.VerdeelDieren(dieren);
+            Console.WriteLine(trein.ToString());
+
+        }
+
+
+
+        public static void PrintDieren(string message, List<Dier> dieren)
+        {
+            Console.WriteLine(message);
+            foreach (Dier dier in dieren)
+            {
+                Console.WriteLine(dier.ToString());
+            }
+            Console.WriteLine();
         }
 
 
