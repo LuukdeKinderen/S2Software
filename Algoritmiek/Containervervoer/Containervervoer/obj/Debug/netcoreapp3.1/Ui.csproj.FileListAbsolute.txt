@@ -1,0 +1,14 @@
+C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Algoritmiek\Containervervoer\Containervervoer\bin\Debug\netcoreapp3.1\Ui.exe
+C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Algoritmiek\Containervervoer\Containervervoer\bin\Debug\netcoreapp3.1\Ui.deps.json
+C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Algoritmiek\Containervervoer\Containervervoer\bin\Debug\netcoreapp3.1\Ui.runtimeconfig.json
+C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Algoritmiek\Containervervoer\Containervervoer\bin\Debug\netcoreapp3.1\Ui.runtimeconfig.dev.json
+C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Algoritmiek\Containervervoer\Containervervoer\bin\Debug\netcoreapp3.1\Ui.dll
+C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Algoritmiek\Containervervoer\Containervervoer\bin\Debug\netcoreapp3.1\Ui.pdb
+C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Algoritmiek\Containervervoer\Containervervoer\bin\Debug\netcoreapp3.1\Logic.dll
+C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Algoritmiek\Containervervoer\Containervervoer\bin\Debug\netcoreapp3.1\Logic.pdb
+C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Algoritmiek\Containervervoer\Containervervoer\obj\Debug\netcoreapp3.1\Ui.csprojAssemblyReference.cache
+C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Algoritmiek\Containervervoer\Containervervoer\obj\Debug\netcoreapp3.1\Ui.AssemblyInfoInputs.cache
+C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Algoritmiek\Containervervoer\Containervervoer\obj\Debug\netcoreapp3.1\Ui.AssemblyInfo.cs
+C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Algoritmiek\Containervervoer\Containervervoer\obj\Debug\netcoreapp3.1\Ui.csproj.CopyComplete
+C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Algoritmiek\Containervervoer\Containervervoer\obj\Debug\netcoreapp3.1\Ui.dll
+C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Algoritmiek\Containervervoer\Containervervoer\obj\Debug\netcoreapp3.1\Ui.pdb

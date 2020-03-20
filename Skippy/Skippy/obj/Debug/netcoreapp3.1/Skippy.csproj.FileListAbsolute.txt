@@ -160,5 +160,5 @@ C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Skippy\Skippy\bin\Debug
 C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Skippy\Skippy\bin\Debug\netcoreapp3.1\Logic.pdb
 C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Skippy\Skippy\bin\Debug\netcoreapp3.1\DB.dll
 C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Skippy\Skippy\bin\Debug\netcoreapp3.1\DB.pdb
-C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Skippy\Skippy\obj\Debug\netcoreapp3.1\Razor\Views\Product\Index.cshtml.g.cs
-C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Skippy\Skippy\obj\Debug\netcoreapp3.1\Razor\Views\Product\Product.cshtml.g.cs
+C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Skippy\Skippy\obj\Debug\netcoreapp3.1\Razor\Views\Products\Index.cshtml.g.cs
+C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Skippy\Skippy\obj\Debug\netcoreapp3.1\Razor\Views\Products\Product.cshtml.g.cs

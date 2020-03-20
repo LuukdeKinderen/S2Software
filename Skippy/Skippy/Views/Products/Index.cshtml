@@ -1,0 +1,18 @@
+﻿@model List<Logic.Product>
+
+<ul>
+    @foreach (var product in Model)
+    {
+        <a class="nav-link text-dark" asp-area="" asp-controller="Products" asp-action="Product" asp-route-id=@product.id>
+            <li>@product.titel</li>
+        </a>
+    }
+</ul>
+
+@*<div class="text-center">
+        @foreach (var product in Model)
+        {
+            <h1 class="display-4">@product.titel</h1>
+        }
+
+    </div>*@
