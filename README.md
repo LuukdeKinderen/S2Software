@@ -41,6 +41,8 @@ Ingedeeld met MoSCoW.
 ![UI Schetsen](/Diagrams/img/UI_Schetsen.png)
 ### Use cases
 #### UC01
+| UseCase | UC01 |
+| --- | --- |
 | naam | 000 |
 | Samenvatting | 000 |
 | Actors | 000 |
@@ -49,7 +51,8 @@ Ingedeeld met MoSCoW.
 | Uitzonderingen | 1. test 2. test2 |
 | Resultaat | test |
 
-#### UC02
+| UseCase | UC01 |
+| --- | --- |
 | naam | 000 |
 | Samenvatting | 000 |
 | Actors | 000 |
