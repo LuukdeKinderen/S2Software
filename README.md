@@ -46,10 +46,7 @@ Ingedeeld met MoSCoW.
 | Samenvatting | 000 |
 | Actors | 000 |
 | Aannamen | 000 |
-| Omschrijving | 
-1. test
-2. test2 
-|
+| Omschrijving | 1. test<br> 2. test2 |
 | Uitzonderingen | 1. test 2. test2 |
 | Resultaat | test |
 
