@@ -39,9 +39,17 @@ Ingedeeld met MoSCoW.
 - **C** Het systeem kan een overzicht maken van alle verkochte producten in een periode.
 ### UI Schetsen
 ![UI Schetsen](/Diagrams/img/UI_Schetsen.png)
-### USe cases
-| UseCase | UC01 |
-| --- | --- |
+### Use cases
+#### UC01
+| naam | 000 |
+| Samenvatting | 000 |
+| Actors | 000 |
+| Aannamen | 000 |
+| Omschrijving | 1. test<br> 2. test2 |
+| Uitzonderingen | 1. test 2. test2 |
+| Resultaat | test |
+
+#### UC02
 | naam | 000 |
 | Samenvatting | 000 |
 | Actors | 000 |
