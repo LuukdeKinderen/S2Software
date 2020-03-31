@@ -1,63 +1,73 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 
 namespace Logic
 {
     public class Stack
     {
-        public List<Container> stack { get; private set; }
 
-        public Stack(Random r)
+        private List<Container> containers;
+
+        public ReadOnlyCollection<Container> Containers
         {
-            stack = new List<Container>();
-            for (int i = 0; i < 4; i++)
+            get { return containers.AsReadOnly(); }
+        }
+
+        public readonly int x;
+        public readonly int y;
+
+        public Stack(int x, int y)
+        {
+            containers = new List<Container>();
+            this.x = x;
+            this.y = y;
+        }
+
+        public void AddContainer(Container container, bool? top)
+        {
+            if (top == true)
             {
-                stack.Add(new Container(r));
+                containers.Insert(0, container);
+            }
+            else
+            {
+                containers.Add(container);
             }
         }
 
-        public bool AddContaintainer(Container container)
+        public bool hasValuable()
         {
-            if (stack[stack.Count - 1].valuable)
+            foreach (Container container in containers)
             {
-                return false;
+                if (container.valuable)
+                {
+                    return true;
+                }
             }
-
-            int load = container.load;
-            for (int c = 1; c < stack.Count; c++)
-            {
-                load += stack[c].load;
-            }
-
-            if(load > 120000)
-            {
-                return false;
-            }
-
-
-            stack.Add(container);
-            return true;
+            return false;
         }
 
         public int Weight()
         {
             int weight = 0;
-            foreach (Container container in stack)
+
+            foreach (Container container in containers)
             {
-                weight += container.load;
+                weight += container.weight;
             }
             return weight;
         }
 
-        public List<string> GetStringList()
+        public int Height()
         {
-            List<string> stackStrList = new List<string>();
-            foreach(Container container in stack)
-            {
-                stackStrList.Add(container.ToString());
-            }
-            return stackStrList;
+            return containers.Count;
+        }
+
+        public override string ToString()
+        {
+            return String.Format("Height: {0} Weight: {1}", containers.Count, Weight());
         }
     }
 }

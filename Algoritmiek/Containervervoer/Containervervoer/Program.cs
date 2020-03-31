@@ -9,7 +9,17 @@ namespace Containervervoer
         {
             BerendBootje bb = new BerendBootje();
 
-            Console.WriteLine(bb.ToString());
+            foreach (Container cont in bb.containterCollection)
+            {
+                Console.WriteLine(cont.ToString());
+            }
+            bb.containterCollection.Orden();
+            Console.WriteLine("___ordened___");
+            foreach (Container cont in bb.containterCollection)
+            {
+                Console.WriteLine(cont.ToString());
+            }
+
         }
     }
 }

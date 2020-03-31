@@ -9,21 +9,31 @@ namespace Skippy.Controllers
 {
     public class ProductsController : Controller
     {
-        
+
         public IActionResult Index()
         {
-            ProductCollection products = new ProductCollection();
-            return View(products.GetCollection(ProductCollection.Sort.Id));
+            ProductContainer container = new ProductContainer();
+            return View(container.GetProducts());
         }
         public IActionResult Product(int id)
         {
-            ProductCollection products = new ProductCollection();
-            Product prod = products.GetProduct(id);
-            if (prod != null)
-            {
-                return View(prod);
-            }
-            else return new ContentResult { Content = "error" };
+            ProductContainer container = new ProductContainer();
+            Product product = container.GetByID(id);
+            return View(product);
+        }
+        
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Create(Product product)
+        {
+           
+            product.Update();
+            return View("Product",product);
         }
     }
 }

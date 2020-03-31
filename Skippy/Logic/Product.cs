@@ -1,23 +1,44 @@
 ﻿using System;
+using DB;
 
 namespace Logic
 {
     public class Product
-        
-    {
-        public int id { get; private set; }
-        public string titel { get; private set; }
-        public string info { get; private set; }
-        public double prijs { get; private set; }
 
-        public Product(int id, string titel, string info, double prijs)
+    {
+        public int id { get; set; }
+        public string titel { get; set; }
+        public string omschrijving { get; set; }
+        public decimal prijs { get; set; }
+
+        public Product(ProductDTO product)
         {
-            this.id = id;
-            this.titel = titel;
-            this.info = info;
-            this.prijs = prijs;
+            id = product.ProductId;
+            titel = product.Titel;
+            omschrijving = product.Omschrijving;
+            prijs = product.Prijs;
+        }
+        public Product()
+        {
+
         }
 
+        public void Update()
+        {
+            ProductDAL DAL = new ProductDAL();
+            ProductDTO DTO = this.ToDTO();
+            DAL.Save(DTO);
+        }
 
+        private ProductDTO ToDTO()
+        {
+            return new ProductDTO
+            {
+                Titel = titel,
+                ProductId = id,
+                Omschrijving = omschrijving,
+                Prijs = prijs
+            };
+        }
     }
 }

@@ -1,107 +1,193 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 
 namespace Logic
 {
-    public enum ShipFormat
-    {
-        small = 4,
-        medium = 6,
-        large = 8
 
-    }
 
     public class Ship
     {
 
-        public Stack[,] stacks { get; private set; }
+        public Stack[] stacks { get; private set; }
         private readonly int maxTotalWeight;
-        public Ship(ShipFormat format)
+        public readonly int xLength;
+        public readonly int yLength;
+        public Ship(int xLenght, int yLenght)
         {
-            stacks = new Stack[(int)format/2,(int)format];
-            Random rnd = new Random();
-            for (int c = 0; c < stacks.GetLength(0); c++)
+            this.xLength = xLenght;
+            this.yLength = yLenght;
+            stacks = new Stack[xLenght * yLenght];
+            for (int x = 0; x < xLenght; x++)
             {
-                for (int r = 0; r < stacks.GetLength(1); r++)
+                for (int y = 0; y < yLenght; y++)
                 {
-                    stacks[c, r] = new Stack(rnd);
+                    stacks[xLenght * y + x] = new Stack(x, y);
                 }
             }
-            maxTotalWeight = 150000 * (int)format;
+            maxTotalWeight = 150000 * stacks.Length;
         }
 
-        public bool AddContainer(Container container)
+        private bool LeftIsHeviest()
+        {
+            return LeftWeight() > RightWeight();
+        }
+
+        private int LeftWeight()
+        {
+            int weight = 0;
+            for (int y = 0; y < yLength; y++)
+            {
+                for (int left = 0; left < xLength / 2; left++)
+                {
+                    weight += GetStack(left, y).Weight();
+                }
+            }
+            return weight;
+        }
+        private int RightWeight()
+        {
+            int weight = 0;
+            for (int y = 0; y < yLength; y++)
+            {
+                for (int right = xLength / 2; right < xLength; right++)
+                {
+                    weight += GetStack(right, y).Weight();
+                }
+            }
+            return weight;
+        }
+        private int TotalWeight()
+        {
+            int weight = 0;
+            foreach (Stack stack in stacks)
+            {
+                weight += stack.Weight();
+            }
+            return weight;
+        }
+
+        public void AddAndDistribute(List<Container> containers)
+        {
+            foreach (Container container in containers)
+            {
+                if (container.cooled && container.valuable)
+                {
+                    
+                    int y = 0;
+                    for (int x = 0; x < xLength; x++)
+                    {
+                        if (!GetStack(x, y).hasValuable())
+                        {
+                            GetStack(x, y).AddContainer(container, true);
+                        }
+                    }
+                    //sjskldjfkl;
+                }
+                for (int y = 0; y < yLength; y++)
+                {
+                    for (int x = 0; x < xLength; x++)
+                    {
+
+                    }
+                }
+            }
+        }
+        public void lol()
+        {/*  public void AddContainers(List<Container> containers)
+          {
+              for (int container = 0; container < containers.Count; container++)
+              {
+                  findStack(containers[container]);
+              }
+          }
+
+          private bool findStack(Container container)
+          {
+              int beginPoint = LeftIsHeviest() ? xLenght / 2 : 0;
+              int endPoint = LeftIsHeviest() ? xLenght : xLenght / 2;
+              for (int y = 0; y < yLenght; y++)
+              {
+                  {/* if (LeftIsHeviest())
+                  {
+                      for (int x = xLenght - 1; x > xLenght / 2-1; x--)
+                      {
+                          if (GetStack(x, y).AddContainer(container))
+                          {
+                              return true;
+                          }
+                      }
+
+                  }
+                  else
+                  {
+                      for (int x = 0; x < xLenght / 2; x++)
+                      {
+                          if (GetStack(x, y).AddContainer(container))
+                          {
+                              return true;
+                          }
+                      }
+                  }
+                  }
+                  for (int x = beginPoint; x < endPoint; x++)
+                  {
+                      Stack stack = GetStack(x, y);
+                      if (container.cooled && y != 0)
+                      {
+                          return false;
+                      }
+                      if (stack.stack.Count > 0)
+                      {
+                          if ((stack.Weight() - stack.stack[stack.stack.Count - 1].weight) + container.weight > 120000)
+                          {
+                              return false;
+                          }
+                      }
+                      if (container.valuable)
+                      {
+                          if (y % 2 == 0)
+                          {
+                              if (stack.hasValuable())
+                              {
+                                  return false;
+                              }
+                              stack.stack.Insert(0, container);
+                              return true;
+                          }
+                          else
+                          {
+                              return false;
+                          }
+                      }
+                      stack.stack.Add(container);
+                      return true;
+                  }
+              }
+              return false;
+          }*/
+        }
+
+        public Stack GetStack(int x, int y)
         {
             foreach (Stack stack in stacks)
             {
-                if (stack.AddContaintainer(container))
+                if (stack.x == x && stack.y == y)
                 {
-                    return true;
+                    return stack;
                 }
             }
-            return false;
+            return null;
         }
 
-
-        private enum Part
+        public override string ToString()
         {
-            total,
-            firsHalf,
-            secondHalf
+
+            float percentageLeft = (float)100 * LeftWeight() / TotalWeight();
+            float percentageRight = (float)100 * RightWeight() / TotalWeight();
+            float percentageOfMax = (float)100 * TotalWeight() / maxTotalWeight;
+            return string.Format("Weight left: {0}Kg , {1}% \nWeight right: {2} Kg , {3}% \nWeight total: {4} Kg , {5}% of Max({6} Kg)", LeftWeight(), percentageLeft.ToString("00.000"), RightWeight(), percentageRight.ToString("00.000"), TotalWeight(), percentageOfMax.ToString("00.000"), maxTotalWeight);
         }
-        //private int Weight(Part part)
-        //{
-        //    int weight = 0;
-        //    switch (part)
-        //    {
-        //        case Part.total:
-        //            foreach (Stack stack in stacks)
-        //            {
-        //                weight += stack.Weight();
-        //            }
-        //            break;
-        //        case Part.firsHalf:
-        //            for (int s = 0; s < stacks.Count / 2; s++)
-        //            {
-        //                weight += stacks[s].Weight();
-        //            }
-        //            break;
-        //        case Part.secondHalf:
-        //            for (int s = stacks.Count / 2; s < stacks.Count; s++)
-        //            {
-        //                weight += stacks[s].Weight();
-        //            }
-        //            break;
-        //    }
-        //    return weight;
-        //}
-
-        public List<string>[,] GetStringList()
-        {
-            List<string>[,] shipStringList = new List<string>[stacks.GetLength(0), stacks.GetLength(1)];
-            for (int c = 0; c < shipStringList.GetLength(0); c++)
-            {
-                for (int r = 0; r < shipStringList.GetLength(1); r++)
-                {
-                    shipStringList[c,r] = stacks[c, r].GetStringList();
-                }
-            }
-            return shipStringList;
-        }
-
-        //private bool capsizeDanger()
-        //{
-        //    if (Weight(Part.total) < maxTotalWeight / 2)
-        //    {
-        //        return true;
-        //    }
-        //    if(Weight(Part.firsHalf) < maxTotalWeight *0.4 || Weight(Part.firsHalf) > maxTotalWeight * 0.6)
-        //    {
-        //        return true;
-        //    }
-        //    return false;
-        //}
-
     }
 }
