@@ -111,7 +111,7 @@ Ingedeeld met MoSCoW.
 | Uitzonderingen | 1. Het ingevoerde veld is geen getal. Het systeem geeft een foutmelding wijzigt de order niet. Ga terug naar stap 1. |
 | Resultaat | Het aantal van een product op de order is gewijzigd |
 
-|     | UC07 |
+|     | UC08 |
 | --- | --- |
 | Naam | Product uit order verwijderen |
 | Samenvatting | Je gaat een product verwijderen uit een order |
