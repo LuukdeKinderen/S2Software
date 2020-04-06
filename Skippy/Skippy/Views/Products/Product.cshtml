@@ -1,0 +1,12 @@
+﻿@model Logic.Product
+
+
+<div>
+    <h1 class="display-4">@Model.titel</h1>
+    <p>@Model.omschrijving</p>
+    <p>€@Model.prijs.ToString("0.00")</p>
+
+</div>
+<div>
+    <a asp-action="Index">Terug</a>
+</div>

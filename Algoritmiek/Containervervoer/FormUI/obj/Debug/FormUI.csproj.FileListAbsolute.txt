@@ -1,0 +1,12 @@
+C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Algoritmiek\Containervervoer\FormUI\bin\Debug\FormUI.exe.config
+C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Algoritmiek\Containervervoer\FormUI\bin\Debug\FormUI.exe
+C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Algoritmiek\Containervervoer\FormUI\bin\Debug\FormUI.pdb
+C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Algoritmiek\Containervervoer\FormUI\obj\Debug\FormUI.csprojAssemblyReference.cache
+C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Algoritmiek\Containervervoer\FormUI\obj\Debug\FormUI.Form1.resources
+C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Algoritmiek\Containervervoer\FormUI\obj\Debug\FormUI.Properties.Resources.resources
+C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Algoritmiek\Containervervoer\FormUI\obj\Debug\FormUI.csproj.GenerateResource.cache
+C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Algoritmiek\Containervervoer\FormUI\obj\Debug\FormUI.exe
+C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Algoritmiek\Containervervoer\FormUI\obj\Debug\FormUI.pdb
+C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Algoritmiek\Containervervoer\FormUI\bin\Debug\Logic.dll
+C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Algoritmiek\Containervervoer\FormUI\bin\Debug\Logic.pdb
+C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Algoritmiek\Containervervoer\FormUI\obj\Debug\FormUI.csproj.CopyComplete
