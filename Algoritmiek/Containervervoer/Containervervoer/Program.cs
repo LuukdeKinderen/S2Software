@@ -9,15 +9,15 @@ namespace Containervervoer
         {
             BerendBootje bb = new BerendBootje();
 
-            foreach (Container cont in bb.containterCollection)
+            foreach (Container cont in bb.containerCollection)
             {
-                Console.WriteLine(cont.ToString());
+                Console.WriteLine(cont);
             }
-            bb.containterCollection.Orden();
+            bb.containerCollection.Orden();
             Console.WriteLine("___ordened___");
-            foreach (Container cont in bb.containterCollection)
+            foreach (Container cont in bb.containerCollection)
             {
-                Console.WriteLine(cont.ToString());
+                Console.WriteLine(cont);
             }
 
         }

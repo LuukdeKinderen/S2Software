@@ -1,34 +1,193 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 
 namespace Logic
 {
     public class BerendBootje
     {
-        public List<Container> containterCollection { get; private set; }
+        public List<Container> containerCollection { get; private set; }
         public List<Ship> shipCollection { get; private set; }
         public BerendBootje()
         {
             Random r = new Random();
-            containterCollection = new List<Container>();
-            for (int c = 0; c < 80; c++)
+            containerCollection = new List<Container>();
+            for (int c = 0; c < 500; c++)
             {
-                containterCollection.Add(new Container(r));
+                Container cont = new Container(r);
+
+                containerCollection.Add(cont);
             }
         }
 
         public void DistribureContainers()
         {
-            containterCollection.Orden();
-            shipCollection = new List<Ship>() { new Ship(8, 5)};
 
-            shipCollection[0].AddAndDistribute(containterCollection);
+            containerCollection.Orden();
+            shipCollection = new List<Ship>();
+            int bootcount = 0;
+            while (containerCollection.Count > 0)
+            {
+                bootcount++;
+                if (bootcount > 3)
+                {
+                    break;
+                }
+                shipCollection.Add(new Ship(4, 8));
+                containerCollection = AddContainers(shipCollection[shipCollection.Count - 1]);
+            }
+
         }
+        List<Container> AddContainers(Ship ship)
+        {
+            List<Container> notAdded = new List<Container>();
+            while (containerCollection.Count > 0)
+            {
+                Container container = containerCollection[0];
+                bool AddToNextShip = true;
+                if (container.cooled && container.valuable)
+                {
+                    //fill only first row with cooled and valuable
+                    int y = 0;
+                    for (int x = 0; x < ship.xLength; x++)
+                    {
+                        if (!ship.GetStack(x, y).hasValuable())
+                        {
+                            if (ship.GetStack(x, y).CanAddContainer(container, true) && AddToNextShip)
+                            {
+                                ship.GetStack(x, y).AddContainer(container, true);
+                                AddToNextShip = false;
+                                containerCollection.Remove(container);
+                            }
+                        }
+                    }
+                    if (AddToNextShip)
+                    {
+                        notAdded.Add(container);
+                        containerCollection.Remove(container);
+                    }
+                }
+                else if (container.valuable)
+                {
+                    //fill each even row with valuable
+                    for (int y = 0; y < ship.yLength; y += 2)
+                    {
+                        for (int x = 0; x < ship.xLength; x++)
+                        {
+                            if (!ship.GetStack(x, y).hasValuable())
+                            {
+                                if (ship.GetStack(x, y).CanAddContainer(container, true) && AddToNextShip)
+                                {
+                                    ship.GetStack(x, y).AddContainer(container, true);
+                                    AddToNextShip = false;
+                                    containerCollection.Remove(container);
+                                }
+                            }
+                        }
+                    }
+                    //fill last row with valuable
+                    for (int x = 0; x < ship.xLength; x++)
+                    {
+                        if (!ship.GetStack(x, ship.yLength - 1).hasValuable())
+                        {
+                            if (ship.GetStack(x, ship.yLength - 1).CanAddContainer(container, true) && AddToNextShip)
+                            {
+                                ship.GetStack(x, ship.yLength - 1).AddContainer(container, true);
+                                AddToNextShip = false;
+                                containerCollection.Remove(container);
+                            }
+                        }
+                    }
+                    if (AddToNextShip)
+                    {
+                        notAdded.Add(container);
+                        containerCollection.Remove(container);
+                    }
+                }
+                else if (container.cooled)
+                {
+                    //fill only first row with cooled
+                    int y = 0;
+                    for (int x = 0; x < ship.xLength; x++)
+                    {
+                        if (ship.GetStack(x, y).CanAddContainer(container, false) && AddToNextShip)
+                        {
+                            ship.GetStack(x, y).AddContainer(container, false);
+                            AddToNextShip = false;
+                            containerCollection.Remove(container);
+                        }
+                    }
+                    if (AddToNextShip)
+                    {
+                        notAdded.Add(container);
+                        containerCollection.Remove(container);
+                    }
+                }
+                else
+                {
+                    for (int y = 1; y < ship.yLength; y += 2)
+                    {
+                        for (int x = 0; x < ship.xLength; x++)
+                        {
+                            if (ship.GetStack(x, y).CanAddContainer(container, false))
+                            {
+                                if (ship.GetStack(x, y + 1) != null)
+                                {
+                                    if (ship.GetStack(x, y + 1).hasValuable())
+                                    {
+                                        bool height = ship.GetStack(x, y).Height() + 1 < ship.GetStack(x, y + 1).Height();
+                                        while (!height)
+                                        {
+                                            Container lightContainer = containerCollection[containerCollection.Count - 1];
+                                            if (ship.GetStack(x, y + 1).CanAddContainer(lightContainer, false))
+                                            {
+                                                ship.GetStack(x, y + 1).AddContainer(lightContainer, false);
+                                                containerCollection.Remove(lightContainer);
+                                            }
+                                            else
+                                            {
+                                                break;
+                                            }
+                                            height = ship.GetStack(x, y).Height() + 1 < ship.GetStack(x, y + 1).Height();
+                                        }
+                                        if (height)
+                                        {
+                                            ship.GetStack(x, y).AddContainer(container, false);
+                                            AddToNextShip = false;
+                                            containerCollection.Remove(container);
+                                        }
+                                    }
+                                    else
+                                    {
+                                        ship.GetStack(x, y).AddContainer(container, false);
+                                        AddToNextShip = false;
+                                        containerCollection.Remove(container);
+                                    }
+                                }
+                                else
+                                {
+                                    ship.GetStack(x, y).AddContainer(container, false);
+                                    AddToNextShip = false;
+                                    containerCollection.Remove(container);
+                                }
+                            }
+                        }
+                    }
+                    if (AddToNextShip)
+                    {
+                        notAdded.Add(container);
+                        containerCollection.Remove(container);
+                    }
+                }
+            }
+            return notAdded;
+        }
+
 
         public void AddContainer(Container container)
         {
-            containterCollection.Add(container);
+            containerCollection.Add(container);
         }
 
     }

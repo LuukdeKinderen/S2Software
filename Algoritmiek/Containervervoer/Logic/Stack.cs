@@ -25,7 +25,12 @@ namespace Logic
             this.y = y;
         }
 
-        public void AddContainer(Container container, bool? top)
+        /// <summary>
+        /// Paces a container on this stack
+        /// </summary>
+        /// <param name="container">the container you want to place</param>
+        /// <param name="top">Do you want to place the container on top</param>
+        public void AddContainer(Container container, bool top)
         {
             if (top == true)
             {
@@ -35,6 +40,16 @@ namespace Logic
             {
                 containers.Add(container);
             }
+        }
+
+        /// <summary>
+        /// Returns true when the load of the bottom conainer is not overwriten.
+        /// </summary>
+        /// <param name="container">the container you want to place</param>
+        /// <param name="top">Do you want to place the container on top</param>
+        public bool CanAddContainer(Container container, bool top)
+        {
+            return top ? BottomLoad() + container.weight <= 120000 : Weight() <= 120000;
         }
 
         public bool hasValuable()
@@ -60,6 +75,17 @@ namespace Logic
             return weight;
         }
 
+        private int BottomLoad()
+        {
+            if (containers.Count > 0)
+            {
+                return Weight() - containers[Containers.Count - 1].weight;
+            }
+            else
+            {
+                return 0;
+            }
+        }
         public int Height()
         {
             return containers.Count;
@@ -67,7 +93,7 @@ namespace Logic
 
         public override string ToString()
         {
-            return String.Format("Height: {0} Weight: {1}", containers.Count, Weight());
+            return String.Format("Height: {0}, Weight: {1}, BottomLoad: {2}", containers.Count, Weight(), BottomLoad());
         }
     }
 }

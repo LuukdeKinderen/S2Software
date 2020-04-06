@@ -65,7 +65,7 @@ Ingedeeld met MoSCoW.
 | Naam | Product toevoegen aan categorie |
 | Samenvatting | Je hebt een categorie en product aangemaakt. Je wilt deze nu verbinden |
 | Actors | Manager |
-| Aannamen | 1. Het systeem heeft minstens 1 product.<br> 2. Het systeem heeft minstens 1 product.  |
+| Aannamen | 1. Het systeem heeft minstens 1 product.<br> 2. Het systeem heeft minstens 1 categorie.  |
 | Omschrijving | 1. De actor opent een categorie <br> 2. De actor klikt op ‘Product toevoegen’ <br> 3. Het systeem laat een lijst zien van alle producten. <br> 4. De actor selecteert het product dat hij wil toevoegen. <br> 5. Het systeem voegt het product toe aan de categorie |
 | Uitzonderingen | Geen |
 | Resultaat | Het product is toegevoegd aan de categorie. |

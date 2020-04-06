@@ -68,34 +68,102 @@ namespace Logic
             return weight;
         }
 
+        public Stack GetStack(int x, int y)
+        {
+            foreach (Stack stack in stacks)
+            {
+                if (stack.x == x && stack.y == y)
+                {
+                    return stack;
+                }
+            }
+            return null;
+        }
+
+        public override string ToString()
+        {
+
+            float percentageLeft = (float)100 * LeftWeight() / TotalWeight();
+            float percentageRight = (float)100 * RightWeight() / TotalWeight();
+            float percentageOfMax = (float)100 * TotalWeight() / maxTotalWeight;
+            return string.Format("Weight left: {0}Kg , {1}% \nWeight right: {2} Kg , {3}% \nWeight total: {4} Kg , {5}% of Max({6} Kg)", LeftWeight(), percentageLeft.ToString("00.000"), RightWeight(), percentageRight.ToString("00.000"), TotalWeight(), percentageOfMax.ToString("00.000"), maxTotalWeight);
+        }
+
+
+
+
+
+        /*
         public void AddAndDistribute(List<Container> containers)
         {
-            foreach (Container container in containers)
+            for (int c = 0; c < containers.Count; c++)
             {
-                if (container.cooled && container.valuable)
+
+                bool distributed = false;
+                if (containers[c].cooled && containers[c].valuable)
                 {
-                    
                     int y = 0;
                     for (int x = 0; x < xLength; x++)
                     {
                         if (!GetStack(x, y).hasValuable())
                         {
-                            GetStack(x, y).AddContainer(container, true);
+                            if (!distributed)
+                            {
+                                GetStack(x, y).AddContainer(containers[c], true);
+                                distributed = true;
+                            }
                         }
                     }
-                    //sjskldjfkl;
+                }
+                if (containers[c].valuable)
+                {
+                    Debug.WriteLine("test");
+                    for (int y = 0; y < yLength; y += 2)
+                    {
+                        for (int x = 0; x < xLength; x++)
+                        {
+                            if (!GetStack(x, y).hasValuable())
+                            {
+                                if (!distributed)
+                                {
+                                    GetStack(x, y).AddContainer(containers[c], true);
+                                    distributed = true;
+                                }
+                            }
+                        }
+                    }
+                }
+                if (containers[c].cooled)
+                {
+                    int y = 0;
+                    for (int x = 0; x < xLength; x++)
+                    {
+                        //if (!distributed)
+                        //{
+                        //    while (GetStack(x, y).CanAddContainer(containers[c], false))
+                        //    {
+                        //        GetStack(x, y).AddContainer(containers[c], false);
+                        //        c++;
+                        //        distributed = true;
+                        //    }
+                        //}
+                    }
                 }
                 for (int y = 0; y < yLength; y++)
                 {
                     for (int x = 0; x < xLength; x++)
                     {
-
+                        if (!distributed && GetStack(x, y).CanAddContainer(containers[c], false))
+                        {
+                            GetStack(x, y).AddContainer(containers[c], false);
+                            distributed = true;
+                        }
                     }
                 }
             }
         }
         public void lol()
-        {/*  public void AddContainers(List<Container> containers)
+        {  public void AddContainers(List<Container> containers)
           {
               for (int container = 0; container < containers.Count; container++)
               {
@@ -166,28 +234,7 @@ namespace Logic
                   }
               }
               return false;
-          }*/
-        }
-
-        public Stack GetStack(int x, int y)
-        {
-            foreach (Stack stack in stacks)
-            {
-                if (stack.x == x && stack.y == y)
-                {
-                    return stack;
-                }
-            }
-            return null;
-        }
-
-        public override string ToString()
-        {
-
-            float percentageLeft = (float)100 * LeftWeight() / TotalWeight();
-            float percentageRight = (float)100 * RightWeight() / TotalWeight();
-            float percentageOfMax = (float)100 * TotalWeight() / maxTotalWeight;
-            return string.Format("Weight left: {0}Kg , {1}% \nWeight right: {2} Kg , {3}% \nWeight total: {4} Kg , {5}% of Max({6} Kg)", LeftWeight(), percentageLeft.ToString("00.000"), RightWeight(), percentageRight.ToString("00.000"), TotalWeight(), percentageOfMax.ToString("00.000"), maxTotalWeight);
-        }
+          }
+        }*/
     }
 }

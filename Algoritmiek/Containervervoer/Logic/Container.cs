@@ -14,8 +14,8 @@ namespace Logic
         public Container(Random r)
         {
             weight = r.Next(4000, 30001);
-            valuable = r.Next(0, 10) < 1;
-            cooled = r.Next(0, 10) < 1;
+            valuable = r.Next(0, 15) < 1;
+            cooled = r.Next(0, 15) < 1;
         }
 
         public Container(bool valuable, bool cooled, int weight)
