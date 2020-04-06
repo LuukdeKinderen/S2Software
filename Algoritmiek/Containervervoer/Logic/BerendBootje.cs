@@ -13,7 +13,7 @@ namespace Logic
         {
             Random r = new Random();
             containerCollection = new List<Container>();
-            for (int c = 0; c < 500; c++)
+            for (int c = 0; c < 400; c++)
             {
                 Container cont = new Container(r);
 
@@ -26,15 +26,10 @@ namespace Logic
 
             containerCollection.Orden();
             shipCollection = new List<Ship>();
-            int bootcount = 0;
             while (containerCollection.Count > 0)
             {
-                bootcount++;
-                if (bootcount > 3)
-                {
-                    break;
-                }
-                shipCollection.Add(new Ship(4, 8));
+
+                shipCollection.Add(new Ship(8,4));
                 containerCollection = AddContainers(shipCollection[shipCollection.Count - 1]);
             }
 
@@ -50,18 +45,20 @@ namespace Logic
                 {
                     //fill only first row with cooled and valuable
                     int y = 0;
-                    for (int x = 0; x < ship.xLength; x++)
+                    for (int xStep = 0; xStep < ship.xLength / 2; xStep++)
                     {
-                        if (!ship.GetStack(x, y).hasValuable())
+                        int xLeft = xStep;
+                        int xRight = ship.xLength - 1 - xStep;
+                        if (!ship.GetStack(xLeft, y).hasValuable())
                         {
-                            if (ship.GetStack(x, y).CanAddContainer(container, true) && AddToNextShip)
-                            {
-                                ship.GetStack(x, y).AddContainer(container, true);
-                                AddToNextShip = false;
-                                containerCollection.Remove(container);
-                            }
+                            AddToNextShip = AddContainer(ship.GetStack(xLeft, y), container, true, AddToNextShip);
+                        }
+                        if (!ship.GetStack(xRight, y).hasValuable())
+                        {
+                            AddToNextShip = AddContainer(ship.GetStack(xRight, y), container, true, AddToNextShip);
                         }
                     }
+
                     if (AddToNextShip)
                     {
                         notAdded.Add(container);
@@ -73,30 +70,32 @@ namespace Logic
                     //fill each even row with valuable
                     for (int y = 0; y < ship.yLength; y += 2)
                     {
-                        for (int x = 0; x < ship.xLength; x++)
+                        for (int xStep = 0; xStep < ship.xLength / 2; xStep++)
                         {
-                            if (!ship.GetStack(x, y).hasValuable())
+                            int xLeft = xStep;
+                            int xRight = ship.xLength - 1 - xStep;
+                            if (!ship.GetStack(xLeft, y).hasValuable())
                             {
-                                if (ship.GetStack(x, y).CanAddContainer(container, true) && AddToNextShip)
-                                {
-                                    ship.GetStack(x, y).AddContainer(container, true);
-                                    AddToNextShip = false;
-                                    containerCollection.Remove(container);
-                                }
+                                AddToNextShip = AddContainer(ship.GetStack(xLeft, y), container, true, AddToNextShip);
+                            }
+                            if (!ship.GetStack(xRight, y).hasValuable())
+                            {
+                                AddToNextShip = AddContainer(ship.GetStack(xRight, y), container, true, AddToNextShip);
                             }
                         }
                     }
                     //fill last row with valuable
-                    for (int x = 0; x < ship.xLength; x++)
+                    for (int xStep = 0; xStep < ship.xLength / 2; xStep++)
                     {
-                        if (!ship.GetStack(x, ship.yLength - 1).hasValuable())
+                        int xLeft = xStep;
+                        int xRight = ship.xLength - 1 - xStep;
+                        if (!ship.GetStack(xLeft, ship.yLength - 1).hasValuable())
                         {
-                            if (ship.GetStack(x, ship.yLength - 1).CanAddContainer(container, true) && AddToNextShip)
-                            {
-                                ship.GetStack(x, ship.yLength - 1).AddContainer(container, true);
-                                AddToNextShip = false;
-                                containerCollection.Remove(container);
-                            }
+                            AddToNextShip = AddContainer(ship.GetStack(xLeft, ship.yLength - 1), container, true, AddToNextShip);
+                        }
+                        if (!ship.GetStack(xRight, ship.yLength - 1).hasValuable())
+                        {
+                            AddToNextShip = AddContainer(ship.GetStack(xRight, ship.yLength - 1), container, true, AddToNextShip);
                         }
                     }
                     if (AddToNextShip)
@@ -109,14 +108,12 @@ namespace Logic
                 {
                     //fill only first row with cooled
                     int y = 0;
-                    for (int x = 0; x < ship.xLength; x++)
+                    for (int xStep = 0; xStep < ship.xLength / 2; xStep++)
                     {
-                        if (ship.GetStack(x, y).CanAddContainer(container, false) && AddToNextShip)
-                        {
-                            ship.GetStack(x, y).AddContainer(container, false);
-                            AddToNextShip = false;
-                            containerCollection.Remove(container);
-                        }
+                        int xLeft = xStep;
+                        int xRight = ship.xLength - 1 - xStep;
+                        AddToNextShip = AddContainer(ship.GetStack(xLeft, y), container, false, AddToNextShip);
+                        AddToNextShip = AddContainer(ship.GetStack(xRight, y), container, false, AddToNextShip);
                     }
                     if (AddToNextShip)
                     {
@@ -126,52 +123,108 @@ namespace Logic
                 }
                 else
                 {
+                    //fill uneven rows with normal containers.
                     for (int y = 1; y < ship.yLength; y += 2)
                     {
-                        for (int x = 0; x < ship.xLength; x++)
+                        for (int xStep = 0; xStep < ship.xLength / 2; xStep++)
                         {
-                            if (ship.GetStack(x, y).CanAddContainer(container, false))
+                            int xLeft = xStep;
+                            int xRight = ship.xLength - 1 - xStep;
+                            if (ship.GetStack(xLeft, y).CanAddContainer(container, false))
                             {
-                                if (ship.GetStack(x, y + 1) != null)
+                                if (ship.GetStack(xLeft, y + 1) != null)
                                 {
-                                    if (ship.GetStack(x, y + 1).hasValuable())
+                                    if (ship.GetStack(xLeft, y + 1).hasValuable())
                                     {
-                                        bool height = ship.GetStack(x, y).Height() + 1 < ship.GetStack(x, y + 1).Height();
+                                        bool height = ship.GetStack(xLeft, y).Count + 1 < ship.GetStack(xLeft, y + 1).Count;
                                         while (!height)
                                         {
                                             Container lightContainer = containerCollection[containerCollection.Count - 1];
-                                            if (ship.GetStack(x, y + 1).CanAddContainer(lightContainer, false))
+                                            if (ship.GetStack(xLeft, y + 1).CanAddContainer(lightContainer, false))
                                             {
-                                                ship.GetStack(x, y + 1).AddContainer(lightContainer, false);
+                                                ship.GetStack(xLeft, y + 1).AddContainer(lightContainer, false);
                                                 containerCollection.Remove(lightContainer);
                                             }
                                             else
                                             {
                                                 break;
                                             }
-                                            height = ship.GetStack(x, y).Height() + 1 < ship.GetStack(x, y + 1).Height();
+                                            height = ship.GetStack(xLeft, y).Count + 1 < ship.GetStack(xLeft, y + 1).Count;
                                         }
-                                        if (height)
+                                        if (height && AddToNextShip)
                                         {
-                                            ship.GetStack(x, y).AddContainer(container, false);
+                                            ship.GetStack(xLeft, y).AddContainer(container, false);
                                             AddToNextShip = false;
                                             containerCollection.Remove(container);
                                         }
                                     }
-                                    else
+                                    else if (AddToNextShip)
                                     {
-                                        ship.GetStack(x, y).AddContainer(container, false);
+                                        ship.GetStack(xLeft, y).AddContainer(container, false);
                                         AddToNextShip = false;
                                         containerCollection.Remove(container);
                                     }
                                 }
-                                else
+                                else if (AddToNextShip)
                                 {
-                                    ship.GetStack(x, y).AddContainer(container, false);
+                                    ship.GetStack(xLeft, y).AddContainer(container, false);
                                     AddToNextShip = false;
                                     containerCollection.Remove(container);
                                 }
                             }
+                            if (ship.GetStack(xRight, y).CanAddContainer(container, false))
+                            {
+                                if (ship.GetStack(xRight, y + 1) != null)
+                                {
+                                    if (ship.GetStack(xRight, y + 1).hasValuable())
+                                    {
+                                        bool height = ship.GetStack(xRight, y).Count + 1 < ship.GetStack(xRight, y + 1).Count;
+                                        while (!height)
+                                        {
+                                            Container lightContainer = containerCollection[containerCollection.Count - 1];
+                                            if (ship.GetStack(xRight, y + 1).CanAddContainer(lightContainer, false))
+                                            {
+                                                ship.GetStack(xRight, y + 1).AddContainer(lightContainer, false);
+                                                containerCollection.Remove(lightContainer);
+                                            }
+                                            else
+                                            {
+                                                break;
+                                            }
+                                            height = ship.GetStack(xRight, y).Count + 1 < ship.GetStack(xRight, y + 1).Count;
+                                        }
+                                        if (height && AddToNextShip)
+                                        {
+                                            ship.GetStack(xRight, y).AddContainer(container, false);
+                                            AddToNextShip = false;
+                                            containerCollection.Remove(container);
+                                        }
+                                    }
+                                    else if (AddToNextShip)
+                                    {
+                                        ship.GetStack(xRight, y).AddContainer(container, false);
+                                        AddToNextShip = false;
+                                        containerCollection.Remove(container);
+                                    }
+                                }
+                                else if (AddToNextShip)
+                                {
+                                    ship.GetStack(xRight, y).AddContainer(container, false);
+                                    AddToNextShip = false;
+                                    containerCollection.Remove(container);
+                                }
+                            }
+                        }
+                    }
+                    //fill even rows with normal containers
+                    for (int y = 0; y < ship.yLength; y += 2)
+                    {
+                        for (int xStep = 0; xStep < ship.xLength / 2; xStep++)
+                        {
+                            int xLeft = xStep;
+                            int xRight = ship.xLength - 1 - xStep;
+                            AddToNextShip = AddContainer(ship.GetStack(xLeft, y), container, false, AddToNextShip);
+                            AddToNextShip = AddContainer(ship.GetStack(xRight, y), container, false, AddToNextShip);
                         }
                     }
                     if (AddToNextShip)
@@ -184,10 +237,16 @@ namespace Logic
             return notAdded;
         }
 
-
-        public void AddContainer(Container container)
+        private bool AddContainer(Stack stack, Container container, bool top, bool AddToNextShip)
         {
-            containerCollection.Add(container);
+            if (stack.CanAddContainer(container, top) && AddToNextShip)
+            {
+                stack.AddContainer(container, top);
+                AddToNextShip = false;
+                containerCollection.Remove(container);
+                return AddToNextShip;
+            }
+            return AddToNextShip;
         }
 
     }

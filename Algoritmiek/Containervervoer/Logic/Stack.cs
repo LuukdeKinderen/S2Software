@@ -17,6 +17,7 @@ namespace Logic
 
         public readonly int x;
         public readonly int y;
+        public int Count { get { return Containers.Count; } }
 
         public Stack(int x, int y)
         {
@@ -38,12 +39,19 @@ namespace Logic
             }
             else
             {
-                containers.Add(container);
+                if (containers.Count > 1)
+                {
+                    containers.Insert(1, container);
+                }
+                else
+                {
+                    containers.Add(container);
+                }
             }
         }
 
         /// <summary>
-        /// Returns true when the load of the bottom conainer is not overwriten.
+        /// Returns true when the load of the bottom conainer is not to high after adding a container.
         /// </summary>
         /// <param name="container">the container you want to place</param>
         /// <param name="top">Do you want to place the container on top</param>
@@ -79,21 +87,19 @@ namespace Logic
         {
             if (containers.Count > 0)
             {
-                return Weight() - containers[Containers.Count - 1].weight;
+                return Weight() - containers[Count - 1].weight;
             }
             else
             {
                 return 0;
             }
         }
-        public int Height()
-        {
-            return containers.Count;
-        }
+        
+
 
         public override string ToString()
         {
-            return String.Format("Height: {0}, Weight: {1}, BottomLoad: {2}", containers.Count, Weight(), BottomLoad());
+            return String.Format("Height: {0}, Weight: {1}, BottomLoad: {2}", Count , Weight(), BottomLoad());
         }
     }
 }
