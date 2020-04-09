@@ -12,18 +12,16 @@ using Logic;
 
 namespace FormUI
 {
-    public partial class Form1 : Form
+    public partial class Visualiser : Form
     {
-        public Form1()
+        BerendBootje bb = new BerendBootje(5,8);
+        public Visualiser()
         {
             InitializeComponent();
-            BerendBootje bb = new BerendBootje();
 
+            bb.AddRandomContianers(750);
             bb.DistribureContainers();
             ScrollPanel.Controls.Add(ShipsTable(bb.shipCollection));
-
-            
-
         }
 
         private TableLayoutPanel ShipsTable(List<Ship> shipCollection)
@@ -31,6 +29,7 @@ namespace FormUI
             TableLayoutPanel shipsTable = new TableLayoutPanel()
             {
                 AutoSize = true,
+                AutoSizeMode = AutoSizeMode.GrowOnly,
                 Location = new Point(10, 10),
                 CellBorderStyle = TableLayoutPanelCellBorderStyle.Single,
             };
@@ -42,7 +41,7 @@ namespace FormUI
                 TableLayoutPanel shipTable = new TableLayoutPanel()
                 {
                     AutoSize = true,
-                    Location = new Point(0, 0),
+                    AutoSizeMode = AutoSizeMode.GrowOnly,
                     ColumnCount = xLength,
                     RowCount = yLenght,
                 };
@@ -52,28 +51,76 @@ namespace FormUI
                     {
                         Panel panel = new Panel
                         {
-                            AutoSize = true,
+                            Size = new Size(200, 165),
                         };
                         Label label = new Label
                         {
                             Text = shipCollection[ship].GetStack(x, y).ToString(),
                             AutoSize = true,
                         };
+                        Panel lbPanel = new Panel
+                        {
+                            Location = new Point(0, 55),
+                            Size = new Size(205, 110),
+                            AutoScroll = true,
+                        };
                         ListBox listBox = new ListBox
                         {
                             DataSource = shipCollection[ship].GetStack(x, y).Containers,
-                            Location = new Point(0,15),
-                            Size = new Size(175, 5),
                             AutoSize = true,
+                            Size = new Size(180, 5),
                             SelectionMode = SelectionMode.None
                         };
                         panel.Controls.Add(label);
-                        panel.Controls.Add(listBox);
+                        lbPanel.Controls.Add(listBox);
+                        panel.Controls.Add(lbPanel);
                         shipTable.Controls.Add(panel, x, y);
                     }
                 }
                 shipsTable.Controls.Add(shipTable, ship, 1);
             }
+
+            shipsTable.Controls.Add(
+                new Label
+                {
+                    Text = "All containers \n" + bb.containerCollectionSorted.ExtendedToString(),
+                    AutoSize = true,
+                },
+                shipCollection.Count,
+                0
+            );
+            shipsTable.Controls.Add(
+                new ListBox
+                {
+                    DataSource = bb.containerCollection,
+                    AutoSize = true,
+                    SelectionMode = SelectionMode.None
+                },
+                shipCollection.Count,
+                1
+            );
+            
+            shipsTable.Controls.Add(
+                new Label
+                {
+                    Text = "All containers Sorted \n" + bb.containerCollectionSorted.ExtendedToString(),
+                    AutoSize = true,
+                },
+                shipCollection.Count+1,
+                0
+            );
+            shipsTable.Controls.Add(
+                new ListBox
+                {
+                    DataSource = bb.containerCollectionSorted,
+                    AutoSize = true,
+                    SelectionMode = SelectionMode.None
+                },
+                shipCollection.Count+1,
+                1
+            );
+
+
             return shipsTable;
         }
 

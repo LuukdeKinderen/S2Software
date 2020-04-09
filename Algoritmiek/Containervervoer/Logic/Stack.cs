@@ -9,15 +9,59 @@ namespace Logic
     {
 
         private List<Container> containers;
-
         public ReadOnlyCollection<Container> Containers
         {
             get { return containers.AsReadOnly(); }
         }
-
         public readonly int x;
         public readonly int y;
-        public int Count { get { return Containers.Count; } }
+        public int Count
+        {
+            get
+            {
+                return Containers.Count;
+            }
+        }
+        public bool HasValuable
+        {
+            get
+            {
+                foreach (Container container in containers)
+                {
+                    if (container.valuable)
+                    {
+                        return true;
+                    }
+                }
+                return false;
+            }
+        }
+        public int Weight
+        {
+            get
+            {
+                int weight = 0;
+                foreach (Container container in containers)
+                {
+                    weight += container.weight;
+                }
+                return weight;
+            }
+        }
+        private int BottomLoad
+        {
+            get
+            {
+                if (containers.Count > 0)
+                {
+                    return Weight - containers[Count - 1].weight;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+        }
 
         public Stack(int x, int y)
         {
@@ -26,80 +70,38 @@ namespace Logic
             this.y = y;
         }
 
-        /// <summary>
-        /// Paces a container on this stack
-        /// </summary>
-        /// <param name="container">the container you want to place</param>
-        /// <param name="top">Do you want to place the container on top</param>
-        public void AddContainer(Container container, bool top)
+        public bool AddContainer(Container container)
         {
-            if (top == true)
+
+            if (HasValuable && container.valuable)
             {
-                containers.Insert(0, container);
+                return false;
+            }
+            if (container.valuable && y % 2 != 0)
+            {
+                return false;
+            }
+            if (container.cooled && y != 0)
+            {
+                return false;
+            }
+            containers.Add(container);
+            containers.SortForStack();
+            if (BottomLoad <= 120000)
+            {
+                return true;
             }
             else
             {
-                if (containers.Count > 1)
-                {
-                    containers.Insert(1, container);
-                }
-                else
-                {
-                    containers.Add(container);
-                }
+                containers.Remove(container);
+                return false;
             }
+
         }
-
-        /// <summary>
-        /// Returns true when the load of the bottom conainer is not to high after adding a container.
-        /// </summary>
-        /// <param name="container">the container you want to place</param>
-        /// <param name="top">Do you want to place the container on top</param>
-        public bool CanAddContainer(Container container, bool top)
-        {
-            return top ? BottomLoad() + container.weight <= 120000 : Weight() <= 120000;
-        }
-
-        public bool hasValuable()
-        {
-            foreach (Container container in containers)
-            {
-                if (container.valuable)
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        public int Weight()
-        {
-            int weight = 0;
-
-            foreach (Container container in containers)
-            {
-                weight += container.weight;
-            }
-            return weight;
-        }
-
-        private int BottomLoad()
-        {
-            if (containers.Count > 0)
-            {
-                return Weight() - containers[Count - 1].weight;
-            }
-            else
-            {
-                return 0;
-            }
-        }
-        
-
 
         public override string ToString()
         {
-            return String.Format("Height: {0}, Weight: {1}, BottomLoad: {2}", Count , Weight(), BottomLoad());
+            return String.Format("Position: ({0},{1})\nHeight: {2}\nWeight: {3}\nBottomLoad: {4}", x, y, Count, Weight, BottomLoad);
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace FormUI
 {
-    partial class Form1
+    partial class Visualiser
     {
         /// <summary>
         /// Required designer variable.
