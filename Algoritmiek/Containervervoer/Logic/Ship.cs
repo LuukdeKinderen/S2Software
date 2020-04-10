@@ -182,7 +182,7 @@ namespace Logic
             float percentageRight = (float)100 * RightWeight / TotalWeight;
             return string.Format
                 (
-                "Total Containers: {0} \nWeight left: {1}Kg , {2}% \nWeight right: {3} Kg , {4}% \nWeight total: {5} Kg , {6}% of Max({7} Kg)",
+                "Total Containers: {0} \nWeight left: {1} Kg , {2}% \nWeight right: {3} Kg , {4}% \nWeight total: {5} Kg , {6}% of Max({7} Kg)",
                 ContainerCount,
                 LeftWeight,
                 percentageLeft.ToString("00.000"),

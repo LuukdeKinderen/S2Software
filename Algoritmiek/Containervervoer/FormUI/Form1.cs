@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
@@ -14,17 +15,17 @@ namespace FormUI
 {
     public partial class Visualiser : Form
     {
-        BerendBootje bb = new BerendBootje(5,8);
+        BerendBootje bb = new BerendBootje();
         public Visualiser()
         {
             InitializeComponent();
 
-            bb.AddRandomContianers(750);
-            bb.DistribureContainers();
-            ScrollPanel.Controls.Add(ShipsTable(bb.shipCollection));
+
+
         }
 
-        private TableLayoutPanel ShipsTable(List<Ship> shipCollection)
+
+        private TableLayoutPanel ShipsTable(ReadOnlyCollection<Ship> shipCollection)
         {
             TableLayoutPanel shipsTable = new TableLayoutPanel()
             {
@@ -58,73 +59,109 @@ namespace FormUI
                             Text = shipCollection[ship].GetStack(x, y).ToString(),
                             AutoSize = true,
                         };
-                        Panel lbPanel = new Panel
-                        {
-                            Location = new Point(0, 55),
-                            Size = new Size(205, 110),
-                            AutoScroll = true,
-                        };
                         ListBox listBox = new ListBox
                         {
                             DataSource = shipCollection[ship].GetStack(x, y).Containers,
-                            AutoSize = true,
-                            Size = new Size(180, 5),
+                            Location = new Point(0, 55),
+                            Size = new Size(180, 110),
                             SelectionMode = SelectionMode.None
                         };
                         panel.Controls.Add(label);
-                        lbPanel.Controls.Add(listBox);
-                        panel.Controls.Add(lbPanel);
+                        panel.Controls.Add(listBox);
                         shipTable.Controls.Add(panel, x, y);
                     }
                 }
                 shipsTable.Controls.Add(shipTable, ship, 1);
             }
-
-            shipsTable.Controls.Add(
-                new Label
-                {
-                    Text = "All containers \n" + bb.containerCollectionSorted.ExtendedToString(),
-                    AutoSize = true,
-                },
-                shipCollection.Count,
-                0
-            );
-            shipsTable.Controls.Add(
-                new ListBox
-                {
-                    DataSource = bb.containerCollection,
-                    AutoSize = true,
-                    SelectionMode = SelectionMode.None
-                },
-                shipCollection.Count,
-                1
-            );
-            
-            shipsTable.Controls.Add(
-                new Label
-                {
-                    Text = "All containers Sorted \n" + bb.containerCollectionSorted.ExtendedToString(),
-                    AutoSize = true,
-                },
-                shipCollection.Count+1,
-                0
-            );
-            shipsTable.Controls.Add(
-                new ListBox
-                {
-                    DataSource = bb.containerCollectionSorted,
-                    AutoSize = true,
-                    SelectionMode = SelectionMode.None
-                },
-                shipCollection.Count+1,
-                1
-            );
-
-
             return shipsTable;
         }
 
+        private void SetShipFormat_Click(object sender, EventArgs e)
+        {
+            int x;
+            int y;
+            if (!int.TryParse(ShipXLength.Text, out x) || !int.TryParse(ShipYLength.Text, out y))
+            {
+                MessageBox.Show("Vul een geldig getal in!");
+            }
+            else if (x < 1 || y < 1)
+            {
+                MessageBox.Show("Vul een getal boven de nul in");
+            }
+            else
+            {
+                bb.SetShipFormat(x, y);
+                MessageBox.Show(string.Format("Ship formaat is aangepast: ({0},{1})", x, y));
+            }
+        }
 
+        private void DistributeContainers_Click(object sender, EventArgs e)
+        {
+            if (!bb.HasShipFormat)
+            {
+                MessageBox.Show("Stel eerst een schip formaat in");
+            }
+            else if (bb.containerCollection.Count == 0)
+            {
+                MessageBox.Show("Voeg eerst containers toe");
+            }
+            else
+            {
 
+                ScrollPanel.Controls.Clear();
+                bb.DistributeContainers();
+                ScrollPanel.Controls.Add(ShipsTable(bb.shipCollection));
+            }
+        }
+
+        private void AddRandom_Click(object sender, EventArgs e)
+        {
+            int random;
+            if (!int.TryParse(RandomInput.Text, out random))
+            {
+                MessageBox.Show("Vul een geldig getal in!");
+            }
+            else if (random < 1)
+            {
+                MessageBox.Show("Vul een getal boven de nul in");
+            }
+            else
+            {
+                bb.AddRandomContianers(random);
+                UpdateContainerView();
+            }
+        }
+        private void UpdateContainerView()
+        {
+            ContainersLabel.Text = Sorted.Checked ? bb.containerCollectionSorted.ExtendedToString() : bb.containerCollection.ExtendedToString();
+            Containers.DataSource = null;
+            Containers.DataSource = Sorted.Checked ? bb.containerCollectionSorted : bb.containerCollection;
+        }
+
+        private void Sorted_CheckedChanged(object sender, EventArgs e)
+        {
+            UpdateContainerView();
+        }
+
+        private void AddContianer_Click(object sender, EventArgs e)
+        {
+            int weight;
+            if (!int.TryParse(WeightText.Text, out weight))
+            {
+                MessageBox.Show("Vul een geldig getal in!");
+            }
+            else
+            {
+                bb.AddContainer(Valuable.Checked, Cooled.Checked, weight);
+                UpdateContainerView();
+            }
+        }
+
+        private void Clear_Click(object sender, EventArgs e)
+        {
+            bb.ClearContainers();
+            UpdateContainerView();
+            ScrollPanel.Controls.Clear();
+        }
     }
 }

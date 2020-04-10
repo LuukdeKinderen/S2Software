@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Text;
 
@@ -7,21 +8,54 @@ namespace Logic
 {
     public class BerendBootje
     {
-        public List<Container> containerCollection { get; private set; }
-        public List<Container> containerCollectionSorted
+        private List<Container> containers;
+
+        public ReadOnlyCollection<Container> containerCollection
         {
             get
             {
-                List<Container> containers = new List<Container>(containerCollection);
-                MyExtensions.Sort(containers);
-                return containers;
+                return containers.AsReadOnly();
             }
         }
-        public List<Ship> shipCollection { get; private set; }
+        public ReadOnlyCollection<Container> containerCollectionSorted
+        {
+            get
+            {
+                List<Container> containersSorted = new List<Container>(containers);
+                MyExtensions.Sort(containersSorted);
+                return containersSorted.AsReadOnly();
+            }
+        }
 
-        private readonly int shipYLength;
-        private readonly int shipXLength;
-        public BerendBootje(int shipXLength, int shipYLength)
+        private List<Ship> ships;
+        public ReadOnlyCollection<Ship> shipCollection
+        {
+            get
+            {
+                return ships.AsReadOnly();
+            }
+        }
+
+        private int shipYLength = 0;
+        private int shipXLength = 0;
+
+        public bool HasShipFormat
+        {
+            get
+            {
+                return shipYLength != 0 && shipXLength != 0;
+            }
+        }
+
+        public BerendBootje()
+        {
+            containers = new List<Container>();
+        }
+
+
+
+
+        public void SetShipFormat(int shipXLength, int shipYLength)
         {
             shipXLength = shipXLength % 2 == 0 ? shipXLength : shipXLength + 1;
             this.shipXLength = shipXLength;
@@ -31,44 +65,64 @@ namespace Logic
         public void AddRandomContianers(int number)
         {
             Random r = new Random();
-            containerCollection = new List<Container>();
             for (int c = 0; c < number; c++)
             {
                 Container container = new Container(r);
-                containerCollection.Add(container);
+                containers.Add(container);
             }
         }
 
-        public void AddContainer(Container container)
+        public void AddContainer(bool valuable, bool cooled, int weight)
         {
-            containerCollection.Add(container);
+            Container container = new Container(valuable, cooled, weight);
+            containers.Add(container);
         }
 
-        public void DistribureContainers()
+        public void ClearContainers()
         {
-            List<Container> containers = new List<Container>(containerCollectionSorted);
-            shipCollection = new List<Ship>();
+            containers.Clear();
+        }
+
+        public void DistributeContainers()
+        {
+            List<Container> containersToDistibute = new List<Container>(containerCollectionSorted);
+            ships = new List<Ship>();
 
             int shipCapacity = new Ship(shipXLength, shipYLength).maxTotalWeight;
 
-            while (containers.Count > 0)
+            while (containersToDistibute.Count > 0)
             {
                 int containersWeight = 0;
-                foreach (Container container in containers)
+                foreach (Container container in containersToDistibute)
                 {
                     containersWeight += container.weight;
                 }
-                if (containersWeight > shipCapacity / 2)
+                if (containersWeight - shipCapacity > shipCapacity / 2)
                 {
                     Ship newShip = new Ship(shipXLength, shipYLength);
-                    containers = newShip.AddContainers(containers, true);
-                    shipCollection.Add(newShip);
+                    containersToDistibute = newShip.AddContainers(containersToDistibute, false);
+                    ships.Add(newShip);
+                }
+                else if (containersWeight > shipCapacity / 2)
+                {
+                    Ship newShip = new Ship(shipXLength, shipYLength);
+                    containersToDistibute = newShip.AddContainers(containersToDistibute, true);
+                    ships.Add(newShip);
                 }
                 else
                 {
-                    foreach (Ship ship in shipCollection)
+                    foreach (Ship ship in ships)
                     {
-                        containers = ship.AddContainers(containers, false);
+                        containersToDistibute = ship.AddContainers(containersToDistibute, false);
+                    }
+                    if (containersToDistibute.Count != 0)
+                    {
+                        foreach (Container container in containersToDistibute)
+                        {
+                            Debug.WriteLine(container);
+                        }
+
+                        containersToDistibute.Clear();
                     }
                 }
             }

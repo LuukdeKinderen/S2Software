@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 using System.Text;
 
 namespace Logic
@@ -8,56 +10,27 @@ namespace Logic
     {
         public static void Sort(this List<Container> containterList)
         {
-            for (int container = 0; container < containterList.Count - 1; container++)
-            {
-                if (containterList[container].weight < containterList[container + 1].weight)
-                {
-                    containterList.Swap(container, container + 1);
-                    container = -1;
-                }
-            }
-            for (int container = 0; container < containterList.Count - 1; container++)
-            {
-                if (!containterList[container].cooled && containterList[container + 1].cooled)
-                {
-                    containterList.Swap(container, container + 1);
-                    container = -1;
-                }
-            }
-            for (int container = 0; container < containterList.Count - 1; container++)
-            {
-                if (!containterList[container].valuable && containterList[container + 1].valuable)
-                {
-                    containterList.Swap(container, container + 1);
-                    container = -1;
-                }
-            }
+            List<Container> list = new List<Container>(containterList);
 
+            list = list.OrderBy(x => -x.weight).ToList();
+            list = list.OrderBy(x => !x.cooled).ToList();
+            list = list.OrderBy(x => !x.valuable).ToList();
 
+            containterList.Clear();
+            containterList.AddRange(list);
         }
         public static void SortForStack(this List<Container> containterList)
         {
-            for (int container = 0; container < containterList.Count - 1; container++)
-            {
-                if (containterList[container].weight > containterList[container + 1].weight)
-                {
-                    containterList.Swap(container, container + 1);
-                    container = -1;
-                }
-            }
-            for (int container = 0; container < containterList.Count - 1; container++)
-            {
-                if (!containterList[container].valuable && containterList[container + 1].valuable)
-                {
-                    containterList.Swap(container, container + 1);
-                    container = -1;
-                }
-            }
+            List<Container> list = new List<Container>(containterList);
 
+            list = list.OrderBy(x => -x.weight).ToList();
+            list = list.OrderBy(x => !x.valuable).ToList();
 
+            containterList.Clear();
+            containterList.AddRange(list);
         }
 
-        public static string ExtendedToString(this List<Container> containterList)
+        public static string ExtendedToString(this ReadOnlyCollection<Container> containterList)
         {
             string str = "";
             int valuableCooled = 0;
@@ -79,19 +52,12 @@ namespace Logic
                 }
             }
             str += string.Format("Valuable and Cooled: {0}\n", valuableCooled);
-            str += string.Format("Valuable: {0}\n", valuable);
-            str += string.Format("Cooled: {0}\n", cooled);
+            str += string.Format("Only Valuable: {0}\n", valuable);
+            str += string.Format("Only Cooled: {0}\n", cooled);
             str += string.Format("Regular: {0}\n", containterList.Count - valuableCooled - valuable - cooled);
             str += string.Format("Total: {0}\n", containterList.Count);
             return str;
         }
 
-        public static IList<T> Swap<T>(this IList<T> list, int indexA, int indexB)
-        {
-            T tmp = list[indexA];
-            list[indexA] = list[indexB];
-            list[indexB] = tmp;
-            return list;
-        }
     }
 }
