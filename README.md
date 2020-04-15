@@ -20,34 +20,34 @@ Ingedeeld met MoSCoW.
 **C**ould have
 **W**on't have
 
-**FR-01** De Kassamedewerker kan een overzicht van alle producten zien. **M**
-    **B-01.1** Het overzicht is per categorie te sorteren.
-    **K-01.1** Het overzicht is te beperken met een zoekterm.
-**FR-02** De Manager moet producten kunnen toevoegen/ wijzigen. **M**
-    **B-02.1** Een product heeft een Naam, omschrijving en prijs.
-    **B-02.2** Naam en Prijs zijn verplicht om in te vullen.
-**FR-03** De Manager moet producten kunnen verwijderen. **S**
-**FR-04** De Manager moet categorieën kunnen toevoegen/ wijzigen. **S**
-    **B-04.1** Een categorie heeft een Naam.
-    **B-04.2** Naam is verplicht om in te vullen.
-**FR-05** De Manager moet categorieën kunnen verwijderen. **C**
-**FR-06** De Manager moet subcategorieën kunnen toevoegen aan Categorieën. **C**
-    **K-06.1** Aan een categorie met een of meerder producten, kan geen sub categorie worden toegevoegd.
-    **K-06.2** Een categorie kan maar een keer als sub categorie toegevoegd worden.
-**FR-07** De Manager kan producten toevoegen aan een categorie. **S**
-    **K-07.1** Aan een categorie met een of meerdere sub categorieën, kan geen product worden toegevoegd.
-    **K-07.2** Een product kan maar een keer aan een categorie toegevoegd worden.
-**FR-08** De Kassamedewerker een order opstellen. **M**
-    **B-08.1** Een order heeft producten, een datum, klant nr. en betaalstatus.
-    **B-08.2** Er kunnen meerdere producten op een order staan.
-    **B-08.3** Per product kan er een aantal worden toegevoegd
-    **B-08.4** Datum en betaalstatus zijn verplicht.
-    **B-08.5** Klantnummer is alleen verplicht als betaalstatus 'niet betaald' is.
-**FR-09** De Manager moet klanten kunnen toevoegen/ wijzigen. **C**
-    **B-09.1** Een klant heeft een Klantnummer, Naam en factuur adres.
-    **B-09.2** Alle gegevens zijn verplicht om in te vullen.
-**FR-10** De Manager moet een overzicht kunnen inzien van alle verkochte producten **C**
-**K-ALG.01** Bij onjuiste invoer moet een duidelijke foutmelding getoond worden.
+**FR-01** De Kassamedewerker kan een overzicht van alle producten zien. **M**<br>
+ - **B-01.1** Het overzicht is per categorie te sorteren.<br>
+ - **K-01.1** Het overzicht is te beperken met een zoekterm.<br>
+**FR-02** De Manager moet producten kunnen toevoegen/ wijzigen. **M**<br>
+ - **B-02.1** Een product heeft een Naam, omschrijving en prijs.<br>
+ - **B-02.2** Naam en Prijs zijn verplicht om in te vullen.<br>
+**FR-03** De Manager moet producten kunnen verwijderen. **S**<br>
+**FR-04** De Manager moet categorieën kunnen toevoegen/ wijzigen. **S**<br>
+ - **B-04.1** Een categorie heeft een Naam.<br>
+ - **B-04.2** Naam is verplicht om in te vullen.<br>
+**FR-05** De Manager moet categorieën kunnen verwijderen. **C**<br>
+**FR-06** De Manager moet subcategorieën kunnen toevoegen aan Categorieën. **C**<br>
+ - **K-06.1** Aan een categorie met een of meerder producten, kan geen sub categorie worden toegevoegd.<br>
+ - **K-06.2** Een categorie kan maar een keer als sub categorie toegevoegd worden.<br>
+**FR-07** De Manager kan producten toevoegen aan een categorie. **S**<br>
+ - **K-07.1** Aan een categorie met een of meerdere sub categorieën, kan geen product worden toegevoegd.<br>
+ - **K-07.2** Een product kan maar een keer aan een categorie toegevoegd worden.<br>
+**FR-08** De Kassamedewerker een order opstellen. **M**<br>
+ - **B-08.1** Een order heeft producten, een datum, klant nr. en betaalstatus.<br>
+ - **B-08.2** Er kunnen meerdere producten op een order staan.<br>
+ - **B-08.3** Per product kan er een aantal worden toegevoegd<br>
+ - **B-08.4** Datum en betaalstatus zijn verplicht.<br>
+ - **B-08.5** Klantnummer is alleen verplicht als betaalstatus 'niet betaald' is.<br>
+**FR-09** De Manager moet klanten kunnen toevoegen/ wijzigen. **C**<br>
+ - **B-09.1** Een klant heeft een Klantnummer, Naam en factuur adres.<br>
+ - **B-09.2** Alle gegevens zijn verplicht om in te vullen.<br>
+**FR-10** De Manager moet een overzicht kunnen inzien van alle verkochte producten **C**<br>
+**K-ALG.01** Bij onjuiste invoer moet een duidelijke foutmelding getoond worden.<br>
 
 ### UI Schetsen
 ![UI Schetsen](/Diagrams/img/UI_Schetsen.png)
