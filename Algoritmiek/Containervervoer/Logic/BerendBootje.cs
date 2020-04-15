@@ -97,13 +97,14 @@ namespace Logic
                 {
                     containersWeight += container.weight;
                 }
-                if (containersWeight - shipCapacity > shipCapacity / 2)
-                {
-                    Ship newShip = new Ship(shipXLength, shipYLength);
-                    containersToDistibute = newShip.AddContainers(containersToDistibute, false);
-                    ships.Add(newShip);
-                }
-                else if (containersWeight > shipCapacity / 2)
+                //if (containersWeight - shipCapacity > shipCapacity / 2)
+                //{
+                //    Ship newShip = new Ship(shipXLength, shipYLength);
+                //    containersToDistibute = newShip.AddContainers(containersToDistibute, false);
+                //    ships.Add(newShip);
+                //}
+                //else 
+                if (containersWeight > shipCapacity / 2)
                 {
                     Ship newShip = new Ship(shipXLength, shipYLength);
                     containersToDistibute = newShip.AddContainers(containersToDistibute, true);
