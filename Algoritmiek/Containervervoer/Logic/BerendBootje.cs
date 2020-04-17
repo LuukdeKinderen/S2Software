@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Linq;
 using System.Text;
 
 namespace Logic
@@ -92,18 +93,11 @@ namespace Logic
 
             while (containersToDistibute.Count > 0)
             {
-                int containersWeight = 0;
-                foreach (Container container in containersToDistibute)
-                {
-                    containersWeight += container.weight;
-                }
-                //if (containersWeight - shipCapacity > shipCapacity / 2)
+                int containersWeight = containersToDistibute.Sum(e => e.weight);
+                //foreach (Container container in containersToDistibute)
                 //{
-                //    Ship newShip = new Ship(shipXLength, shipYLength);
-                //    containersToDistibute = newShip.AddContainers(containersToDistibute, false);
-                //    ships.Add(newShip);
+                //    containersWeight += container.weight;
                 //}
-                //else 
                 if (containersWeight > shipCapacity / 2)
                 {
                     Ship newShip = new Ship(shipXLength, shipYLength);

@@ -152,7 +152,7 @@ Ingedeeld met MoSCoW.
 | Uitzonderingen | 1. Niet alle verplichte velden zijn ingevuld. Toon een melding en ga terug naar stap 2. (B-09.2) |
 | Resultaat | Een klant is toegevoegd aan het systeem |
 
-|     | UC10 |
+|     | UC11 |
 | --- | --- |
 | Naam | Klant wijzigen |
 | Samenvatting | Je gaat bestaande klant wijzigen |
@@ -163,7 +163,7 @@ Ingedeeld met MoSCoW.
 | Resultaat | Een klant is gewijzigd in het systeem |
 
 
-|     | UC11 |
+|     | UC12 |
 | --- | --- |
 | Naam | Klant nummer toevoegen aan Order |
 | Samenvatting | Je gaat een order zo opstellen dat hij voor een specifieke klant is |
@@ -174,7 +174,7 @@ Ingedeeld met MoSCoW.
 | Resultaat | Er is een klantnummer toegevoegd aan de order |
 
 
-|     | UC12 |
+|     | UC13 |
 | --- | --- |
 | Naam | Order afronden |
 | Samenvatting | Een order is compleet je gaat deze afronden |
@@ -184,6 +184,8 @@ Ingedeeld met MoSCoW.
 | Uitzonderingen | 1. Er is geen klantnummer toegevoegd. De betaalstatus wordt 'betaald' Ga door naar stap 5.  |
 | Resultaat | De order is afgerond en gearchiveerd. |
 
+### Use case diagram
+![Use case diagram](/Diagrams/img/UseCaseDiagram.png)
 ## Ontwerp
 ### Conceptueel Model
 ![Conceptueel Model](/Diagrams/img/Conceptueel_Model.png)
