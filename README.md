@@ -128,7 +128,7 @@ Algemene uitzondering: Wanneer als actor Manager staat vastgesteld, kan de Use c
 
 |     | UC08 |
 | --- | --- |
-| Naam | Aantal wijzigen in een order |
+| Naam | **Aantal** wijzigen in een order |
 | Samenvatting | Je wil het aantal producten wijzigen in de order. |
 | Actors | Kassa medewerker |
 | Aannamen | 1. Het systeem heeft minstens 1 product. <br> 2. In de huidige order zit minimaal 1 product |
@@ -204,48 +204,48 @@ Algemene uitzondering: Wanneer als actor Manager staat vastgesteld, kan de Use c
 ### Use case diagram
 | Test case | Use case(s) | Invoer | Verwacht uitvoer |
 | --- | --- | --- | --- |
-| TC01 | UC01 | naam: "legkorrel" <br> omschrijving: "stevige korrel" <br> Prijs: 10,20 <br> Gebruiker: Manager | Product toegevoegd door manager |
-| TC02 | UC01 | naam: "legkorrel" <br> omschrijving: "stevige korrel" <br> Prijs: 10,20 <br> Gebruiker: Kassamedewerker | Product toevoegen geweigerd als kassamedewerker |
-| TC03 | UC01 | naam: "" <br> omschrijving: "stevige korrel" <br> Prijs: 10,20 <br> Gebruiker: Manager | Product toevoegen geweigerd. foutmelding: niet alle verplichte velden zijn ingevuld |
-| TC04 | UC01 | naam: "legkorrel" <br> omschrijving: "" <br> Prijs: "tien euro en twintig cent" <br> Gebruiker: Manager | Product toevoegen geweigerd. foutmelding: vul een getal in bij prijs |
-| TC05 | UC02 | naam: "kip" <br> Gebruiker: Manager | Categorie toegevoegd door manager |
-| TC06 | UC02 | naam: "kip" <br> Gebruiker: Kassamedewerker | Categorie toevoegen geweigerd als kassamedewerker |
-| TC07 | UC02 | naam: "" <br> Gebruiker: Manager | Categorie toevoegen geweigerd. foutmelding: niet alle verplichte velden zijn ingevuld |
-| TC08 | UC03 | parent categorie: "kip (bevat 0 producten)"<br> child categorie: "kippenvoer" <br> Gebruiker: Manager | Subcategorie toegevoegd door manager |
-| TC09 | UC03 | parent categorie: "kip (bevat 0 producten)"<br> child categorie: "kippenvoer" <br> Gebruiker: kassamedewerker | Subcategorie toevoegen geweigerd als kassamedewerker |
-| TC10 | UC03 | parent categorie: "kip (bevat 2 producten)"<br> Gebruiker: Manager | Kan geen subcategorie selecteren |
-| TC11 | UC03 | parent categorie: "kip (bevat kippenvoer als subcategorie)" <br> child categorie: "kippenvoer" <br> Gebruiker: Manager | Kan kippenvoer niet selecteren |
-| TC12 | UC04 | Categorie: "kip (bevat 0 subcategorieën en 0 producten)" <br> Product: "legkorrel" <br> Gebruiker: Manager | Product toegevoegd aan categorie |
-| TC13 | UC04 | Categorie: "kip (bevat 0 subcategorieën en 0 producten)" <br> Product: "legkorrel" <br> Gebruiker: kassamedewerker |  Product toevoegen aan categorie geweigerd als kassamedewerker |
-| TC14 | UC04 | Categorie: "kip (bevat 1 subcategorie)" <br> Gebruiker: Manager | Kan geen product selecteren |
-| TC15 | UC04 | Categorie: "kip (bevat legkorrel als product)" <br> Product: "legkorrel" <br> Gebruiker: Manager | Kan legkorrel niet selecteren |
-| TC16 | UC05 | Categorie: "kip (bevat legkorrel als product)" <br> Product: "legkorrel" <br> Gebruiker: Manager | Product detailpagina wordt getoond |
-| TC17 | UC05 | Categorie: "kip (bevat legkorrel als product)" <br> Product: "legkorrel" <br> Gebruiker: Kassamedewerker | Product detailpagina wordt getoond |
-| TC18 | UC05 | Categorie: "kip (bevat subcategorie kippenvoer)" <br> Subcategorie: "kippenvoer (bevat product legkorrel)"<br> Product: "legkorrel" <br> Gebruiker: Kassamedewerker | Product detailpagina wordt getoond |
-| TC19 | UC06 | Product: "naam: "legkorrel" omschrijving: "stevige korrel" Prijs: 10,20" <br> Wijziging: "omschrijving: "extra stevige korrel" " <br> Gebruiker: Manager | Product gewijzigd door manager |
-| TC20 | UC06 | Product: "naam: "legkorrel" omschrijving: "stevige korrel" Prijs: 10,20" <br> Wijziging: "omschrijving: "extra stevige korrel" " <br> Gebruiker: kassamedewerker | Product weizigen geweigerd als kassamedewerker |
-| TC21 | UC06 | Product: "naam: "legkorrel" omschrijving: "stevige korrel" Prijs: 10,20" <br> Wijziging: "naam: "" " <br> Gebruiker: Manager | Product weizigen geweigerd. foutmelding: niet alle verplichte velden zijn ingevuld |
-| TC22 | UC06 | Product: "naam: "legkorrel" omschrijving: "stevige korrel" Prijs: 10,20" <br> Wijziging: "Prijs: "tien euro en twintig cent" " <br> Gebruiker: Manager | Product weizigen eweigerd. foutmelding: vul een getal in bij prijs |
-| TC23 | UC07 | Aantal: 1 <br> Gebruiker: Kassamedewerker | Geopend product toegevoegd aan order |
-| TC24 | UC07 | Aantal: "een" <br> Gebruiker: Kassamedewerker | Product toevoegen geweigerd. foutmelding: vul een getal in bij Aantal |
-| TC25 | UC07 | Aantal: "" <br> Gebruiker: Kassamedewerker | Product toevoegen geweigerd. foutmelding: vul een getal in bij Aantal |
-| TC26 | UC07 | Order: "bevat huidig product al" <br> Aantal: 1 <br> Gebruiker: Kassamedewerker | Product toevoegen geweigerd. foutmelding: Product bestaat al in order, weizig Aantal binnen order |
-| TC27 | UC08 | Aantal: 2 <br> Gebruiker: Kassamedewerker | Order gewijzigd |
-| TC28 | UC08 | Aantal: "twee" <br> Gebruiker: Kassamedewerker | Order wijzigen geweigerd. foutmelding: vul een getal in bij Aantal |
-| TC29 | UC08 | Aantal: "" <br> Gebruiker: Kassamedewerker | Order wijzigen geweigerd. foutmelding: vul een getal in bij Aantal |
-| TC30 | UC09 | Gebruiker: Kassamedewerker | Order gewijzigd |
-| TC31 | UC10 | Klantnummer: 12345 <br> naam: "Barrie Butsers" <br> Factuur adres: "Rachelsmolen 1, 5612 MA Eindhoven" <br> Gebruiker: Manager | Klant aangemaakt |
-| TC32 | UC10 | Klantnummer: 12345 <br> naam: "Barrie Butsers" <br> Factuur adres: "Rachelsmolen 1, 5612 MA Eindhoven" <br> Gebruiker: Kassamedewerker | Klant aanmaken geweigerd als kassamedewerker |
-| TC33 | UC10 | Klantnummer: 12345 <br> naam: "" <br> Factuur adres: "Rachelsmolen 1, 5612 MA Eindhoven" <br> Gebruiker: Manager | Klant aanmaken geweigerd. foutmelding: niet alle verplichte velden zijn ingevuld. |
-| TC34 | UC11 | Klant: "Klantnummer: 12345 naam: "Barrie Butsers" Factuur adres: "Rachelsmolen 1, 5612 MA Eindhoven" " <br> Wijziging: "naam: "Richard Batsbak" "  <br> Gebruiker: Manager | Klant gewijzigd |
-| TC35 | UC11 | Klant: "Klantnummer: 12345 naam: "Barrie Butsers" Factuur adres: "Rachelsmolen 1, 5612 MA Eindhoven" " <br> Wijziging: "naam: "Richard Batsbak" "  <br> Gebruiker: Kassamedewerker | Klant weizigen geweigerd als kassamedewerker |
-| TC36 | UC11 | Klant: "Klantnummer: 12345 naam: "Barrie Butsers" Factuur adres: "Rachelsmolen 1, 5612 MA Eindhoven" " <br> Wijziging: "naam: "" "  <br> Gebruiker: Manager | Klant weizigen geweigerd. foutmelding: niet alle verplichte velden zijn ingevuld |
-| TC37 | UC12 | Gebruiker: Kassamedewerker | Klantnummer toegevoegd |
-| TC38 | UC13 | Klantnummer: ""<br> Gebruiker: Kassamedewerker | Order afgerond, status: betaald |
-| TC39 | UC13 | Klantnummer: "12345" <br> betaalstatus: "betaald" <br> Gebruiker: Kassamedewerker | Order afgerond, status: betaald |
-| TC40 | UC13 | Klantnummer: "12345" <br> betaalstatus: "niet betaald" <br> Gebruiker: Kassamedewerker | Order afgerond, status: niet betaald |
-| TC41 | UC14 | Login: "correcte gegevens" | Gebruiker krijg manager status |
-| TC42 | UC14 | Login: "niet correcte gegevens" | Gebruiker krijg geen manager status |
+| TC01 | UC01 | **naam**: "legkorrel" <br> **omschrijving**: "stevige korrel" <br> **Prijs**: 10,20 <br> **Gebruiker**: Manager | Product toegevoegd door manager |
+| TC02 | UC01 | **naam**: "legkorrel" <br> **omschrijving**: "stevige korrel" <br> **Prijs**: 10,20 <br> **Gebruiker**: Kassamedewerker | Product toevoegen geweigerd als kassamedewerker |
+| TC03 | UC01 | **naam**: "" <br> **omschrijving**: "stevige korrel" <br> **Prijs**: 10,20 <br> **Gebruiker**: Manager | Product toevoegen geweigerd. foutmelding: niet alle verplichte velden zijn ingevuld |
+| TC04 | UC01 | **naam**: "legkorrel" <br> **omschrijving**: "" <br> **Prijs**: "tien euro en twintig cent" <br> **Gebruiker**: Manager | Product toevoegen geweigerd. foutmelding: vul een getal in bij prijs |
+| TC05 | UC02 | **naam**: "kip" <br> **Gebruiker**: Manager | Categorie toegevoegd door manager |
+| TC06 | UC02 | **naam**: "kip" <br> **Gebruiker**: Kassamedewerker | Categorie toevoegen geweigerd als kassamedewerker |
+| TC07 | UC02 | **naam**: "" <br> **Gebruiker**: Manager | Categorie toevoegen geweigerd. foutmelding: niet alle verplichte velden zijn ingevuld |
+| TC08 | UC03 | **parent categorie**: "kip (bevat 0 producten)"<br> **child categorie**: "kippenvoer" <br> **Gebruiker**: Manager | Subcategorie toegevoegd door manager |
+| TC09 | UC03 | **parent categorie**: "kip (bevat 0 producten)"<br> **child categorie**: "kippenvoer" <br> **Gebruiker**: kassamedewerker | Subcategorie toevoegen geweigerd als kassamedewerker |
+| TC10 | UC03 | **parent categorie**: "kip (bevat 2 producten)"<br> **Gebruiker**: Manager | Kan geen subcategorie selecteren |
+| TC11 | UC03 | **parent categorie**: "kip (bevat kippenvoer als subcategorie)" <br> **child categorie**: "kippenvoer" <br> **Gebruiker**: Manager | Kan kippenvoer niet selecteren |
+| TC12 | UC04 | **Categorie**: "kip (bevat 0 subcategorieën en 0 producten)" <br> **Product**: "legkorrel" <br> **Gebruiker**: Manager | Product toegevoegd aan categorie |
+| TC13 | UC04 | **Categorie**: "kip (bevat 0 subcategorieën en 0 producten)" <br> **Product**: "legkorrel" <br> **Gebruiker**: kassamedewerker |  Product toevoegen aan categorie geweigerd als kassamedewerker |
+| TC14 | UC04 | **Categorie**: "kip (bevat 1 subcategorie)" <br> **Gebruiker**: Manager | Kan geen product selecteren |
+| TC15 | UC04 | **Categorie**: "kip (bevat legkorrel als product)" <br> **Product**: "legkorrel" <br> **Gebruiker**: Manager | Kan legkorrel niet selecteren |
+| TC16 | UC05 | **Categorie**: "kip (bevat legkorrel als product)" <br> **Product**: "legkorrel" <br> **Gebruiker**: Manager | Product detailpagina wordt getoond |
+| TC17 | UC05 | **Categorie**: "kip (bevat legkorrel als product)" <br> **Product**: "legkorrel" <br> **Gebruiker**: Kassamedewerker | Product detailpagina wordt getoond |
+| TC18 | UC05 | **Categorie**: "kip (bevat subcategorie kippenvoer)" <br> **Subcategorie**: "kippenvoer (bevat product legkorrel)"<br> **Product**: "legkorrel" <br> **Gebruiker**: Kassamedewerker | Product detailpagina wordt getoond |
+| TC19 | UC06 | **Product**: "naam: "legkorrel" omschrijving: "stevige korrel" Prijs: 10,20" <br> **Wijziging**: "omschrijving: "extra stevige korrel" " <br> **Gebruiker**: Manager | Product gewijzigd door manager |
+| TC20 | UC06 | **Product**: "naam: "legkorrel" omschrijving: "stevige korrel" Prijs: 10,20" <br> **Wijziging**: "omschrijving: "extra stevige korrel" " <br> **Gebruiker**: kassamedewerker | Product weizigen geweigerd als kassamedewerker |
+| TC21 | UC06 | **Product**: "naam: "legkorrel" omschrijving: "stevige korrel" Prijs: 10,20" <br> **Wijziging**: "naam: "" " <br> **Gebruiker**: Manager | Product weizigen geweigerd. foutmelding: niet alle verplichte velden zijn ingevuld |
+| TC22 | UC06 | **Product**: "naam: "legkorrel" omschrijving: "stevige korrel" Prijs: 10,20" <br> **Wijziging**: "Prijs: "tien euro en twintig cent" " <br> **Gebruiker**: Manager | Product weizigen eweigerd. foutmelding: vul een getal in bij prijs |
+| TC23 | UC07 | **Aantal**: 1 <br> **Gebruiker**: Kassamedewerker | Geopend product toegevoegd aan order |
+| TC24 | UC07 | **Aantal**: "een" <br> **Gebruiker**: Kassamedewerker | Product toevoegen geweigerd. foutmelding: vul een getal in bij Aantal |
+| TC25 | UC07 | **Aantal**: "" <br> **Gebruiker**: Kassamedewerker | Product toevoegen geweigerd. foutmelding: vul een getal in bij Aantal |
+| TC26 | UC07 | **Order**: "bevat huidig product al" <br> **Aantal**: 1 <br> **Gebruiker**: Kassamedewerker | Product toevoegen geweigerd. foutmelding: Product bestaat al in order, weizig Aantal binnen order |
+| TC27 | UC08 | **Aantal**: 2 <br> **Gebruiker**: Kassamedewerker | Order gewijzigd |
+| TC28 | UC08 | **Aantal**: "twee" <br> **Gebruiker**: Kassamedewerker | Order wijzigen geweigerd. foutmelding: vul een getal in bij Aantal |
+| TC29 | UC08 | **Aantal**: "" <br> **Gebruiker**: Kassamedewerker | Order wijzigen geweigerd. foutmelding: vul een getal in bij Aantal |
+| TC30 | UC09 | **Gebruiker**: Kassamedewerker | Order gewijzigd |
+| TC31 | UC10 | **Klantnummer**: 12345 <br> **naam**: "Barrie Butsers" <br> **Factuur adres**: "Rachelsmolen 1, 5612 MA Eindhoven" <br> **Gebruiker**: Manager | Klant aangemaakt |
+| TC32 | UC10 | **Klantnummer**: 12345 <br> **naam**: "Barrie Butsers" <br> **Factuur adres**: "Rachelsmolen 1, 5612 MA Eindhoven" <br> **Gebruiker**: Kassamedewerker | Klant aanmaken geweigerd als kassamedewerker |
+| TC33 | UC10 | **Klantnummer**: 12345 <br> **naam**: "" <br> **Factuur adres**: "Rachelsmolen 1, 5612 MA Eindhoven" <br> **Gebruiker**: Manager | Klant aanmaken geweigerd. foutmelding: niet alle verplichte velden zijn ingevuld. |
+| TC34 | UC11 | **Klant**: "Klantnummer: 12345 naam: "Barrie Butsers" Factuur adres: "Rachelsmolen 1, 5612 MA Eindhoven" " <br> **Wijziging**: "naam: "Richard Batsbak" "  <br> **Gebruiker**: Manager | Klant gewijzigd |
+| TC35 | UC11 | **Klant**: "Klantnummer: 12345 naam: "Barrie Butsers" Factuur adres: "Rachelsmolen 1, 5612 MA Eindhoven" " <br> **Wijziging**: "naam: "Richard Batsbak" "  <br> **Gebruiker**: Kassamedewerker | Klant weizigen geweigerd als kassamedewerker |
+| TC36 | UC11 | **Klant**: "Klantnummer: 12345 naam: "Barrie Butsers" Factuur adres: "Rachelsmolen 1, 5612 MA Eindhoven" " <br> **Wijziging**: "naam: "" "  <br> **Gebruiker**: Manager | Klant weizigen geweigerd. foutmelding: niet alle verplichte velden zijn ingevuld |
+| TC37 | UC12 | **Gebruiker**: Kassamedewerker | Klantnummer toegevoegd |
+| TC38 | UC13 | **Klantnummer**: ""<br> **Gebruiker**: Kassamedewerker | Order afgerond, status: betaald |
+| TC39 | UC13 | **Klantnummer**: "12345" <br> **betaalstatus**: "betaald" <br> **Gebruiker**: Kassamedewerker | Order afgerond, status: betaald |
+| TC40 | UC13 | **Klantnummer**: "12345" <br> **betaalstatus**: "niet betaald" <br> **Gebruiker**: Kassamedewerker | Order afgerond, status: niet betaald |
+| TC41 | UC14 | **Login**: "correcte gegevens" | Gebruiker krijg manager status |
+| TC42 | UC14 | **Login**: "niet correcte gegevens" | Gebruiker krijg geen manager status |
 
 ## Ontwerp
 ### Conceptueel Model
