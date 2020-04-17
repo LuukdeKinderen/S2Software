@@ -248,7 +248,7 @@ Algemene uitzondering: Wanneer als actor Manager staat vastgesteld, kan de Use c
 | TC42 | UC14 | **Login**: "niet correcte gegevens" | Gebruiker krijg geen manager status |
 
 ### Test Matrix
-|     | FR-01 | B-01.1 | K-01.1 | FR-02 | B-02.1 | B-02.2 | FR-03 | FR-04 | B-04.1 | B-04.2 | FR-05 | FR-06 | K-06.1 | K-06.2 | FR-07 | K-07.1 | K-07.2 | FR-08 | B-08.1 | B-08.2 | B-08.3 | B-08.4 | B-08.5 | FR-09 | B-09.1 | B-09.2  | FR-10 | FR-11 | K-ALG.01 | K-ALG.02 | 
+|     | F R - 0 1 | B-01.1 | K-01.1 | FR-02 | B-02.1 | B-02.2 | FR-03 | FR-04 | B-04.1 | B-04.2 | FR-05 | FR-06 | K-06.1 | K-06.2 | FR-07 | K-07.1 | K-07.2 | FR-08 | B-08.1 | B-08.2 | B-08.3 | B-08.4 | B-08.5 | FR-09 | B-09.1 | B-09.2  | FR-10 | FR-11 | K-ALG.01 | K-ALG.02 | 
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | TC01 |     |     |     |  x  |  x  |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |
 | TC02 |     |     |     |  x  |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |  x  |
