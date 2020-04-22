@@ -10,7 +10,6 @@ namespace Logic
     public class BerendBootje
     {
         private List<Container> containers;
-
         public ReadOnlyCollection<Container> containerCollection
         {
             get
@@ -23,10 +22,11 @@ namespace Logic
             get
             {
                 List<Container> containersSorted = new List<Container>(containers);
-                MyExtensions.Sort(containersSorted);
+                containersSorted.SortForShip();
                 return containersSorted.AsReadOnly();
             }
         }
+        public ReadOnlyCollection<Container> containersFailedToDistribute;
 
         private List<Ship> ships;
         public ReadOnlyCollection<Ship> shipCollection
@@ -44,39 +44,30 @@ namespace Logic
         {
             get
             {
-                return shipYLength != 0 && shipXLength != 0;
+                return shipYLength > 0 && shipXLength > 0;
             }
         }
 
         public BerendBootje()
         {
             containers = new List<Container>();
+            ships = new List<Ship>();
         }
-
-
-
 
         public void SetShipFormat(int shipXLength, int shipYLength)
         {
-            shipXLength = shipXLength % 2 == 0 ? shipXLength : shipXLength + 1;
             this.shipXLength = shipXLength;
             this.shipYLength = shipYLength;
         }
 
         public void AddRandomContianers(int number)
         {
-            Random r = new Random();
-            for (int c = 0; c < number; c++)
-            {
-                Container container = new Container(r);
-                containers.Add(container);
-            }
+           containers.AddRange(ContainerConstructor.CreateRanomContainers(number));
         }
 
         public void AddContainer(bool valuable, bool cooled, int weight)
         {
-            Container container = new Container(valuable, cooled, weight);
-            containers.Add(container);
+            containers.Add(ContainerConstructor.CreateContainer(valuable, cooled, weight));
         }
 
         public void ClearContainers()
@@ -87,40 +78,36 @@ namespace Logic
         public void DistributeContainers()
         {
             List<Container> containersToDistibute = new List<Container>(containerCollectionSorted);
-            ships = new List<Ship>();
-
-            int shipCapacity = new Ship(shipXLength, shipYLength).maxTotalWeight;
+            ships.Clear();
+            containersFailedToDistribute = new List<Container>().AsReadOnly();
+            int shipCapacity = Ship.MaxTotalWeight(shipXLength, shipYLength);
 
             while (containersToDistibute.Count > 0)
             {
                 int containersWeight = containersToDistibute.Sum(e => e.weight);
-                //foreach (Container container in containersToDistibute)
-                //{
-                //    containersWeight += container.weight;
-                //}
+
                 if (containersWeight > shipCapacity / 2)
                 {
                     Ship newShip = new Ship(shipXLength, shipYLength);
-                    containersToDistibute = newShip.AddContainers(containersToDistibute, true);
+                    containersToDistibute = newShip.DistributeMinAndReturn(containersToDistibute);
                     ships.Add(newShip);
                 }
                 else
                 {
                     foreach (Ship ship in ships)
                     {
-                        containersToDistibute = ship.AddContainers(containersToDistibute, false);
+                        containersToDistibute = ship.DistributeMaxAndReturn(containersToDistibute);
                     }
                     if (containersToDistibute.Count != 0)
                     {
-                        foreach (Container container in containersToDistibute)
-                        {
-                            Debug.WriteLine(container);
-                        }
+                        containersFailedToDistribute = new List<Container>(containersToDistibute).AsReadOnly();
 
                         containersToDistibute.Clear();
                     }
                 }
             }
         }
+
+        
     }
 }

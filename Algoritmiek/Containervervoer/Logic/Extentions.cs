@@ -8,13 +8,13 @@ namespace Logic
 {
     public static class MyExtensions
     {
-        public static void Sort(this List<Container> containterList)
+        public static void SortForShip(this List<Container> containterList)
         {
             List<Container> list = new List<Container>(containterList);
 
-            list = list.OrderBy(x => -x.weight).ToList();
-            list = list.OrderBy(x => !x.cooled).ToList();
-            list = list.OrderBy(x => !x.valuable).ToList();
+            list = list.OrderByDescending(x => x.weight).ToList();
+            list = list.OrderByDescending(x => x.cooled).ToList();
+            list = list.OrderByDescending(x => x.valuable).ToList();
 
             containterList.Clear();
             containterList.AddRange(list);
@@ -23,8 +23,8 @@ namespace Logic
         {
             List<Container> list = new List<Container>(containterList);
 
-            list = list.OrderBy(x => -x.weight).ToList();
-            list = list.OrderBy(x => !x.valuable).ToList();
+            list = list.OrderByDescending(x => x.weight).ToList();
+            list = list.OrderByDescending(x => x.valuable).ToList();
 
             containterList.Clear();
             containterList.AddRange(list);

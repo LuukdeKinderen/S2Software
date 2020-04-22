@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Text;
 
 namespace Logic
@@ -13,14 +14,9 @@ namespace Logic
         {
             get { return containers.AsReadOnly(); }
         }
-        public readonly int x;
-        public readonly int y;
-        public int Count
+        public int ContainerCount
         {
-            get
-            {
-                return Containers.Count;
-            }
+            get { return Containers.Count; }
         }
         public bool HasValuable
         {
@@ -36,16 +32,11 @@ namespace Logic
                 return false;
             }
         }
-        public int Weight
+        public int TotalWeight
         {
             get
             {
-                int weight = 0;
-                foreach (Container container in containers)
-                {
-                    weight += container.weight;
-                }
-                return weight;
+                return containers.Sum(container => container.weight);
             }
         }
         private int BottomLoad
@@ -54,7 +45,7 @@ namespace Logic
             {
                 if (containers.Count > 0)
                 {
-                    return Weight - containers[Count - 1].weight;
+                    return TotalWeight - containers[ContainerCount - 1].weight;
                 }
                 else
                 {
@@ -63,25 +54,14 @@ namespace Logic
             }
         }
 
-        public Stack(int x, int y)
+        public Stack()
         {
             containers = new List<Container>();
-            this.x = x;
-            this.y = y;
         }
 
         public bool AddContainer(Container container)
         {
-
             if (HasValuable && container.valuable)
-            {
-                return false;
-            }
-            if (container.valuable && y % 2 != 0)
-            {
-                return false;
-            }
-            if (container.cooled && y != 0)
             {
                 return false;
             }
@@ -96,12 +76,14 @@ namespace Logic
                 containers.Remove(container);
                 return false;
             }
-
         }
+
+
+
 
         public override string ToString()
         {
-            return String.Format("Position: ({0},{1})\nHeight: {2}\nWeight: {3}\nBottomLoad: {4}", x, y, Count, Weight, BottomLoad);
+            return String.Format("Height: {0}\nWeight: {1}\nBottomLoad: {2}", ContainerCount, TotalWeight, BottomLoad);
         }
     }
 }

@@ -25,55 +25,56 @@ namespace FormUI
         }
 
 
-        private TableLayoutPanel ShipsTable(ReadOnlyCollection<Ship> shipCollection)
+        private List<TabPage> ShipsTable(ReadOnlyCollection<Ship> shipCollection)
         {
-            TableLayoutPanel shipsTable = new TableLayoutPanel()
-            {
-                AutoSize = true,
-                AutoSizeMode = AutoSizeMode.GrowOnly,
-                Location = new Point(10, 10),
-                CellBorderStyle = TableLayoutPanelCellBorderStyle.Single,
-            };
+            List<TabPage> tabs = new List<TabPage>();
             for (int ship = 0; ship < shipCollection.Count; ship++)
             {
-                shipsTable.Controls.Add(new Label() { AutoSize = true, Text = shipCollection[ship].ToString() }, ship, 0);
-                int xLength = shipCollection[ship].xLength;
-                int yLenght = shipCollection[ship].yLength;
+                Panel scrollpanel = new Panel()
+                {
+                    AutoScroll = true,
+                    Anchor = (AnchorStyles.Top | AnchorStyles.Right | AnchorStyles.Bottom | AnchorStyles.Left),
+                };
+                scrollpanel.Controls.Add(new Label() { AutoSize = true, Text = shipCollection[ship].ToString() });
                 TableLayoutPanel shipTable = new TableLayoutPanel()
                 {
+                    Location = new Point(0,70),
                     AutoSize = true,
                     AutoSizeMode = AutoSizeMode.GrowOnly,
-                    ColumnCount = xLength,
-                    RowCount = yLenght,
+                    ColumnCount = shipCollection[ship].yLength,
+                    RowCount = shipCollection[ship].xLength,
                 };
-                for (int x = 0; x < xLength; x++)
+                foreach (ShipRow row in shipCollection[ship].ShipRows)
                 {
-                    for (int y = 0; y < yLenght; y++)
+                    foreach (Stack stack in row.Stacks)
                     {
                         Panel panel = new Panel
                         {
-                            Size = new Size(200, 165),
+                            Size = new Size(200, 145),
                         };
                         Label label = new Label
                         {
-                            Text = shipCollection[ship].GetStack(x, y).ToString(),
+                            Text = stack.ToString(),
                             AutoSize = true,
                         };
                         ListBox listBox = new ListBox
                         {
-                            DataSource = shipCollection[ship].GetStack(x, y).Containers,
-                            Location = new Point(0, 55),
-                            Size = new Size(180, 110),
+                            DataSource = stack.Containers,
+                            Location = new Point(0, 45),
+                            Size = new Size(190, 100),
                             SelectionMode = SelectionMode.None
                         };
                         panel.Controls.Add(label);
                         panel.Controls.Add(listBox);
-                        shipTable.Controls.Add(panel, x, y);
+                        shipTable.Controls.Add(panel);
                     }
                 }
-                shipsTable.Controls.Add(shipTable, ship, 1);
+                scrollpanel.Controls.Add(shipTable);
+                TabPage tab = new TabPage("ship " + (ship + 1));
+                tab.Controls.Add(scrollpanel);
+                tabs.Add(tab);
             }
-            return shipsTable;
+            return tabs;
         }
 
         private void SetShipFormat_Click(object sender, EventArgs e)
@@ -91,7 +92,7 @@ namespace FormUI
             else
             {
                 bb.SetShipFormat(x, y);
-                MessageBox.Show(string.Format("Ship formaat is aangepast: ({0},{1})", x, y));
+                //MessageBox.Show(string.Format("Ship formaat is aangepast: ({0},{1})", x, y));
             }
         }
 
@@ -108,9 +109,23 @@ namespace FormUI
             else
             {
 
-                ScrollPanel.Controls.Clear();
+                tabControl1.Controls.Clear();
                 bb.DistributeContainers();
-                ScrollPanel.Controls.Add(ShipsTable(bb.shipCollection));
+                foreach (TabPage table in ShipsTable(bb.shipCollection))
+                {
+                    tabControl1.Controls.Add(table);
+                }
+                if (bb.containersFailedToDistribute.Count > 0)
+                {
+                    TabPage tab = new TabPage("failed Containers");
+                    ListBox listBox = new ListBox()
+                    {
+                        DataSource = bb.containersFailedToDistribute,
+                        Anchor = (AnchorStyles.Top | AnchorStyles.Right | AnchorStyles.Bottom | AnchorStyles.Left)
+                    };
+                    tab.Controls.Add(listBox);
+                    tabControl1.Controls.Add(tab);
+                }
             }
         }
 
@@ -159,9 +174,9 @@ namespace FormUI
 
         private void Clear_Click(object sender, EventArgs e)
         {
+            tabControl1.Controls.Clear();
             bb.ClearContainers();
             UpdateContainerView();
-            ScrollPanel.Controls.Clear();
         }
     }
 }

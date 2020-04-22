@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.ScrollPanel = new System.Windows.Forms.Panel();
             this.AddRandom = new System.Windows.Forms.Button();
             this.AddContianer = new System.Windows.Forms.Button();
             this.RandomInput = new System.Windows.Forms.TextBox();
@@ -49,25 +48,15 @@
             this.Clear = new System.Windows.Forms.Button();
             this.DistributeContainers = new System.Windows.Forms.Button();
             this.ContainersLabel = new System.Windows.Forms.Label();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
             this.SuspendLayout();
-            // 
-            // ScrollPanel
-            // 
-            this.ScrollPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.ScrollPanel.AutoScroll = true;
-            this.ScrollPanel.Location = new System.Drawing.Point(370, 12);
-            this.ScrollPanel.Name = "ScrollPanel";
-            this.ScrollPanel.Size = new System.Drawing.Size(608, 582);
-            this.ScrollPanel.TabIndex = 0;
             // 
             // AddRandom
             // 
             this.AddRandom.Location = new System.Drawing.Point(9, 367);
             this.AddRandom.Name = "AddRandom";
             this.AddRandom.Size = new System.Drawing.Size(59, 23);
-            this.AddRandom.TabIndex = 11;
+            this.AddRandom.TabIndex = 4;
             this.AddRandom.Text = "Add";
             this.AddRandom.UseVisualStyleBackColor = true;
             this.AddRandom.Click += new System.EventHandler(this.AddRandom_Click);
@@ -87,7 +76,7 @@
             this.RandomInput.Location = new System.Drawing.Point(9, 328);
             this.RandomInput.Name = "RandomInput";
             this.RandomInput.Size = new System.Drawing.Size(100, 20);
-            this.RandomInput.TabIndex = 9;
+            this.RandomInput.TabIndex = 3;
             this.RandomInput.Text = "500";
             // 
             // WeightText
@@ -103,16 +92,16 @@
             this.ShipYLengthLabel.AutoSize = true;
             this.ShipYLengthLabel.Location = new System.Drawing.Point(9, 48);
             this.ShipYLengthLabel.Name = "ShipYLengthLabel";
-            this.ShipYLengthLabel.Size = new System.Drawing.Size(70, 13);
+            this.ShipYLengthLabel.Size = new System.Drawing.Size(64, 13);
             this.ShipYLengthLabel.TabIndex = 1;
-            this.ShipYLengthLabel.Text = "Ship Y length";
+            this.ShipYLengthLabel.Text = "Ship Length";
             // 
             // ShipYLength
             // 
             this.ShipYLength.Location = new System.Drawing.Point(9, 64);
             this.ShipYLength.Name = "ShipYLength";
             this.ShipYLength.Size = new System.Drawing.Size(100, 20);
-            this.ShipYLength.TabIndex = 2;
+            this.ShipYLength.TabIndex = 1;
             this.ShipYLength.Text = "0";
             // 
             // SetShipFormat
@@ -120,7 +109,7 @@
             this.SetShipFormat.Location = new System.Drawing.Point(9, 90);
             this.SetShipFormat.Name = "SetShipFormat";
             this.SetShipFormat.Size = new System.Drawing.Size(59, 23);
-            this.SetShipFormat.TabIndex = 3;
+            this.SetShipFormat.TabIndex = 2;
             this.SetShipFormat.Text = "Set";
             this.SetShipFormat.UseVisualStyleBackColor = true;
             this.SetShipFormat.Click += new System.EventHandler(this.SetShipFormat_Click);
@@ -157,7 +146,7 @@
             this.ShipXLength.Location = new System.Drawing.Point(9, 25);
             this.ShipXLength.Name = "ShipXLength";
             this.ShipXLength.Size = new System.Drawing.Size(100, 20);
-            this.ShipXLength.TabIndex = 9;
+            this.ShipXLength.TabIndex = 0;
             this.ShipXLength.Text = "0";
             // 
             // ShipXLengthLabel
@@ -165,9 +154,9 @@
             this.ShipXLengthLabel.AutoSize = true;
             this.ShipXLengthLabel.Location = new System.Drawing.Point(9, 9);
             this.ShipXLengthLabel.Name = "ShipXLengthLabel";
-            this.ShipXLengthLabel.Size = new System.Drawing.Size(70, 13);
+            this.ShipXLengthLabel.Size = new System.Drawing.Size(59, 13);
             this.ShipXLengthLabel.TabIndex = 8;
-            this.ShipXLengthLabel.Text = "Ship X length";
+            this.ShipXLengthLabel.Text = "Ship Width";
             // 
             // Valuable
             // 
@@ -214,7 +203,7 @@
             this.Sorted.Location = new System.Drawing.Point(184, 25);
             this.Sorted.Name = "Sorted";
             this.Sorted.Size = new System.Drawing.Size(57, 17);
-            this.Sorted.TabIndex = 16;
+            this.Sorted.TabIndex = 6;
             this.Sorted.Text = "Sorted";
             this.Sorted.UseVisualStyleBackColor = true;
             this.Sorted.CheckedChanged += new System.EventHandler(this.Sorted_CheckedChanged);
@@ -224,7 +213,7 @@
             this.Clear.Location = new System.Drawing.Point(184, 48);
             this.Clear.Name = "Clear";
             this.Clear.Size = new System.Drawing.Size(75, 23);
-            this.Clear.TabIndex = 17;
+            this.Clear.TabIndex = 7;
             this.Clear.Text = "Clear";
             this.Clear.UseVisualStyleBackColor = true;
             this.Clear.Click += new System.EventHandler(this.Clear_Click);
@@ -235,7 +224,7 @@
             this.DistributeContainers.Location = new System.Drawing.Point(9, 571);
             this.DistributeContainers.Name = "DistributeContainers";
             this.DistributeContainers.Size = new System.Drawing.Size(113, 23);
-            this.DistributeContainers.TabIndex = 18;
+            this.DistributeContainers.TabIndex = 5;
             this.DistributeContainers.Text = "Distribute";
             this.DistributeContainers.UseVisualStyleBackColor = true;
             this.DistributeContainers.Click += new System.EventHandler(this.DistributeContainers_Click);
@@ -248,11 +237,23 @@
             this.ContainersLabel.Size = new System.Drawing.Size(0, 13);
             this.ContainersLabel.TabIndex = 19;
             // 
+            // tabControl1
+            // 
+            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tabControl1.Location = new System.Drawing.Point(370, 9);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(615, 592);
+            this.tabControl1.TabIndex = 0;
+            // 
             // Visualiser
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(990, 606);
+            this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.ContainersLabel);
             this.Controls.Add(this.ShipYLengthLabel);
             this.Controls.Add(this.ShipYLength);
@@ -273,7 +274,6 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.Weight);
             this.Controls.Add(this.SetShipFormat);
-            this.Controls.Add(this.ScrollPanel);
             this.Name = "Visualiser";
             this.Text = "Form1";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
@@ -283,8 +283,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Panel ScrollPanel;
         private System.Windows.Forms.Button AddRandom;
         private System.Windows.Forms.Button AddContianer;
         private System.Windows.Forms.TextBox RandomInput;
@@ -305,6 +303,7 @@
         private System.Windows.Forms.Button Clear;
         private System.Windows.Forms.Button DistributeContainers;
         private System.Windows.Forms.Label ContainersLabel;
+        private System.Windows.Forms.TabControl tabControl1;
     }
 }
 
