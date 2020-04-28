@@ -306,8 +306,8 @@ Ik heb tot nu toe de eerste 2 puzzels gemaakt. Ik vond het erg interessant en le
 Deze opdracht heb ik afgerond. Na het verwerken van de feedback is deze opdracht met succes voltooid. In de toekomst zou ik de scheiding van UI en Logica beter implementeren.
 ## Container schip
 ### Conceptueel Model
-![Containerschip Conceptueel Model](/Algoritmiek/Diagrams/ContainerSchip_ConceptueelModel.png)
+![Containerschip Conceptueel Model](/Algoritmiek/Diagrams/Container_Schip_ConceptueelModel.png)
 ### Class Diagram
-![Containerschip Class Diagram](/Algoritmiek/Diagrams/ContainerSchip_ClassDiagram.png)
+![Containerschip Class Diagram](/Algoritmiek/Diagrams/Container_Schip_ClassDiagram.png)
 
 
