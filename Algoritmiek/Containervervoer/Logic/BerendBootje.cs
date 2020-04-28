@@ -62,7 +62,7 @@ namespace Logic
 
         public void AddRandomContianers(int number)
         {
-           containers.AddRange(ContainerConstructor.CreateRanomContainers(number));
+           containers.AddRange(ContainerConstructor.CreateRandomContainers(number));
         }
 
         public void AddContainer(bool valuable, bool cooled, int weight)

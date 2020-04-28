@@ -23,14 +23,8 @@ namespace Logic
 
         }
 
-        public void Update()
-        {
-            ProductDAL DAL = new ProductDAL();
-            ProductDTO DTO = this.ToDTO();
-            DAL.Save(DTO);
-        }
 
-        private ProductDTO ToDTO()
+        public ProductDTO ToDTO()
         {
             return new ProductDTO
             {

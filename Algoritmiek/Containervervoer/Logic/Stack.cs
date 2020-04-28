@@ -78,9 +78,6 @@ namespace Logic
             }
         }
 
-
-
-
         public override string ToString()
         {
             return String.Format("Height: {0}\nWeight: {1}\nBottomLoad: {2}", ContainerCount, TotalWeight, BottomLoad);

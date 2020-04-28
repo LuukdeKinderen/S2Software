@@ -9,12 +9,6 @@ namespace Logic
         public readonly bool cooled;
         public readonly int weight;
 
-        public Container(Random r)
-        {
-            weight = r.Next(4000, 30001);
-            valuable = r.Next(0, 15) < 1;
-            cooled = r.Next(0, 25) < 1;
-        }
 
         public Container(bool valuable, bool cooled, int weight)
         {

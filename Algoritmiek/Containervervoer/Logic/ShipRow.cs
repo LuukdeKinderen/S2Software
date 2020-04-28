@@ -9,13 +9,12 @@ namespace Logic
 {
     public class ShipRow
     {
-
+        private List<Stack> stacks;
         public ReadOnlyCollection<Stack> Stacks
         {
             get { return stacks.AsReadOnly(); }
         }
-
-        private List<Stack> stacks;
+        
 
         public int Weight
         {
@@ -34,7 +33,6 @@ namespace Logic
                 stacks.Add(new Stack());
             }
         }
-
 
         public bool AddContainer(Container container)
         {
