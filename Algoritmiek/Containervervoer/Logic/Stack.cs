@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Text;
 
 namespace Logic
@@ -9,91 +10,77 @@ namespace Logic
     {
 
         private List<Container> containers;
-
         public ReadOnlyCollection<Container> Containers
         {
             get { return containers.AsReadOnly(); }
         }
-
-        public readonly int x;
-        public readonly int y;
-
-        public Stack(int x, int y)
+        public int ContainerCount
         {
-            containers = new List<Container>();
-            this.x = x;
-            this.y = y;
+            get { return Containers.Count; }
         }
-
-        /// <summary>
-        /// Paces a container on this stack
-        /// </summary>
-        /// <param name="container">the container you want to place</param>
-        /// <param name="top">Do you want to place the container on top</param>
-        public void AddContainer(Container container, bool top)
+        public bool HasValuable
         {
-            if (top == true)
+            get
             {
-                containers.Insert(0, container);
-            }
-            else
-            {
-                containers.Add(container);
-            }
-        }
-
-        /// <summary>
-        /// Returns true when the load of the bottom conainer is not overwriten.
-        /// </summary>
-        /// <param name="container">the container you want to place</param>
-        /// <param name="top">Do you want to place the container on top</param>
-        public bool CanAddContainer(Container container, bool top)
-        {
-            return top ? BottomLoad() + container.weight <= 120000 : Weight() <= 120000;
-        }
-
-        public bool hasValuable()
-        {
-            foreach (Container container in containers)
-            {
-                if (container.valuable)
+                foreach (Container container in containers)
                 {
-                    return true;
+                    if (container.valuable)
+                    {
+                        return true;
+                    }
+                }
+                return false;
+            }
+        }
+        public int TotalWeight
+        {
+            get
+            {
+                return containers.Sum(container => container.weight);
+            }
+        }
+        private int BottomLoad
+        {
+            get
+            {
+                if (containers.Count > 0)
+                {
+                    return TotalWeight - containers[ContainerCount - 1].weight;
+                }
+                else
+                {
+                    return 0;
                 }
             }
-            return false;
         }
 
-        public int Weight()
+        public Stack()
         {
-            int weight = 0;
+            containers = new List<Container>();
+        }
 
-            foreach (Container container in containers)
+        public bool AddContainer(Container container)
+        {
+            if (HasValuable && container.valuable)
             {
-                weight += container.weight;
+                return false;
             }
-            return weight;
-        }
-
-        private int BottomLoad()
-        {
-            if (containers.Count > 0)
+            containers.Add(container);
+            containers.SortForStack();
+            if (BottomLoad <= 120000)
             {
-                return Weight() - containers[Containers.Count - 1].weight;
+                return true;
             }
             else
             {
-                return 0;
+                containers.Remove(container);
+                return false;
             }
-        }
-        public int Height()
-        {
-            return containers.Count;
         }
 
         public override string ToString()
         {
-            return String.Format("Height: {0}, Weight: {1}, BottomLoad: {2}", containers.Count, Weight(), BottomLoad());
+            return String.Format("Height: {0}\nWeight: {1}\nBottomLoad: {2}", ContainerCount, TotalWeight, BottomLoad);
         }
     }
 }

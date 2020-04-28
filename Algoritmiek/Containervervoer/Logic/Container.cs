@@ -5,18 +5,10 @@ namespace Logic
 {
     public class Container
     {
-        public bool valuable { get; private set; }
-        public bool cooled { get; private set; }
-        public int weight { get; private set; }
+        public readonly bool valuable;
+        public readonly bool cooled;
+        public readonly int weight;
 
-
-
-        public Container(Random r)
-        {
-            weight = r.Next(4000, 30001);
-            valuable = r.Next(0, 15) < 1;
-            cooled = r.Next(0, 15) < 1;
-        }
 
         public Container(bool valuable, bool cooled, int weight)
         {
@@ -29,7 +21,7 @@ namespace Logic
 
         public override string ToString()
         {
-            return " load: " + weight.ToString() + (valuable ? " VALUABLE" : "") + (cooled ? " COOLED" : "") + Environment.NewLine;
+            return String.Format("Load: {0}{1}{2}{3}", weight, (valuable ? " VALUABLE" : ""), (cooled ? " COOLED" : ""), Environment.NewLine);
         }
     }
 }

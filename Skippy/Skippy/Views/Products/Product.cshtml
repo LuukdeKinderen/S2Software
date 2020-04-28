@@ -1,12 +1,22 @@
 ﻿@model Logic.Product
 
 
-<div>
-    <h1 class="display-4">@Model.titel</h1>
-    <p>@Model.omschrijving</p>
-    <p>€@Model.prijs.ToString("0.00")</p>
+    <div>
+        <h1 class="display-4">@Model.titel</h1>
+        <p>@Model.omschrijving</p>
+        <p>€@Model.prijs.ToString("0.00")</p>
 
-</div>
+
+        <form asp-action="Delete" asp-route-id=@Model.id>
+            <input type="submit" value="Verwijderen" class="btn btn-primary" />
+        </form>
+
+        <form asp-action="Edit" asp-route-id=@Model>
+            <input type="submit" value="Weizigen" class="btn btn-primary" />
+        </form>
+
+
+    </div>
 <div>
     <a asp-action="Index">Terug</a>
 </div>

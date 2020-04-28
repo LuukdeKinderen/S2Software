@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Logic;
+using System.Diagnostics;
 
 namespace Skippy.Controllers
 {
@@ -12,16 +13,14 @@ namespace Skippy.Controllers
 
         public IActionResult Index()
         {
-            ProductContainer container = new ProductContainer();
-            return View(container.GetProducts());
+            return View(ProductContainer.GetProducts());
         }
         public IActionResult Product(int id)
         {
-            ProductContainer container = new ProductContainer();
-            Product product = container.GetByID(id);
+            Product product = ProductContainer.GetByID(id);
             return View(product);
         }
-        
+
         [HttpGet]
         public IActionResult Create()
         {
@@ -31,9 +30,25 @@ namespace Skippy.Controllers
         [HttpPost]
         public IActionResult Create(Product product)
         {
-           
-            product.Update();
-            return View("Product",product);
+            ProductContainer.Insert(product);
+            return View("Product", ProductContainer.GetByID(product.id));
+        }
+
+        public IActionResult Edit(Product product)
+        {
+            return View(product);
+        }
+
+        public IActionResult SaveEdit(Product product)
+        {
+            return View("Product", product);
+        }
+
+
+        public IActionResult Delete(int id)
+        {
+            ProductContainer.DeleteByID(id);
+            return View("Index", ProductContainer.GetProducts());
         }
     }
 }

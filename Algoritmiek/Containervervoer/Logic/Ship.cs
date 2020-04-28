@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Linq;
 using System.Text;
 
 namespace Logic
@@ -9,232 +11,188 @@ namespace Logic
 
     public class Ship
     {
-
-        public Stack[] stacks { get; private set; }
-        private readonly int maxTotalWeight;
+        private List<ShipRow> shipRows;
+        public ReadOnlyCollection<ShipRow> ShipRows
+        {
+            get { return shipRows.AsReadOnly(); }
+        }
+        public readonly int maxTotalWeight;
         public readonly int xLength;
         public readonly int yLength;
-        public Ship(int xLenght, int yLenght)
+
+        private int LeftWeight
         {
-            this.xLength = xLenght;
-            this.yLength = yLenght;
-            stacks = new Stack[xLenght * yLenght];
-            for (int x = 0; x < xLenght; x++)
+            get
             {
-                for (int y = 0; y < yLenght; y++)
+                if (xLength % 2 != 0)
                 {
-                    stacks[xLenght * y + x] = new Stack(x, y);
+                    int weight = 0;
+                    List<ShipRow> rows = GetLeftRows();
+                    for (int i = 0; i <rows.Count-1; i++)
+                    {
+                        weight += rows[i].Weight;
+                    }
+                    weight += rows[rows.Count - 1].Weight/2;
+                    return weight;
+                }
+                else
+                {
+                    return GetLeftRows().Sum(row => row.Weight);
                 }
             }
-            maxTotalWeight = 150000 * stacks.Length;
+        }
+        private int RightWeight
+        {
+            get
+            {
+                if (xLength % 2 != 0)
+                {
+                    int weight = 0;
+                    List<ShipRow> rows = GetRightRows();
+                    for (int i = 0; i < rows.Count - 1; i++)
+                    {
+                        weight += rows[i].Weight;
+                    }
+                    weight += rows[rows.Count - 1].Weight / 2;
+                    return weight;
+                }
+                else
+                {
+                    return GetRightRows().Sum(row => row.Weight);
+                }
+            }
+        }
+        private int TotalWeight
+        {
+            get { return shipRows.Sum(row => row.Weight); }
+        }
+        private float PercentageOfMaxWeight
+        {
+            get
+            {
+                return (float)100 * TotalWeight / maxTotalWeight;
+            }
         }
 
-        private bool LeftIsHeviest()
+
+
+        public Ship(int xLength, int yLength)
         {
-            return LeftWeight() > RightWeight();
+            this.xLength = xLength;
+            this.yLength = yLength;
+            shipRows = new List<ShipRow>();
+            for (int x = 0; x < xLength; x++)
+            {
+                shipRows.Add(new ShipRow(this.yLength));
+            }
+            maxTotalWeight = MaxTotalWeight(xLength,yLength);
         }
 
-        private int LeftWeight()
+
+        public List<Container> DistributeMaxAndReturn(List<Container> containers)
         {
-            int weight = 0;
-            for (int y = 0; y < yLength; y++)
+            List<Container> notAdded = new List<Container>();
+
+            foreach (Container container in containers)
             {
-                for (int left = 0; left < xLength / 2; left++)
+                if (!FindRowAndAdd(container))
                 {
-                    weight += GetStack(left, y).Weight();
+                    notAdded.Add(container);
                 }
             }
-            return weight;
-        }
-        private int RightWeight()
-        {
-            int weight = 0;
-            for (int y = 0; y < yLength; y++)
-            {
-                for (int right = xLength / 2; right < xLength; right++)
-                {
-                    weight += GetStack(right, y).Weight();
-                }
-            }
-            return weight;
-        }
-        private int TotalWeight()
-        {
-            int weight = 0;
-            foreach (Stack stack in stacks)
-            {
-                weight += stack.Weight();
-            }
-            return weight;
+            return notAdded;
         }
 
-        public Stack GetStack(int x, int y)
+        public List<Container> DistributeMinAndReturn(List<Container> containers)
         {
-            foreach (Stack stack in stacks)
+            List<Container> notAdded = new List<Container>();
+            foreach (Container container in containers)
             {
-                if (stack.x == x && stack.y == y)
+                if (PercentageOfMaxWeight > 50)
                 {
-                    return stack;
+                    notAdded.Add(container);
+                }
+                else if (!FindRowAndAdd(container))
+                {
+                    notAdded.Add(container);
                 }
             }
-            return null;
+            return notAdded;
+        }
+
+        private bool FindRowAndAdd(Container container)
+        {
+            bool added = false;
+
+            if (LeftWeight > RightWeight)
+            {
+                foreach (ShipRow row in GetRightRows())
+                {
+                    if (row.AddContainer(container))
+                    {
+                        added = true;
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                foreach (ShipRow row in GetLeftRows())
+                {
+                    if (row.AddContainer(container))
+                    {
+                        added = true;
+                        break;
+                    }
+                }
+            }
+            return added;
+        }
+
+        private List<ShipRow> GetLeftRows()
+        {
+            List<ShipRow> rows = new List<ShipRow>();
+            int half = xLength % 2 != 0 ? xLength / 2 + 1 : xLength / 2;
+            for (int step = 0; step < half; step++)
+            {
+                int rowindex = step;
+                rows.Add(shipRows[rowindex]);
+            }
+            return rows;
+        }
+        private List<ShipRow> GetRightRows()
+        {
+            List<ShipRow> rows = new List<ShipRow>();
+            int half = xLength % 2 != 0 ? xLength / 2 + 1 : xLength / 2;
+            for (int step = 0; step < half; step++)
+            {
+                int rowindex = xLength - 1 - step;
+                rows.Add(shipRows[rowindex]);
+            }
+            return rows;
         }
 
         public override string ToString()
         {
-
-            float percentageLeft = (float)100 * LeftWeight() / TotalWeight();
-            float percentageRight = (float)100 * RightWeight() / TotalWeight();
-            float percentageOfMax = (float)100 * TotalWeight() / maxTotalWeight;
-            return string.Format("Weight left: {0}Kg , {1}% \nWeight right: {2} Kg , {3}% \nWeight total: {4} Kg , {5}% of Max({6} Kg)", LeftWeight(), percentageLeft.ToString("00.000"), RightWeight(), percentageRight.ToString("00.000"), TotalWeight(), percentageOfMax.ToString("00.000"), maxTotalWeight);
+            float percentageLeft = (float)100 * LeftWeight / TotalWeight;
+            float percentageRight = (float)100 * RightWeight / TotalWeight;
+            return string.Format
+                (
+                "Total Containers: {0} \nWeight left: {1} Kg , {2}% \nWeight right: {3} Kg , {4}% \nWeight total: {5} Kg , {6}% of Max({7} Kg)",
+                shipRows.Sum(row => row.ContainerCount),
+                LeftWeight,
+                percentageLeft.ToString("00.000"),
+                RightWeight,
+                percentageRight.ToString("00.000"),
+                TotalWeight,
+                PercentageOfMaxWeight.ToString("00.000"),
+                maxTotalWeight
+                );
         }
 
-
-
-
-
-        /*
-        public void AddAndDistribute(List<Container> containers)
+        public static int MaxTotalWeight(int xLength, int yLength)
         {
-            for (int c = 0; c < containers.Count; c++)
-            {
-
-                bool distributed = false;
-                if (containers[c].cooled && containers[c].valuable)
-                {
-                    int y = 0;
-                    for (int x = 0; x < xLength; x++)
-                    {
-                        if (!GetStack(x, y).hasValuable())
-                        {
-                            if (!distributed)
-                            {
-                                GetStack(x, y).AddContainer(containers[c], true);
-                                distributed = true;
-                            }
-                        }
-                    }
-                }
-                if (containers[c].valuable)
-                {
-                    Debug.WriteLine("test");
-                    for (int y = 0; y < yLength; y += 2)
-                    {
-                        for (int x = 0; x < xLength; x++)
-                        {
-                            if (!GetStack(x, y).hasValuable())
-                            {
-                                if (!distributed)
-                                {
-                                    GetStack(x, y).AddContainer(containers[c], true);
-                                    distributed = true;
-                                }
-                            }
-                        }
-                    }
-                }
-                if (containers[c].cooled)
-                {
-                    int y = 0;
-                    for (int x = 0; x < xLength; x++)
-                    {
-                        //if (!distributed)
-                        //{
-                        //    while (GetStack(x, y).CanAddContainer(containers[c], false))
-                        //    {
-                        //        GetStack(x, y).AddContainer(containers[c], false);
-                        //        c++;
-                        //        distributed = true;
-                        //    }
-                        //}
-                    }
-                }
-                for (int y = 0; y < yLength; y++)
-                {
-                    for (int x = 0; x < xLength; x++)
-                    {
-                        if (!distributed && GetStack(x, y).CanAddContainer(containers[c], false))
-                        {
-                            GetStack(x, y).AddContainer(containers[c], false);
-                            distributed = true;
-                        }
-                    }
-                }
-            }
+            return 150000 * xLength * yLength;
         }
-        public void lol()
-        {  public void AddContainers(List<Container> containers)
-          {
-              for (int container = 0; container < containers.Count; container++)
-              {
-                  findStack(containers[container]);
-              }
-          }
-
-          private bool findStack(Container container)
-          {
-              int beginPoint = LeftIsHeviest() ? xLenght / 2 : 0;
-              int endPoint = LeftIsHeviest() ? xLenght : xLenght / 2;
-              for (int y = 0; y < yLenght; y++)
-              {
-                  {/* if (LeftIsHeviest())
-                  {
-                      for (int x = xLenght - 1; x > xLenght / 2-1; x--)
-                      {
-                          if (GetStack(x, y).AddContainer(container))
-                          {
-                              return true;
-                          }
-                      }
-
-                  }
-                  else
-                  {
-                      for (int x = 0; x < xLenght / 2; x++)
-                      {
-                          if (GetStack(x, y).AddContainer(container))
-                          {
-                              return true;
-                          }
-                      }
-                  }
-                  }
-                  for (int x = beginPoint; x < endPoint; x++)
-                  {
-                      Stack stack = GetStack(x, y);
-                      if (container.cooled && y != 0)
-                      {
-                          return false;
-                      }
-                      if (stack.stack.Count > 0)
-                      {
-                          if ((stack.Weight() - stack.stack[stack.stack.Count - 1].weight) + container.weight > 120000)
-                          {
-                              return false;
-                          }
-                      }
-                      if (container.valuable)
-                      {
-                          if (y % 2 == 0)
-                          {
-                              if (stack.hasValuable())
-                              {
-                                  return false;
-                              }
-                              stack.stack.Insert(0, container);
-                              return true;
-                          }
-                          else
-                          {
-                              return false;
-                          }
-                      }
-                      stack.stack.Add(container);
-                      return true;
-                  }
-              }
-              return false;
-          }
-        }*/
     }
 }
