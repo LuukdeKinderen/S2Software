@@ -20,36 +20,36 @@ Ingedeeld met MoSCoW.
 **C**ould have
 **W**on't have
 
- - **FR-01** De Kassamedewerker kan een overzicht van alle producten zien. **M**
-- **B-01.1** Het overzicht is per categorie te sorteren.
-- **K-01.1** Het overzicht is te beperken met een zoekterm.
- - **FR-02** De Manager moet producten kunnen toevoegen/ wijzigen. **M**
-- **B-02.1** Een product heeft een Naam, omschrijving en prijs.
-- **B-02.2** Naam en Prijs zijn verplicht om in te vullen.
- - **FR-03** De Manager moet producten kunnen verwijderen. **S**
- - **FR-04** De Manager moet categorieën kunnen toevoegen/ wijzigen. **S**
-- **B-04.1** Een categorie heeft een Naam.
-- **B-04.2** Naam is verplicht om in te vullen.
- - **FR-05** De Manager moet categorieën kunnen verwijderen. **C**
- - **FR-06** De Manager moet subcategorieën kunnen toevoegen aan Categorieën. **C**
-- **K-06.1** Aan een categorie met een of meerder producten, kan geen sub categorie worden toegevoegd.
-- **K-06.2** Een categorie kan maar een keer als sub categorie toegevoegd worden.
- - **FR-07** De Manager kan producten toevoegen aan een categorie. **S**
-- **K-07.1** Aan een categorie met een of meerdere sub categorieën, kan geen product worden toegevoegd.
-- **K-07.2** Een product kan maar een keer aan een categorie toegevoegd worden.
- - **FR-08** De Kassamedewerker een order opstellen. **M**
-- **B-08.1** Een order heeft producten, een datum, klant nr. en betaalstatus.
-- **B-08.2** Er kunnen meerdere producten op een order staan.
-- **B-08.3** Per product moet er een aantal worden toegevoegd
-- **B-08.4** Bij afronding zijn datum en betaalstatus zijn verplicht.
-- **B-08.5** Bij afronding is klantnummer alleen verplicht als betaalstatus 'niet betaald' is.
- - **FR-09** De Manager moet klanten kunnen toevoegen/ wijzigen. **C**
-- **B-09.1** Een klant heeft een Klantnummer, Naam en factuur adres.
-- **B-09.2** Alle gegevens zijn verplicht om in te vullen.
- - **FR-10** De Manager moet een overzicht kunnen inzien van alle verkochte producten **C**
- - **FR-11** De Manager moet kunnen inloggen en manager rechten krijgen **M**
- - **K-ALG.01** Bij onjuiste invoer moet een duidelijke foutmelding getoond worden.
- - **K-ALG.02** Wanneer de Manager niet ingelogd is zullen opties die alleen voor de manager bedoeld zijn niet zichtbaar zijn.
+- **FR-01** De Kassamedewerker kan een overzicht van alle producten zien. **M**
+  - **B-01.1** Het overzicht is per categorie te sorteren.
+  - **K-01.1** Het overzicht is te beperken met een zoekterm.
+- **FR-02** De Manager moet producten kunnen toevoegen/ wijzigen. **M**
+  - **B-02.1** Een product heeft een Naam, omschrijving en prijs.
+  - **B-02.2** Naam en Prijs zijn verplicht om in te vullen.
+- **FR-03** De Manager moet producten kunnen verwijderen. **S**
+- **FR-04** De Manager moet categorieën kunnen toevoegen/ wijzigen. **S**
+  - **B-04.1** Een categorie heeft een Naam.
+  - **B-04.2** Naam is verplicht om in te vullen.
+- **FR-05** De Manager moet categorieën kunnen verwijderen. **C**
+- **FR-06** De Manager moet subcategorieën kunnen toevoegen aan Categorieën. **C**
+  - **K-06.1** Aan een categorie met een of meerder producten, kan geen sub categorie worden toegevoegd.
+  - **K-06.2** Een categorie kan maar een keer als sub categorie toegevoegd worden.
+- **FR-07** De Manager kan producten toevoegen aan een categorie. **S**
+  - **K-07.1** Aan een categorie met een of meerdere sub categorieën, kan geen product worden toegevoegd.
+  - **K-07.2** Een product kan maar een keer aan een categorie toegevoegd worden.
+- **FR-08** De Kassamedewerker een order opstellen. **M**
+  - **B-08.1** Een order heeft producten, een datum, klant nr. en betaalstatus.
+  - **B-08.2** Er kunnen meerdere producten op een order staan.
+  - **B-08.3** Per product moet er een aantal worden toegevoegd
+  - **B-08.4** Bij afronding zijn datum en betaalstatus zijn verplicht.
+  - **B-08.5** Bij afronding is klantnummer alleen verplicht als betaalstatus 'niet betaald' is.
+- **FR-09** De Manager moet klanten kunnen toevoegen/ wijzigen. **C**
+  - **B-09.1** Een klant heeft een Klantnummer, Naam en factuur adres.
+  - **B-09.2** Alle gegevens zijn verplicht om in te vullen.
+- **FR-10** De Manager moet een overzicht kunnen inzien van alle verkochte producten **C**
+- **FR-11** De Manager moet kunnen inloggen en manager rechten krijgen **M**
+- **K-ALG.01** Bij onjuiste invoer moet een duidelijke foutmelding getoond worden.
+- **K-ALG.02** Wanneer de Manager niet ingelogd is zullen opties die alleen voor de manager bedoeld zijn niet zichtbaar zijn.
 
 ### UI Schetsen
 ![UI Schetsen](/Diagrams/img/UI_Schetsen.png)
