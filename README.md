@@ -21,31 +21,31 @@ Ingedeeld met MoSCoW.
 **W**on't have
 
  - **FR-01** De Kassamedewerker kan een overzicht van alle producten zien. **M**
-     - **B-01.1** Het overzicht is per categorie te sorteren.
-     - **K-01.1** Het overzicht is te beperken met een zoekterm.
+- **B-01.1** Het overzicht is per categorie te sorteren.
+- **K-01.1** Het overzicht is te beperken met een zoekterm.
  - **FR-02** De Manager moet producten kunnen toevoegen/ wijzigen. **M**
-     - **B-02.1** Een product heeft een Naam, omschrijving en prijs.
-     - **B-02.2** Naam en Prijs zijn verplicht om in te vullen.
+- **B-02.1** Een product heeft een Naam, omschrijving en prijs.
+- **B-02.2** Naam en Prijs zijn verplicht om in te vullen.
  - **FR-03** De Manager moet producten kunnen verwijderen. **S**
  - **FR-04** De Manager moet categorieën kunnen toevoegen/ wijzigen. **S**
-     - **B-04.1** Een categorie heeft een Naam.
-     - **B-04.2** Naam is verplicht om in te vullen.
+- **B-04.1** Een categorie heeft een Naam.
+- **B-04.2** Naam is verplicht om in te vullen.
  - **FR-05** De Manager moet categorieën kunnen verwijderen. **C**
  - **FR-06** De Manager moet subcategorieën kunnen toevoegen aan Categorieën. **C**
-     - **K-06.1** Aan een categorie met een of meerder producten, kan geen sub categorie worden toegevoegd.
-     - **K-06.2** Een categorie kan maar een keer als sub categorie toegevoegd worden.
+- **K-06.1** Aan een categorie met een of meerder producten, kan geen sub categorie worden toegevoegd.
+- **K-06.2** Een categorie kan maar een keer als sub categorie toegevoegd worden.
  - **FR-07** De Manager kan producten toevoegen aan een categorie. **S**
-     - **K-07.1** Aan een categorie met een of meerdere sub categorieën, kan geen product worden toegevoegd.
-     - **K-07.2** Een product kan maar een keer aan een categorie toegevoegd worden.
+- **K-07.1** Aan een categorie met een of meerdere sub categorieën, kan geen product worden toegevoegd.
+- **K-07.2** Een product kan maar een keer aan een categorie toegevoegd worden.
  - **FR-08** De Kassamedewerker een order opstellen. **M**
-     - **B-08.1** Een order heeft producten, een datum, klant nr. en betaalstatus.
-     - **B-08.2** Er kunnen meerdere producten op een order staan.
-     - **B-08.3** Per product moet er een aantal worden toegevoegd
-     - **B-08.4** Bij afronding zijn datum en betaalstatus zijn verplicht.
-     - **B-08.5** Bij afronding is klantnummer alleen verplicht als betaalstatus 'niet betaald' is.
+- **B-08.1** Een order heeft producten, een datum, klant nr. en betaalstatus.
+- **B-08.2** Er kunnen meerdere producten op een order staan.
+- **B-08.3** Per product moet er een aantal worden toegevoegd
+- **B-08.4** Bij afronding zijn datum en betaalstatus zijn verplicht.
+- **B-08.5** Bij afronding is klantnummer alleen verplicht als betaalstatus 'niet betaald' is.
  - **FR-09** De Manager moet klanten kunnen toevoegen/ wijzigen. **C**
-     - **B-09.1** Een klant heeft een Klantnummer, Naam en factuur adres.
-     - **B-09.2** Alle gegevens zijn verplicht om in te vullen.
+- **B-09.1** Een klant heeft een Klantnummer, Naam en factuur adres.
+- **B-09.2** Alle gegevens zijn verplicht om in te vullen.
  - **FR-10** De Manager moet een overzicht kunnen inzien van alle verkochte producten **C**
  - **FR-11** De Manager moet kunnen inloggen en manager rechten krijgen **M**
  - **K-ALG.01** Bij onjuiste invoer moet een duidelijke foutmelding getoond worden.
@@ -56,7 +56,7 @@ Ingedeeld met MoSCoW.
 ### Use cases
 Algemene uitzondering: Wanneer als actor Manager staat vastgesteld, kan de Use case alleen worden uitgevoergd wanneer als manager ingelogd is. (FR-11)
 
-|     | UC01 |
+|| UC01 |
 | --- | --- |
 | Naam | Product toevoegen |
 | Samenvatting | Een nieuw product wordt toegevoegd aan het systeem |
@@ -66,7 +66,7 @@ Algemene uitzondering: Wanneer als actor Manager staat vastgesteld, kan de Use c
 | Uitzonderingen | 1. Niet alle verplichte velden zijn ingevuld. Toon een melding en ga terug naar stap 2. (B-02.2) <br> 2. Bij prijs wordt geen getal ingevoerd. Toon een melding en ga terug naar stap 2. (K-ALG.01) |
 | Resultaat | Een product is toegevoegd aan het systeem |
 
-|     | UC02 |
+|| UC02 |
 | --- | --- |
 | Naam | Categorie toevoegen |
 | Samenvatting | Een nieuwe categorie wordt toegevoegd aan het systeem |
@@ -76,7 +76,7 @@ Algemene uitzondering: Wanneer als actor Manager staat vastgesteld, kan de Use c
 | Uitzonderingen | 1. Niet alle verplichte velden zijn ingevuld. Toon een melding en ga terug naar stap 2. (B-04.2) |
 | Resultaat | Een categorie is toegevoegd aan het systeem |
 
-|     | UC03 |
+|| UC03 |
 | --- | --- |
 | Naam | Subcategorie toevoegen aan categorie |
 | Samenvatting | Je hebt twee categorieën en wilt ze verbinden door een parent-child relatie (subcategorie). |
@@ -86,7 +86,7 @@ Algemene uitzondering: Wanneer als actor Manager staat vastgesteld, kan de Use c
 | Uitzonderingen | 1. de parent categorie bevat een of meerdere producten. 'Categorie toevoegen' Wordt niet getoond. (K-06.1)<br> 2. Categorie is al een subcategorie van de parent. Categorie wordt niet getoond in lijst (K-06.2) |
 | Resultaat | De categorie heeft een nieuwe subcategorie. |
 
-|     | UC04 |
+|| UC04 |
 | --- | --- |
 | Naam | Product toevoegen aan categorie |
 | Samenvatting | Je voegt in product toe aan een categorie |
@@ -96,7 +96,7 @@ Algemene uitzondering: Wanneer als actor Manager staat vastgesteld, kan de Use c
 | Uitzonderingen | 1. De categorie bevat een of meerdere sub categorieën. 'Product toevoegen' Wordt niet getoond. (K-07.1) <br> 2. Product bevindt zich al in de categorie. Product wordt niet getoond in lijst (K-07.2) |
 | Resultaat | Het product is toegevoegd aan de categorie. |
 
-|     | UC05 |
+|| UC05 |
 | --- | --- |
 | Naam | Product opzoeken in categorie |
 | Samenvatting | Een product wordt opgezocht door te navigeren naar de juiste categorie en daar het product te selecteren |
@@ -106,7 +106,7 @@ Algemene uitzondering: Wanneer als actor Manager staat vastgesteld, kan de Use c
 | Uitzonderingen | 1. De categorie heeft subcategorieën. Het systeem toont alle sub categorieën. Ga terug naar stap 1 |
 | Resultaat | De detail pagina van het geselecteerde product wordt getoond. |
 
-|     | UC06 |
+|| UC06 |
 | --- | --- |
 | Naam | Product gegevens wijzigen |
 | Samenvatting | Een opgezocht product word gewijzigd. |
@@ -116,7 +116,7 @@ Algemene uitzondering: Wanneer als actor Manager staat vastgesteld, kan de Use c
 | Uitzonderingen | 1. Niet alle verplichte velden zijn ingevuld. Toon een melding en ga terug naar stap 2. (B-02.2) <br> 2. Bij prijs wordt geen getal ingevoerd. Toon een melding en ga terug naar stap 2. (K-ALG.01) |
 | Resultaat | Een product is gewijzigd |
 
-|     | UC07 |
+|| UC07 |
 | --- | --- |
 | Naam | Product toevoegen aan een order |
 | Samenvatting | Een opgezocht product wordt toegevoegd aan een order |
@@ -126,7 +126,7 @@ Algemene uitzondering: Wanneer als actor Manager staat vastgesteld, kan de Use c
 | Uitzonderingen | 1. Het 'aantal' input veld is geen (correct) getal. Het systeem geeft een foutmelding en voegt het product niet toe aan de order. Ga terug naar stap 1. (K-ALG.01) <br> 2. Het product is al toegevoegd aan de order. Het systeem geeft een foutmelding en laat weten dat je het aantal op de order kunt wijzigen (K-ALG.01) |
 | Resultaat | Een product met aantal is toegevoegd aan de order. |
 
-|     | UC08 |
+|| UC08 |
 | --- | --- |
 | Naam | **Aantal** wijzigen in een order |
 | Samenvatting | Je wil het aantal producten wijzigen in de order. |
@@ -136,7 +136,7 @@ Algemene uitzondering: Wanneer als actor Manager staat vastgesteld, kan de Use c
 | Uitzonderingen | 1. Het ingevoerde veld is geen getal. Het systeem geeft een foutmelding wijzigt de order niet. Ga terug naar stap 1. (K-ALG.01) |
 | Resultaat | Het aantal van een product op de order is gewijzigd |
 
-|     | UC09 |
+|| UC09 |
 | --- | --- |
 | Naam | Product uit order verwijderen |
 | Samenvatting | Je gaat een product verwijderen uit een order |
@@ -146,7 +146,7 @@ Algemene uitzondering: Wanneer als actor Manager staat vastgesteld, kan de Use c
 | Uitzonderingen | Geen |
 | Resultaat | Een product is verwijderd uit de order |
 
-|     | UC10 |
+|| UC10 |
 | --- | --- |
 | Naam | Klant toevoegen |
 | Samenvatting | Je gaat nieuwe klant toevoegen aan het systeem |
@@ -156,7 +156,7 @@ Algemene uitzondering: Wanneer als actor Manager staat vastgesteld, kan de Use c
 | Uitzonderingen | 1. Niet alle verplichte velden zijn ingevuld. Toon een melding en ga terug naar stap 2. (B-09.2) |
 | Resultaat | Een klant is toegevoegd aan het systeem |
 
-|     | UC11 |
+|| UC11 |
 | --- | --- |
 | Naam | Klant wijzigen |
 | Samenvatting | Je gaat bestaande klant wijzigen |
@@ -167,7 +167,7 @@ Algemene uitzondering: Wanneer als actor Manager staat vastgesteld, kan de Use c
 | Resultaat | Een klant is gewijzigd in het systeem |
 
 
-|     | UC12 |
+|| UC12 |
 | --- | --- |
 | Naam | Klant nummer toevoegen aan Order |
 | Samenvatting | Je gaat een order zo opstellen dat hij voor een specifieke klant is |
@@ -178,7 +178,7 @@ Algemene uitzondering: Wanneer als actor Manager staat vastgesteld, kan de Use c
 | Resultaat | Er is een klantnummer toegevoegd aan de order |
 
 
-|     | UC13 |
+|| UC13 |
 | --- | --- |
 | Naam | Order afronden |
 | Samenvatting | Een order is compleet je gaat deze afronden |
@@ -188,7 +188,7 @@ Algemene uitzondering: Wanneer als actor Manager staat vastgesteld, kan de Use c
 | Uitzonderingen | 1. Er is geen klantnummer toegevoegd. De betaalstatus wordt 'betaald' Ga door naar stap 5.  |
 | Resultaat | De order is afgerond en gearchiveerd. |
 
-|     | UC14 |
+|| UC14 |
 | --- | --- |
 | Naam | Inloggen |
 | Samenvatting | Om manager rechten te krijgen moet de gebruiker inloggen |
@@ -248,50 +248,50 @@ Algemene uitzondering: Wanneer als actor Manager staat vastgesteld, kan de Use c
 | TC42 | UC14 | **Login**: "niet correcte gegevens" | Gebruiker krijg geen manager status |
 
 ### Test Matrix
-|     | F R 0 1 | B 0 1 . 1 | K 0 1 . 1 | F R 0 2 | B 0 2 . 1 | B 0 2 . 2 | F R 0 3 | F R 0 4 | B 0 4 . 1 | B 0 4 . 2 | F R 0 5 | F R 0 6 | K 0 6 . 1 | K 0 6 . 2 | F R 0 7 | K 0 7 . 1 | K 0 7 . 2 | F R 0 8 | B 0 8 . 1 | B 0 8 . 2 | B 0 8 . 3 | B 0 8 . 4 | B 0 8 . 5 | F R 0 9 | B 0 9 . 1 | B 0 9 . 2  | F R 1 0 | F R 1 1 | K A L G . 0 1 | K A L G . 0 2 | 
+|| F R 0 1 | B 0 1 . 1 | K 0 1 . 1 | F R 0 2 | B 0 2 . 1 | B 0 2 . 2 | F R 0 3 | F R 0 4 | B 0 4 . 1 | B 0 4 . 2 | F R 0 5 | F R 0 6 | K 0 6 . 1 | K 0 6 . 2 | F R 0 7 | K 0 7 . 1 | K 0 7 . 2 | F R 0 8 | B 0 8 . 1 | B 0 8 . 2 | B 0 8 . 3 | B 0 8 . 4 | B 0 8 . 5 | F R 0 9 | B 0 9 . 1 | B 0 9 . 2  | F R 1 0 | F R 1 1 | K A L G . 0 1 | K A L G . 0 2 | 
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| TC01 |     |     |     |  x  |  x  |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |
-| TC02 |     |     |     |  x  |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |  x  |
-| TC03 |     |     |     |  x  |     |  x  |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |  x  |     |
-| TC04 |     |     |     |  x  |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |  x  |     |
-| TC05 |     |     |     |     |     |     |     |  x  |  x  |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |
-| TC06 |     |     |     |     |     |     |     |  x  |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |  x  |
-| TC07 |     |     |     |     |     |     |     |  x  |     |  x  |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |  x  |     |
-| TC08 |     |     |     |     |     |     |     |     |     |     |     |  x  |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |
-| TC09 |     |     |     |     |     |     |     |     |     |     |     |  x  |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |  x  |
-| TC10 |     |     |     |     |     |     |     |     |     |     |     |  x  |  x  |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |
-| TC11 |     |     |     |     |     |     |     |     |     |     |     |  x  |     |  x  |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |
-| TC12 |     |     |     |     |     |     |     |     |     |     |     |     |     |     |  x  |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |
-| TC13 |     |     |     |     |     |     |     |     |     |     |     |     |     |     |  x  |     |     |     |     |     |     |     |     |     |     |     |     |     |     |  x  |
-| TC14 |     |     |     |     |     |     |     |     |     |     |     |     |     |     |  x  |  x  |     |     |     |     |     |     |     |     |     |     |     |     |     |     |
-| TC15 |     |     |     |     |     |     |     |     |     |     |     |     |     |     |  x  |     |  x  |     |     |     |     |     |     |     |     |     |     |     |     |     |
-| TC16 |  x  |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |
-| TC17 |  x  |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |
-| TC18 |  x  |  x  |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |
-| TC19 |     |     |     |  x  |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |
-| TC20 |     |     |     |  x  |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |  x  |
-| TC21 |     |     |     |  x  |     |  x  |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |  x  |     |
-| TC22 |     |     |     |  x  |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |  x  |     |
-| TC23 |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |  x  |  x  |     |  x  |     |     |     |     |     |     |     |     |     |
-| TC24 |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |  x  |     |     |     |     |     |     |     |     |     |     |  x  |     |
-| TC25 |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |  x  |     |     |     |     |     |     |     |     |     |     |  x  |     |
-| TC26 |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |  x  |     |     |  x  |     |     |     |     |     |     |     |  x  |     |
-| TC27 |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |  x  |     |  x  |  x  |     |     |     |     |     |     |     |     |     |
-| TC28 |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |  x  |     |     |     |     |     |     |     |     |     |     |  x  |     |
-| TC29 |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |  x  |     |     |     |     |     |     |     |     |     |     |  x  |     |
-| TC30 |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |  x  |     |     |     |     |     |     |     |     |     |     |     |     |
-| TC31 |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |  x  |  x  |     |     |     |     |     |
-| TC32 |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |  x  |     |     |     |     |     |  x  |
-| TC33 |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |  x  |  x  |  x  |     |     |  x  |     |
-| TC34 |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |  x  |  x  |     |     |     |     |     |
-| TC35 |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |  x  |     |     |     |     |     |  x  |
-| TC36 |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |  x  |  x  |  x  |     |     |  x  |     |
-| TC37 |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |  x  |  x  |     |     |     |     |     |     |     |     |     |     |     |
-| TC38 |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |  x  |  x  |     |     |  x  |     |     |     |     |     |     |     |     |
-| TC39 |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |  x  |  x  |     |     |  x  |     |     |     |     |     |     |     |     |
-| TC40 |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |  x  |  x  |     |     |  x  |  x  |     |     |     |     |     |     |     |
-| TC41 |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |  x  |     |     |
-| TC42 |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |  x  |  x  |     |
+| TC01 ||||x|x||||||||||||||||||||||||||
+| TC02 ||||x||||||||||||||||||||||||||x|
+| TC03 ||||x||x|||||||||||||||||||||||x||
+| TC04 ||||x|||||||||||||||||||||||||x||
+| TC05 ||||||||x|x||||||||||||||||||||||
+| TC06 ||||||||x||||||||||||||||||||||x|
+| TC07 ||||||||x||x|||||||||||||||||||x||
+| TC08 ||||||||||||x|||||||||||||||||||
+| TC09 ||||||||||||x||||||||||||||||||x|
+| TC10 ||||||||||||x|x||||||||||||||||||
+| TC11 ||||||||||||x||x|||||||||||||||||
+| TC12 |||||||||||||||x||||||||||||||||
+| TC13 |||||||||||||||x|||||||||||||||x|
+| TC14 |||||||||||||||x|x|||||||||||||||
+| TC15 |||||||||||||||x||x||||||||||||||
+| TC16 |x||||||||||||||||||||||||||||||
+| TC17 |x||||||||||||||||||||||||||||||
+| TC18 |x|x|||||||||||||||||||||||||||||
+| TC19 ||||x|||||||||||||||||||||||||||
+| TC20 ||||x||||||||||||||||||||||||||x|
+| TC21 ||||x||x|||||||||||||||||||||||x||
+| TC22 ||||x|||||||||||||||||||||||||x||
+| TC23 ||||||||||||||||||x|x||x||||||||||
+| TC24 ||||||||||||||||||x|||||||||||x||
+| TC25 ||||||||||||||||||x|||||||||||x||
+| TC26 ||||||||||||||||||x|||x||||||||x||
+| TC27 ||||||||||||||||||x||x|x||||||||||
+| TC28 ||||||||||||||||||x|||||||||||x||
+| TC29 ||||||||||||||||||x|||||||||||x||
+| TC30 ||||||||||||||||||x|||||||||||||
+| TC31 ||||||||||||||||||||||||x|x||||||
+| TC32 ||||||||||||||||||||||||x||||||x|
+| TC33 ||||||||||||||||||||||||x|x|x|||x||
+| TC34 ||||||||||||||||||||||||x|x||||||
+| TC35 ||||||||||||||||||||||||x||||||x|
+| TC36 ||||||||||||||||||||||||x|x|x|||x||
+| TC37 ||||||||||||||||||x|x||||||||||||
+| TC38 ||||||||||||||||||x|x|||x|||||||||
+| TC39 ||||||||||||||||||x|x|||x|||||||||
+| TC40 ||||||||||||||||||x|x|||x|x||||||||
+| TC41 ||||||||||||||||||||||||||||x|||
+| TC42 ||||||||||||||||||||||||||||x|x||
 
 ## Ontwerp
 ### Conceptueel Model
