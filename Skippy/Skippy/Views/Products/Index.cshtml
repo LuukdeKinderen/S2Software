@@ -1,12 +1,14 @@
 ﻿@model List<Logic.Product>
 
+
+<h1>Producten</h1>
 <ul>
-    @foreach (var product in Model)
+    @foreach (Logic.Product product in Model)
     {
-        <a class="nav-link text-dark" asp-area="" asp-controller="Products" asp-action="Product" asp-route-id=@product.id>
-            <li>@product.titel</li>
-        </a>
+        <li>@Html.ActionLink(product.titel, "Product", new { id = product.id}) </li>
     }
 </ul>
-
-
+<div>
+    
+    @Html.ActionLink("Toevoegen", "Create")<br />
+</div>

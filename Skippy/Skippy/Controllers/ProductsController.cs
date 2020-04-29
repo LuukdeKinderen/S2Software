@@ -31,18 +31,23 @@ namespace Skippy.Controllers
         public IActionResult Create(Product product)
         {
             ProductContainer.Insert(product);
+            return View("Index", ProductContainer.GetProducts());
+        }
+
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            return View(ProductContainer.GetByID(id));
+        }
+
+        [HttpPost]
+        public IActionResult Edit(Product product)
+        {
+            ProductContainer.Update(product);
             return View("Product", ProductContainer.GetByID(product.id));
         }
 
-        public IActionResult Edit(Product product)
-        {
-            return View(product);
-        }
 
-        public IActionResult SaveEdit(Product product)
-        {
-            return View("Product", product);
-        }
 
 
         public IActionResult Delete(int id)

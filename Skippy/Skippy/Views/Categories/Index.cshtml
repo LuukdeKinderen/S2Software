@@ -1,0 +1,15 @@
+﻿@model List<Logic.Categorie>
+
+
+<h1>Categorieën</h1>
+<ul>
+    @foreach (Logic.Categorie categorie in Model)
+    {
+        <li>@Html.ActionLink(categorie.titel, "Categorie", new { id = categorie.id }) </li>
+    }
+</ul>
+<div>
+
+    @Html.ActionLink("Toevoegen", "Create")<br />
+
+</div>

@@ -13,7 +13,7 @@ namespace Logic
 
         public Product(ProductDTO product)
         {
-            id = product.ProductId;
+            id = product.Id;
             titel = product.Titel;
             omschrijving = product.Omschrijving;
             prijs = product.Prijs;
@@ -29,8 +29,8 @@ namespace Logic
             return new ProductDTO
             {
                 Titel = titel,
-                ProductId = id,
-                Omschrijving = omschrijving,
+                Id = id,
+                Omschrijving = omschrijving ?? "",
                 Prijs = prijs
             };
         }

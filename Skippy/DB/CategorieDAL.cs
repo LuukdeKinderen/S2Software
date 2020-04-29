@@ -7,23 +7,20 @@ using System.Diagnostics;
 
 namespace DB
 {
-    public class ProductDAL
+    public class CategorieDAL
     {
         private DatabaseConnection connection = new DatabaseConnection();
-        public void Insert(ProductDTO product)
+        public void Insert(CategorieDTO categorie)
         {
             try
             {
                 using (SqlConnection connection = this.connection.CreateConnection())
                 {
-                    string Querry = "insert into Products ( Titel, Prijs, Omschrijving) values(@param1,@param2,@param3)";
+                    string Querry = "insert into Categories ( Titel ) values (@param1)";
                     using (SqlCommand command = new SqlCommand(Querry, connection))
                     {
                         connection.Open();
-
-                        command.Parameters.AddWithValue("@param1", product.Titel);
-                        command.Parameters.AddWithValue("@param2", product.Prijs);
-                        command.Parameters.AddWithValue("@param3", product.Omschrijving);
+                        command.Parameters.AddWithValue("@param1", categorie.Titel);
                         command.CommandType = CommandType.Text;
                         int rowsAdded = command.ExecuteNonQuery();
                     }
@@ -35,28 +32,26 @@ namespace DB
             }
         }
 
-        public List<ProductDTO> GetAll()
+        public List<CategorieDTO> GetAll()
         {
-            List<ProductDTO> products = new List<ProductDTO>();
+            List<CategorieDTO> categories = new List<CategorieDTO>();
             try
             {
                 using (SqlConnection connection = this.connection.CreateConnection())
                 {
-                    string Querry = "select * from Products";
+                    string Querry = "select * from Categories";
                     using (SqlCommand command = new SqlCommand(Querry, connection))
                     {
                         connection.Open();
                         var reader = command.ExecuteReader();
                         while (reader.Read())
                         {
-                            ProductDTO newProduct = new ProductDTO
+                            CategorieDTO newCategorie = new CategorieDTO
                             {
                                 Id = reader.GetInt32(0),
                                 Titel = reader.GetString(1),
-                                Prijs = reader.GetDecimal(2),
-                                Omschrijving = reader.GetString(3)
                             };
-                            products.Add(newProduct);
+                            categories.Add(newCategorie);
                         }
                     }
                 }
@@ -65,31 +60,29 @@ namespace DB
             {
                 Console.Write(se.Message);
             }
-            return products;
+            return categories;
         }
 
-        public ProductDTO FindById(int id)
+        public CategorieDTO FindById(int id)
         {
-            ProductDTO product = new ProductDTO();
+            CategorieDTO categorie = new CategorieDTO();
             try
             {
                 using (SqlConnection connection = this.connection.CreateConnection())
                 {
-                    string Querry = string.Format("select * from Products where Id={0}", id);
+                    string Querry = string.Format("select * from Categories where Id={0}", id);
                     using (SqlCommand command = new SqlCommand(Querry, connection))
                     {
                         connection.Open();
                         var reader = command.ExecuteReader();
                         while (reader.Read())
                         {
-                            ProductDTO newProduct = new ProductDTO
+                            CategorieDTO newCategorie = new CategorieDTO
                             {
                                 Id = reader.GetInt32(0),
-                                Titel = reader.GetString(1),
-                                Prijs = reader.GetDecimal(2),
-                                Omschrijving = reader.GetString(3)
+                                Titel = reader.GetString(1)
                             };
-                            product = newProduct;
+                            categorie = newCategorie;
                         }
                     }
                 }
@@ -98,12 +91,11 @@ namespace DB
             {
                 Console.Write(se.Message);
             }
-            return product;
+            return categorie;
         }
 
         public void Delete(int id)
         {
-
             try
             {
                 using (SqlConnection connection = this.connection.CreateConnection())
@@ -122,21 +114,19 @@ namespace DB
             }
         }
 
-        public void Update(ProductDTO product)
+        public void Update(CategorieDTO categorie)
         {
             try
             {
                 using (SqlConnection connection = this.connection.CreateConnection())
                 {
-                    string Querry = "UPDATE Products SET Titel = @titel, Prijs = @prijs, Omschrijving = @omschrijving Where Id = @id";
+                    string Querry = "UPDATE Products SET Titel = @titel Where Id = @id";
                     using (SqlCommand command = new SqlCommand(Querry, connection))
                     {
                         connection.Open();
 
-                        command.Parameters.AddWithValue("@id", product.Id);
-                        command.Parameters.AddWithValue("@titel", product.Titel);
-                        command.Parameters.AddWithValue("@prijs", product.Prijs);
-                        command.Parameters.AddWithValue("@omschrijving", product.Omschrijving);
+                        command.Parameters.AddWithValue("@id", categorie.Id);
+                        command.Parameters.AddWithValue("@titel", categorie.Titel);
 
                         command.CommandType = CommandType.Text;
                         command.ExecuteNonQuery();
@@ -147,6 +137,33 @@ namespace DB
             {
                 Console.Write(se.Message);
             }
+        }
+
+        public List<int> GetProductIds(int categorieId)
+        {
+            List<int> productIds = new List<int>();
+
+            try
+            {
+                using (SqlConnection connection = this.connection.CreateConnection())
+                {
+                    string Querry = string.Format("select * from Categorie_Product where CategorieId={0}", categorieId);
+                    using (SqlCommand command = new SqlCommand(Querry, connection))
+                    {
+                        connection.Open();
+                        var reader = command.ExecuteReader();
+                        while (reader.Read())
+                        {
+                            productIds.Add(reader.GetInt32(1));
+                        }
+                    }
+                }
+            }
+            catch (SqlException se)
+            {
+                Console.Write(se.Message);
+            }
+            return productIds;
         }
     }
 

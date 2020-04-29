@@ -39,11 +39,11 @@ namespace Logic
             DAL.Insert(DTO);
         }
 
-        public static void Edit(Product product)
+        public static void Update(Product product)
         {
             ProductDAL DAL = new ProductDAL();
             ProductDTO DTO = product.ToDTO();
-            DAL.Edit(DTO);
+            DAL.Update(DTO);
         }
     }
 }

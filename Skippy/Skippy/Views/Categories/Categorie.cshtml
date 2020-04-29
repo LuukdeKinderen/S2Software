@@ -1,0 +1,18 @@
+﻿@model Logic.Categorie
+
+
+<h1>@Model.titel</h1>
+<h4>Producten in categorie</h4>
+
+
+<ul>
+    @foreach (Logic.Product product in Model.Products)
+    {
+        <li>@product.titel</li>
+    }
+</ul>
+
+
+<div>
+    <a asp-action="Index">Terug</a>
+</div>
