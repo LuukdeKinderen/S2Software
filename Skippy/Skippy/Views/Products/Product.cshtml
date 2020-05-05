@@ -8,6 +8,6 @@
 
 </div>
 <div>
-    @Html.ActionLink("Weizigen", "Edit", new { id = Model.id })<br />
+    <a asp-action="Edit" asp-route-id=@Model.id>Weizigen</a><br />
     <a asp-action="Index">Terug</a>
 </div>

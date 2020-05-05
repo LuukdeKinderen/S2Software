@@ -63,7 +63,7 @@ namespace DB
             return categories;
         }
 
-        public CategorieDTO FindById(int id)
+        public CategorieDTO GetById(int id)
         {
             CategorieDTO categorie = new CategorieDTO();
             try
@@ -100,10 +100,12 @@ namespace DB
             {
                 using (SqlConnection connection = this.connection.CreateConnection())
                 {
-                    string Querry = string.Format("delete from Products where Id={0}", id);
+                    string Querry = "DELETE FROM Categories WHERE Id=@id";
                     using (SqlCommand command = new SqlCommand(Querry, connection))
                     {
                         connection.Open();
+                        command.Parameters.AddWithValue("@id", id);
+                        command.CommandType = CommandType.Text;
                         command.ExecuteNonQuery();
                     }
                 }
@@ -120,12 +122,13 @@ namespace DB
             {
                 using (SqlConnection connection = this.connection.CreateConnection())
                 {
-                    string Querry = "UPDATE Products SET Titel = @titel Where Id = @id";
+                    string Querry = "UPDATE Categories SET Titel = @titel Where Id = @id";
                     using (SqlCommand command = new SqlCommand(Querry, connection))
                     {
                         connection.Open();
 
                         command.Parameters.AddWithValue("@id", categorie.Id);
+
                         command.Parameters.AddWithValue("@titel", categorie.Titel);
 
                         command.CommandType = CommandType.Text;
@@ -139,22 +142,33 @@ namespace DB
             }
         }
 
-        public List<int> GetProductIds(int categorieId)
-        {
-            List<int> productIds = new List<int>();
 
+        public List<ProductDTO> GetProductsNotInCategorie(int categorieId)
+        {
+
+            List<ProductDTO> productDTOs = new List<ProductDTO>();
             try
             {
                 using (SqlConnection connection = this.connection.CreateConnection())
                 {
-                    string Querry = string.Format("select * from Categorie_Product where CategorieId={0}", categorieId);
+                    string Querry = "SELECT Products.Id,Products.Titel,Products.Prijs,Products.Omschrijving FROM Products LEFT JOIN Categorie_Product ON Categorie_Product.ProductId = Products.Id AND Categorie_Product.CategorieId = @id WHERE CategorieId IS NULL ORDER BY Id";
                     using (SqlCommand command = new SqlCommand(Querry, connection))
                     {
                         connection.Open();
+
+                        command.Parameters.AddWithValue("@id", categorieId);
+
                         var reader = command.ExecuteReader();
                         while (reader.Read())
                         {
-                            productIds.Add(reader.GetInt32(1));
+                            ProductDTO newProduct = new ProductDTO
+                            {
+                                Id = reader.GetInt32(0),
+                                Titel = reader.GetString(1),
+                                Prijs = reader.GetDecimal(2),
+                                Omschrijving = reader.GetString(3)
+                            };
+                            productDTOs.Add(newProduct);
                         }
                     }
                 }
@@ -163,9 +177,90 @@ namespace DB
             {
                 Console.Write(se.Message);
             }
-            return productIds;
+            return productDTOs;
         }
+        public List<ProductDTO> GetProductsInCategorie(int categorieId)
+        {
+
+            List<ProductDTO> productDTOs = new List<ProductDTO>();
+            try
+            {
+                using (SqlConnection connection = this.connection.CreateConnection())
+                {
+                    string Querry = "SELECT Products.Id,Products.Titel,Products.Prijs,Products.Omschrijving FROM Products LEFT JOIN Categorie_Product ON Categorie_Product.ProductId = Products.Id AND Categorie_Product.CategorieId = @id WHERE CategorieId IS NOT NULL ORDER BY Id";
+                    using (SqlCommand command = new SqlCommand(Querry, connection))
+                    {
+                        connection.Open();
+
+                        command.Parameters.AddWithValue("@id", categorieId);
+
+                        var reader = command.ExecuteReader();
+                        while (reader.Read())
+                        {
+                            ProductDTO newProduct = new ProductDTO
+                            {
+                                Id = reader.GetInt32(0),
+                                Titel = reader.GetString(1),
+                                Prijs = reader.GetDecimal(2),
+                                Omschrijving = reader.GetString(3)
+                            };
+                            productDTOs.Add(newProduct);
+                        }
+                    }
+                }
+            }
+            catch (SqlException se)
+            {
+                Console.Write(se.Message);
+            }
+            return productDTOs;
+        }
+
+        public void AddProduct(int categorieId,int productId)
+        {
+            try
+            {
+                using (SqlConnection connection = this.connection.CreateConnection())
+                {
+                    string Querry = "insert into Categorie_Product ( CategorieId, ProductId ) values (@catId, @prodId)";
+                    using (SqlCommand command = new SqlCommand(Querry, connection))
+                    {
+                        connection.Open();
+                        command.Parameters.AddWithValue("@catId", categorieId);
+                        command.Parameters.AddWithValue("@prodId", productId);
+                        command.CommandType = CommandType.Text;
+                        int rowsAdded = command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (SqlException se)
+            {
+                Console.Write(se.Message);
+            }
+        }
+
+        public void RemoveProduct(int categorieId, int productId)
+        {
+            try
+            {
+                using (SqlConnection connection = this.connection.CreateConnection())
+                {
+                    string Querry = "DELETE FROM Categorie_Product WHERE CategorieId=@catId AND ProductId=@prodId";
+                    using (SqlCommand command = new SqlCommand(Querry, connection))
+                    {
+                        connection.Open();
+                        command.Parameters.AddWithValue("@catId", categorieId);
+                        command.Parameters.AddWithValue("@prodId", productId);
+                        command.CommandType = CommandType.Text;
+                        int rowsAdded = command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (SqlException se)
+            {
+                Console.Write(se.Message);
+            }
+        }
+
     }
-
-
 }

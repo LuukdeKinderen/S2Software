@@ -7,7 +7,7 @@ namespace Logic
 {
     public static class ProductContainer
     {
-        public static List<Product> GetProducts()
+        public static List<Product> GetAll()
         {
             ProductDAL DAL = new ProductDAL();
             List<ProductDTO> productDTOs =  DAL.GetAll();
@@ -26,7 +26,7 @@ namespace Logic
             return product;
         }
 
-        public static void DeleteByID(int id)
+        public static void Delete(int id)
         {
             ProductDAL DAL = new ProductDAL();
             DAL.Delete(id);

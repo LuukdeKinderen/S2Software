@@ -68,6 +68,32 @@ namespace DB
             return products;
         }
 
+        public List<int> GetAllIds()
+        {
+            List<int> Ids = new List<int>();
+            try
+            {
+                using (SqlConnection connection = this.connection.CreateConnection())
+                {
+                    string Querry = "select * from Products";
+                    using (SqlCommand command = new SqlCommand(Querry, connection))
+                    {
+                        connection.Open();
+                        var reader = command.ExecuteReader();
+                        while (reader.Read())
+                        {
+                            Ids.Add(reader.GetInt32(0));
+                        }
+                    }
+                }
+            }
+            catch (SqlException se)
+            {
+                Console.Write(se.Message);
+            }
+            return Ids;
+        }
+
         public ProductDTO FindById(int id)
         {
             ProductDTO product = new ProductDTO();
@@ -103,15 +129,39 @@ namespace DB
 
         public void Delete(int id)
         {
-
+            DeleteCategorieRef(id);
             try
             {
                 using (SqlConnection connection = this.connection.CreateConnection())
                 {
-                    string Querry = string.Format("delete from Products where Id={0}", id);
+                    string Querry = "DELETE FROM Products WHERE Id=@id";
                     using (SqlCommand command = new SqlCommand(Querry, connection))
                     {
                         connection.Open();
+                        command.Parameters.AddWithValue("@id", id);
+                        command.CommandType = CommandType.Text;
+                        command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (SqlException se)
+            {
+                Console.Write(se.Message);
+            }
+        }
+
+        private void DeleteCategorieRef(int id)
+        {
+            try
+            {
+                using (SqlConnection connection = this.connection.CreateConnection())
+                {
+                    string Querry = "DELETE FROM Categorie_Product WHERE ProductId=@id";
+                    using (SqlCommand command = new SqlCommand(Querry, connection))
+                    {
+                        connection.Open();
+                        command.Parameters.AddWithValue("@id", id);
+                        command.CommandType = CommandType.Text;
                         command.ExecuteNonQuery();
                     }
                 }

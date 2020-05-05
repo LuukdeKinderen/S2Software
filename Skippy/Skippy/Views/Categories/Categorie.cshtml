@@ -6,13 +6,15 @@
 
 
 <ul>
-    @foreach (Logic.Product product in Model.Products)
+    @foreach (Logic.Product product in Model.GetProducts())
     {
         <li>@product.titel</li>
     }
 </ul>
 
 
+
 <div>
+    <a asp-action="Edit" asp-route-id=@Model.id>Weizigen</a><br />
     <a asp-action="Index">Terug</a>
 </div>

@@ -10,7 +10,6 @@ namespace Logic
         public int id { get; set; }
         public string titel { get; set; }
 
-        public List<Product> Products { get; private set; }
 
         public Categorie()
         {
@@ -21,8 +20,6 @@ namespace Logic
         {
             id = categorieDTO.Id;
             titel = categorieDTO.Titel;
-
-            Products = GetProducts();
         }
         public CategorieDTO ToDTO()
         {
@@ -33,27 +30,44 @@ namespace Logic
             };
         }
 
-        private List<Product> GetProducts()
+        public List<Product> GetProducts()
         {
+            CategorieDAL DAL = new CategorieDAL();
+            List<ProductDTO> DTOs = DAL.GetProductsInCategorie(id);
             List<Product> products = new List<Product>();
-
-            CategorieDAL categorieDAL = new CategorieDAL();
-            ProductDAL productDAL = new ProductDAL();
-
-            List<int> productIds = categorieDAL.GetProductIds(id);
-
-            foreach (int id in productIds)
+            foreach (ProductDTO DTO in DTOs)
             {
-                ProductDTO DTO = productDAL.FindById(id);
-                Product product = new Product(DTO);
-                products.Add(product);
+                Product newProduct = new Product(DTO);
+                products.Add(newProduct);
             }
-
             return products;
         }
 
+        public List<Product> GetProductsNotInCategorie()
+        {
+            CategorieDAL DAL = new CategorieDAL();
+            List<ProductDTO> DTOs = DAL.GetProductsNotInCategorie(id);
+            List<Product> products = new List<Product>();
+            foreach (ProductDTO DTO in DTOs)
+            {
+                Product newProduct = new Product(DTO);
+                products.Add(newProduct);                
+            }
+            return products;
+        }
 
+        public void AddProduct(int productId)
+        {
+            CategorieDAL DAL = new CategorieDAL();
+            DAL.AddProduct(id, productId);
+        }
 
+        public void RemoveProduct(int productId)
+        {
+            
+            CategorieDAL DAL = new CategorieDAL();
+            DAL.RemoveProduct(id, productId);
+        }
 
 
 

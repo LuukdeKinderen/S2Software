@@ -7,7 +7,7 @@ namespace Logic
 {
     public static class CategorieContainer
     {
-        public static List<Categorie> GetCategories()
+        public static List<Categorie> GetAll()
         {
             CategorieDAL DAL = new CategorieDAL();
             List<CategorieDTO> DTOs =  DAL.GetAll();
@@ -21,12 +21,12 @@ namespace Logic
         public static Categorie GetByID(int id)
         {
             CategorieDAL DAL = new CategorieDAL();
-            CategorieDTO DTO = DAL.FindById(id);
+            CategorieDTO DTO = DAL.GetById(id);
             Categorie categorie = new Categorie(DTO);
             return categorie;
         }
 
-        public static void DeleteByID(int id)
+        public static void Delete(int id)
         {
             CategorieDAL DAL = new CategorieDAL();
             DAL.Delete(id);

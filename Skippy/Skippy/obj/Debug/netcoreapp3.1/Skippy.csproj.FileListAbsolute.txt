@@ -169,3 +169,5 @@ C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Skippy\Skippy\obj\Debug
 C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Skippy\Skippy\obj\Debug\netcoreapp3.1\Razor\Views\Products\Index.cshtml.g.cs
 C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Skippy\Skippy\obj\Debug\netcoreapp3.1\Razor\Views\Categories\Index.cshtml.g.cs
 C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Skippy\Skippy\obj\Debug\netcoreapp3.1\Razor\Views\Categories\Categorie.cshtml.g.cs
+C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Skippy\Skippy\obj\Debug\netcoreapp3.1\Razor\Views\Categories\Edit.cshtml.g.cs
+C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Skippy\Skippy\obj\Debug\netcoreapp3.1\Razor\Views\Categories\Create.cshtml.g.cs

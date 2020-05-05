@@ -5,10 +5,9 @@
 <ul>
     @foreach (Logic.Product product in Model)
     {
-        <li>@Html.ActionLink(product.titel, "Product", new { id = product.id}) </li>
+        <li> <a asp-action="Product" asp-route-id=@product.id>@product.titel</a> </li>
     }
 </ul>
 <div>
-    
-    @Html.ActionLink("Toevoegen", "Create")<br />
+    <a asp-action="Create">Toevoegen</a><br />
 </div>
