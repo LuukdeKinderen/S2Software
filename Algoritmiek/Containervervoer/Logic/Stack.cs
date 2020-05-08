@@ -39,7 +39,7 @@ namespace Logic
                 return containers.Sum(container => container.weight);
             }
         }
-        private int BottomLoad
+        public int BottomLoad
         {
             get
             {

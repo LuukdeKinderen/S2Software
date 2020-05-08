@@ -4,14 +4,14 @@
 <h1>@Model.titel</h1>
 <h4>Producten in categorie</h4>
 
-
-<ul>
-    @foreach (Logic.Product product in Model.GetProducts())
-    {
-        <li>@product.titel</li>
-    }
-</ul>
-
+<div class="rounded bg-white shadow-sm">
+    <ul>
+        @foreach (Logic.Product product in Model.GetProducts())
+        {
+            <li>@product.titel</li>
+        }
+    </ul>
+</div>
 
 
 <div>

@@ -2,12 +2,25 @@
 
 
 <h1>Categorieën</h1>
-<ul>
-    @foreach (Logic.Categorie categorie in Model)
-    {
-        <li>@Html.ActionLink(categorie.titel, "Categorie", new { id = categorie.id }) </li>
-    }
-</ul>
+<div class="container">
+    <div class="row">
+        @foreach (Logic.Categorie categorie in Model)
+        {
+        <div class=" col-sm-6 col-md-4 ">
+            <a 
+               asp-action="Categorie"
+               asp-route-id=@categorie.id>
+
+
+                <h3 class="rounded bg-white shadow-sm p-4 text-center">@categorie.titel</h3>
+
+
+            </a>
+        </div>
+        }
+    </div>
+</div>
+
 <div>
 
     @Html.ActionLink("Toevoegen", "Create")<br />
