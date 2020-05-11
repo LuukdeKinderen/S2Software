@@ -21,7 +21,7 @@ namespace Logic
         public static Product GetByID(int id)
         {
             ProductDAL DAL = new ProductDAL();
-            ProductDTO productDTO = DAL.FindById(id);
+            ProductDTO productDTO = DAL.GetById(id);
             Product product = new Product(productDTO);
             return product;
         }
