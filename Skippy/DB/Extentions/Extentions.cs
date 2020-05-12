@@ -13,6 +13,9 @@ namespace DB.Extentions
                 return reader.GetString(colIndex);
             return string.Empty;
         }
+        /// <summary>
+        /// Retruns int. If not found retruns -1
+        /// </summary>
         public static int SafeGetInt(this SqlDataReader reader, int colIndex)
         {
             if (!reader.IsDBNull(colIndex))

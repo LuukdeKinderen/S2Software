@@ -9,7 +9,8 @@
         @foreach (Logic.Order order in Model.GetOrders())
         {
             <div class=" col-md-12  ">
-                <a asp-action="Categorie"
+                <a asp-controller="Order"
+                   asp-action="Order"
                    asp-route-id=@order.id>
                     <div class="row">
                         <div class=" col-md-8  ">

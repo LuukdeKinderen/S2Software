@@ -21,9 +21,6 @@ namespace Skippy.Controllers
 
         public IActionResult Index()
         {
-            
-            
-            ViewBag.Counter = GetOrder();
             return View();
         }
 

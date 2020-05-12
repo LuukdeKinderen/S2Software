@@ -18,6 +18,12 @@ footer {
     background-color: #C00A27;
     color: white;
 }
+footer a {
+    color: white;
+}
+    footer a:hover {
+        color: white;
+    }
 
 .bluebar {
     height: 10px;

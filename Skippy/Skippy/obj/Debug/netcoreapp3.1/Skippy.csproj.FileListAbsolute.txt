@@ -175,3 +175,4 @@ C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Skippy\Skippy\obj\Debug
 C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Skippy\Skippy\obj\Debug\netcoreapp3.1\Razor\Views\Klant\Index.cshtml.g.cs
 C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Skippy\Skippy\obj\Debug\netcoreapp3.1\Razor\Views\Klant\Klant.cshtml.g.cs
 C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Skippy\Skippy\obj\Debug\netcoreapp3.1\Razor\Views\Klant\Create.cshtml.g.cs
+C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Skippy\Skippy\obj\Debug\netcoreapp3.1\Razor\Views\Order\Order.cshtml.g.cs
