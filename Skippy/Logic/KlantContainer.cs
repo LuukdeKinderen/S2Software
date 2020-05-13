@@ -5,12 +5,12 @@ using DB;
 
 namespace Logic
 {
-    public static class KlantContainer
+    public class KlantContainer
     {
-        public static List<Klant> GetAll()
+        public List<Klant> GetAll()
         {
             KlantDAL DAL = new KlantDAL();
-            List<KlantDTO> DTOs =  DAL.GetAll();
+            List<KlantDTO> DTOs = DAL.GetAll();
             List<Klant> klanten = new List<Klant>();
             foreach (KlantDTO DTO in DTOs)
             {
@@ -18,7 +18,7 @@ namespace Logic
             }
             return klanten;
         }
-        public static Klant GetByID(int id)
+        public Klant GetByID(int id)
         {
             KlantDAL DAL = new KlantDAL();
             KlantDTO DTO = DAL.GetById(id);
@@ -27,14 +27,14 @@ namespace Logic
         }
 
 
-        public static void Insert(Klant klant)
+        public void Insert(Klant klant)
         {
             KlantDAL DAL = new KlantDAL();
             KlantDTO DTO = klant.ToDTO();
             DAL.Insert(DTO);
         }
 
-        public static void Update(Klant klant)
+        public void Update(Klant klant)
         {
             KlantDAL DAL = new KlantDAL();
             KlantDTO DTO = klant.ToDTO();

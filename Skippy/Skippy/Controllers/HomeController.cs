@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Skippy.Models;
@@ -22,21 +21,6 @@ namespace Skippy.Controllers
         public IActionResult Index()
         {
             return View();
-        }
-
-        private int GetOrder()
-        {
-            int? orderId = HttpContext.Session.GetInt32("order");
-            if (orderId.HasValue)
-            {
-                int newid = orderId.Value + 1;
-                HttpContext.Session.SetInt32("order", newid);
-            }
-            else
-            {
-                HttpContext.Session.SetInt32("order", 0);
-            }
-            return HttpContext.Session.GetInt32("order").Value;
         }
 
         

@@ -5,20 +5,10 @@ using DB;
 
 namespace Logic
 {
-    public static class OrderContainer
+    public class OrderContainer
     {
-        //public static List<Categorie> GetAll()
-        //{
-        //    CategorieDAL DAL = new CategorieDAL();
-        //    List<CategorieDTO> DTOs =  DAL.GetAll();
-        //    List<Categorie> categories = new List<Categorie>();
-        //    foreach (CategorieDTO DTO in DTOs)
-        //    {
-        //        categories.Add(new Categorie(DTO));
-        //    }
-        //    return categories;
-        //}
-        public static Order GetByID(int id)
+
+        public Order GetByID(int id)
         {
             OrderDAL DAL = new OrderDAL();
             OrderDTO DTO = DAL.GetById(id);
@@ -26,24 +16,28 @@ namespace Logic
             return order;
         }
 
-        //public static void Delete(int id)
-        //{
-        //    CategorieDAL DAL = new CategorieDAL();
-        //    DAL.Delete(id);
-        //}
+        public List<Order> GetAll()
+        {
+            OrderDAL DAL = new OrderDAL();
+            List<OrderDTO> DTOs = DAL.GetAll();
+            List<Order> orders = new List<Order>();
+            foreach (OrderDTO DTO in DTOs)
+            {
+                Order order = new Order(DTO);
+                orders.Add(order);
+            }
 
-        //public static void Insert(Categorie categorie)
-        //{
-        //    CategorieDAL DAL = new CategorieDAL();
-        //    CategorieDTO DTO = categorie.ToDTO();
-        //    DAL.Insert(DTO);
-        //}
+            return orders;
+        }
 
-        //public static void Update(Categorie categorie)
-        //{
-        //    CategorieDAL DAL = new CategorieDAL();
-        //    CategorieDTO DTO = categorie.ToDTO();
-        //    DAL.Update(DTO);
-        //}
+        public int CreateNew()
+        {
+
+            OrderDAL DAL = new OrderDAL();
+            int id = DAL.Insert();
+            return id;
+
+        }
+
     }
 }

@@ -11,69 +11,35 @@ namespace DB
     public class OrderDAL
     {
         private DatabaseConnection connection = new DatabaseConnection();
-        //public void Insert(KlantDTO klant)
-        //{
-        //    try
-        //    {
-        //        using (SqlConnection connection = this.connection.CreateConnection())
-        //        {
-        //            string Querry = "insert into Klant ( Naam, FactuurAdres, BezorgAdres) values(@param1,@param2,@param3)";
-        //            using (SqlCommand command = new SqlCommand(Querry, connection))
-        //            {
-        //                connection.Open();
 
-        //                command.Parameters.AddWithValue("@param1", klant.Naam);
-        //                command.Parameters.AddWithValue("@param2", klant.FactuurAdres);
-        //                command.Parameters.AddWithValue("@param3", klant.BezorgAdres);
-        //                command.CommandType = CommandType.Text;
-        //                int rowsAdded = command.ExecuteNonQuery();
-        //            }
-        //        }
-        //    }
-        //    catch (SqlException se)
-        //    {
-        //        Console.Write(se.Message);
-        //    }
-        //}
+        public int Insert()
+        {
+            int id = -1;
+            try
+            {
+                using (SqlConnection connection = this.connection.CreateConnection())
+                {
+                    string Querry = "INSERT INTO Orders (Betaald, date) VALUES(@betaald,@date) SELECT @NewId = SCOPE_IDENTITY()";
+                    using (SqlCommand command = new SqlCommand(Querry, connection))
+                    {
+                        connection.Open();
 
-        //public List<KlantDTO> GetAll()
-        //{
-        //    List<KlantDTO> klanten = new List<KlantDTO>();
-        //    try
-        //    {
-        //        using (SqlConnection connection = this.connection.CreateConnection())
-        //        {
-        //            string Querry = "select * from Klant";
-        //            using (SqlCommand command = new SqlCommand(Querry, connection))
-        //            {
-        //                connection.Open();
-        //                var reader = command.ExecuteReader();
-        //                while (reader.Read())
-        //                {
-        //                    KlantDTO newKlant = new KlantDTO
-        //                    {
-        //                        Id = reader.GetInt32(0),
-        //                        Naam = reader.GetString(1),
-        //                        FactuurAdres = reader.SafeGetString(2),
-        //                        BezorgAdres = reader.SafeGetString(3)
-        //                    };
+                        command.Parameters.AddWithValue("@betaald", false);
+                        command.Parameters.AddWithValue("@date", DateTime.Now);
+                        command.Parameters.Add("@NewId", SqlDbType.Int).Direction = ParameterDirection.Output;
+                        //command.CommandType = CommandType.Text;
 
-
-
-
-
-        //                    klanten.Add(newKlant);
-        //                }
-        //            }
-        //        }
-        //    }
-        //    catch (SqlException se)
-        //    {
-        //        Console.Write(se.Message);
-        //    }
-        //    return klanten;
-        //}
-
+                        command.ExecuteNonQuery();
+                        id = Convert.ToInt32(command.Parameters["@NewId"].Value);
+                    }
+                }
+            }
+            catch (SqlException se)
+            {
+                Console.Write(se.Message);
+            }
+            return id;
+        }
 
         public OrderDTO GetById(int id)
         {
@@ -106,6 +72,40 @@ namespace DB
                 Console.Write(se.Message);
             }
             return order;
+        }
+
+        public List<OrderDTO> GetAll()
+        {
+            List<OrderDTO> orders = new List<OrderDTO>();
+            try
+            {
+                using (SqlConnection connection = this.connection.CreateConnection())
+                {
+                    // Delete orders zonder producten?!
+                    string Querry = string.Format("select * from Orders");
+                    using (SqlCommand command = new SqlCommand(Querry, connection))
+                    {
+                        connection.Open();
+                        var reader = command.ExecuteReader();
+                        while (reader.Read())
+                        {
+                            OrderDTO newOrder = new OrderDTO
+                            {
+                                Id = reader.GetInt32(0),
+                                Betaald = reader.GetBool(1),
+                                KlantId = reader.SafeGetInt(2),
+                                Date = reader.GetDateTime(3)
+                            };
+                            orders.Add(newOrder);
+                        }
+                    }
+                }
+            }
+            catch (SqlException se)
+            {
+                Console.Write(se.Message);
+            }
+            return orders;
         }
 
         public List<OrderRegelDTO> GetOrderRegels(int orderId)
@@ -164,67 +164,145 @@ namespace DB
             }
         }
 
-        //public void Update(KlantDTO product)
-        //{
-        //    try
-        //    {
-        //        using (SqlConnection connection = this.connection.CreateConnection())
-        //        {
-        //            string Querry = "UPDATE Klant SET Naam = @naam, FactuurAdres = @facAdd, BezorgAdres = @bezAdd Where Id = @id";
-        //            using (SqlCommand command = new SqlCommand(Querry, connection))
-        //            {
-        //                connection.Open();
+        public void UpdateOrderRegel(int orderId, OrderRegelDTO orderRegel)
+        {
+            try
+            {
+                using (SqlConnection connection = this.connection.CreateConnection())
+                {
+                    string Querry = "UPDATE OrderRegel SET Aantal = @aantal WHERE OrderId = @orderId AND ProductId = @prodId";
+                    using (SqlCommand command = new SqlCommand(Querry, connection))
+                    {
+                        connection.Open();
 
-        //                command.Parameters.AddWithValue("@id", product.Id);
-        //                command.Parameters.AddWithValue("@naam", product.Naam);
-        //                command.Parameters.AddWithValue("@facAdd", product.FactuurAdres);
-        //                command.Parameters.AddWithValue("@bezAdd", product.BezorgAdres);
+                        command.Parameters.AddWithValue("@aantal", orderRegel.Aantal);
+                        command.Parameters.AddWithValue("@orderId", orderId);
+                        command.Parameters.AddWithValue("@prodId", orderRegel.ProductId);
+                        command.CommandType = CommandType.Text;
+                        int rowsAdded = command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (SqlException se)
+            {
+                Console.Write(se.Message);
+            }
+        }
 
-        //                command.CommandType = CommandType.Text;
-        //                command.ExecuteNonQuery();
-        //            }
-        //        }
-        //    }
-        //    catch (SqlException se)
-        //    {
-        //        Console.Write(se.Message);
-        //    }
-        //}
+        public void DeleteOrderRegel(int orderId, OrderRegelDTO orderRegel)
+        {
+            try
+            {
+                using (SqlConnection connection = this.connection.CreateConnection())
+                {
+                    string Querry = "Delete from OrderRegel WHERE OrderId = @orderId AND ProductId = @prodId";
+                    using (SqlCommand command = new SqlCommand(Querry, connection))
+                    {
+                        connection.Open();
+                        command.Parameters.AddWithValue("@orderId", orderId);
+                        command.Parameters.AddWithValue("@prodId", orderRegel.ProductId);
+                        command.CommandType = CommandType.Text;
+                        command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (SqlException se)
+            {
+                Console.Write(se.Message);
+            }
+        }
 
-        //public List<OrderDTO> GetOrders(int klantId)
-        //{
-        //    List<OrderDTO> orders = new List<OrderDTO>();
-        //    try
-        //    {
-        //        using (SqlConnection connection = this.connection.CreateConnection())
-        //        {
-        //            string Querry = string.Format("select * from Orders where KlantId={0}", klantId);
-        //            using (SqlCommand command = new SqlCommand(Querry, connection))
-        //            {
-        //                connection.Open();
-        //                var reader = command.ExecuteReader();
-        //                while (reader.Read())
-        //                {
-        //                    OrderDTO newOrder = new OrderDTO
-        //                    {
-        //                        Id = reader.GetInt32(0),
-        //                        Betaald = reader.GetByte(1) == 1 ? true : false,
-        //                        KlantId = reader.SafeGetInt(2),
-        //                        Date = reader.GetDateTime(3)
-        //                    };
-        //                    orders.Add(newOrder);
-        //                }
-        //            }
-        //        }
-        //    }
-        //    catch (SqlException se)
-        //    {
-        //        Console.Write(se.Message);
-        //    }
-        //    return orders;
-        //}
+        private void DeleteOrderRegels(int orderId)
+        {
+            try
+            {
+                using (SqlConnection connection = this.connection.CreateConnection())
+                {
+                    string Querry = "Delete from OrderRegel WHERE OrderId = @orderId";
+                    using (SqlCommand command = new SqlCommand(Querry, connection))
+                    {
+                        connection.Open();
+                        command.Parameters.AddWithValue("@orderId", orderId);
+                        command.CommandType = CommandType.Text;
+                        command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (SqlException se)
+            {
+                Console.Write(se.Message);
+            }
+        }
 
+        public void Delete(int id)
+        {
+            DeleteOrderRegels(id);
 
+            try
+            {
+                using (SqlConnection connection = this.connection.CreateConnection())
+                {
+                    string Querry = "Delete from Orders WHERE Id = @orderId";
+                    using (SqlCommand command = new SqlCommand(Querry, connection))
+                    {
+                        connection.Open();
+                        command.Parameters.AddWithValue("@orderId", id);
+                        command.CommandType = CommandType.Text;
+                        command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (SqlException se)
+            {
+                Console.Write(se.Message);
+            }
+        }
+
+        public void Complete(int id)
+        {
+            try
+            {
+                using (SqlConnection connection = this.connection.CreateConnection())
+                {
+                    string Querry = "UPDATE Orders SET Betaald = @betaald WHERE Id = @orderId";
+                    using (SqlCommand command = new SqlCommand(Querry, connection))
+                    {
+                        connection.Open();
+                        command.Parameters.AddWithValue("@orderId", id);
+                        command.Parameters.AddWithValue("@betaald", true);
+                        command.CommandType = CommandType.Text;
+                        command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (SqlException se)
+            {
+                Console.Write(se.Message);
+            }
+        }
+
+        public void AddKlant(int orderId, int klantId)
+        {
+            try
+            {
+                using (SqlConnection connection = this.connection.CreateConnection())
+                {
+                    string Querry = "UPDATE Orders SET KlantId = @klantId WHERE Id = @orderId";
+                    using (SqlCommand command = new SqlCommand(Querry, connection))
+                    {
+                        connection.Open();
+                        command.Parameters.AddWithValue("@orderId", orderId);
+                        command.Parameters.AddWithValue("@klantId", klantId);
+                        command.CommandType = CommandType.Text;
+                        command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (SqlException se)
+            {
+                Console.Write(se.Message);
+            }
+        }
     }
 
 

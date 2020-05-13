@@ -5,9 +5,9 @@ using DB;
 
 namespace Logic
 {
-    public static class CategorieContainer
+    public class CategorieContainer
     {
-        public static List<Categorie> GetAll()
+        public List<Categorie> GetAll()
         {
             CategorieDAL DAL = new CategorieDAL();
             List<CategorieDTO> DTOs =  DAL.GetAll();
@@ -18,7 +18,7 @@ namespace Logic
             }
             return categories;
         }
-        public static Categorie GetByID(int id)
+        public Categorie GetByID(int id)
         {
             CategorieDAL DAL = new CategorieDAL();
             CategorieDTO DTO = DAL.GetById(id);
@@ -26,20 +26,20 @@ namespace Logic
             return categorie;
         }
 
-        public static void Delete(int id)
+        public void Delete(int id)
         {
             CategorieDAL DAL = new CategorieDAL();
             DAL.Delete(id);
         }
 
-        public static void Insert(Categorie categorie)
+        public void Insert(Categorie categorie)
         {
             CategorieDAL DAL = new CategorieDAL();
             CategorieDTO DTO = categorie.ToDTO();
             DAL.Insert(DTO);
         }
 
-        public static void Update(Categorie categorie)
+        public void Update(Categorie categorie)
         {
             CategorieDAL DAL = new CategorieDAL();
             CategorieDTO DTO = categorie.ToDTO();

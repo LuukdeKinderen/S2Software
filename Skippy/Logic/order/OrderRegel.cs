@@ -24,5 +24,10 @@ namespace Logic.order
                 Aantal = aantal
             };
         }
+
+        public decimal Prijs()
+        {
+            return aantal * product.prijs;
+        }
     }
 }

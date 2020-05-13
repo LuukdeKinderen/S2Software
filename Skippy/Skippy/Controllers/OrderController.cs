@@ -5,55 +5,90 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Logic;
 using System.Diagnostics;
+using Microsoft.AspNetCore.Http;
 
 namespace Skippy.Controllers
 {
+
+
     public class OrderController : Controller
     {
+        OrderContainer orderContainer = new OrderContainer();
+        ProductContainer productContainer = new ProductContainer();
 
-        //public IActionResult Index()
-        //{
-        //    return View(ProductContainer.GetAll());
-        //}
+        public IActionResult Index()
+        {
+            return View(orderContainer.GetAll());
+        }
+
         public IActionResult Order(int id)
         {
-            Order order = OrderContainer.GetByID(id);
+            Order order = orderContainer.GetByID(id);
             return View(order);
         }
 
-        [HttpGet]
-        public IActionResult Create()
+        public IActionResult Current()
         {
-            return View();
+            int id = GetOrderId();
+
+            Order order = orderContainer.GetByID(id);
+
+            return View(order);
+
         }
 
-        [HttpPost]
-        public IActionResult Create(Product product)
+        private int GetOrderId()
         {
-            ProductContainer.Insert(product);
-            return RedirectToAction("Index", ProductContainer.GetAll());
+            int? orderId = HttpContext.Session.GetInt32("order");
+            if (!orderId.HasValue)
+            {
+                int id = orderContainer.CreateNew();
+                HttpContext.Session.SetInt32("order", id);
+            }
+            return HttpContext.Session.GetInt32("order").Value;
         }
 
-        [HttpGet]
-        public IActionResult Edit(int id)
+        public IActionResult AddProduct(int aantal, int productId)
         {
-            return View(ProductContainer.GetByID(id));
+            int orderId = GetOrderId();
+
+            Order order = orderContainer.GetByID(orderId);
+            Product product = productContainer.GetByID(productId);
+
+
+            order.AddProduct(aantal, product);
+
+
+            return RedirectToAction("Product", "Products", product);
+
         }
 
-        [HttpPost]
-        public IActionResult Edit(Product product)
+        public IActionResult Complete()
         {
-            ProductContainer.Update(product);
-            return RedirectToAction("Product", ProductContainer.GetByID(product.id));
+            int orderId = GetOrderId();
+
+            Order order = orderContainer.GetByID(orderId);
+            order.Complete();
+            ClearSessionOrderId();
+
+            return RedirectToAction("Order", order);
+
         }
-
-
-
 
         public IActionResult Delete(int id)
         {
-            ProductContainer.Delete(id);
-            return RedirectToAction("Index", ProductContainer.GetAll());
+
+
+            Order order = orderContainer.GetByID(id);
+            order.Cancel();
+            ClearSessionOrderId();
+
+            return RedirectToAction("Index", orderContainer.GetAll());
+        }
+
+        private void ClearSessionOrderId()
+        {
+            HttpContext.Session.Remove("order");
         }
     }
 }

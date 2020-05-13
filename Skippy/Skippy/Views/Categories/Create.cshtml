@@ -1,5 +1,8 @@
 ﻿@model Logic.Categorie
 
+@{
+    ViewData["Title"] = "Nieuw";
+}
 
 
 <h1>Maak</h1>
@@ -22,9 +25,6 @@
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Terug</a>
-</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

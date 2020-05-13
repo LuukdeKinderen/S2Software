@@ -1,0 +1,41 @@
+﻿@model Logic.Order
+@{
+    ViewData["Title"] = "Default";
+}
+
+<h1>Order: @Model.id</h1>
+@{Logic.Klant klant = Model.GetKlant();}
+@if (klant != null)
+{
+    <p>Klant: @klant.naam</p>
+}
+else
+{
+    <p>selecteer klant (WIP)</p>
+}
+
+    <table class="table table-sm">
+        <tr>
+            <th>Product</th>
+            <th>Aantal</th>
+            <th>Prijs</th>
+        </tr>
+        @foreach (Logic.order.OrderRegel orderRegel in Model.GetOrderRegels())
+        {
+            <tr>
+                <td>@orderRegel.product.titel</td>
+                <td>@orderRegel.aantal</td>
+                <td>@orderRegel.Prijs().ToString("0.00")</td>
+            </tr>
+        }
+    </table>
+<p>Totaal prijs: @Model.TotaalPrijs().ToString("0.00")</p>
+
+<form asp-controller="Order" asp-action="Complete">
+    <div class="form-group">
+        <input type="submit" value="OK" class="btn btn-primary" />
+    </div>
+</form>
+
+
+

@@ -1,10 +1,13 @@
 ﻿@model Logic.Order
 
+@{
+    ViewData["Title"] = "Order #" +Model.id;
+}
 
 <h1>Order #@Model.id</h1>
 <p>Betaald: @Model.betaald</p>
 @{Logic.Klant klant = Model.GetKlant();}
-@if (klant.naam.Length > 0)
+@if (klant != null)
 {
     <p>Naam: @klant.naam</p>
     if (klant.bezorgAdres.Length > 0)
@@ -29,6 +32,5 @@
 
 
 <div>
-    <a asp-action="Edit" asp-route-id=@Model.id>Wijzigen</a><br />
-    <a asp-action="Index">Terug</a>
+    <a asp-action="Delete" asp-route-id=@Model.id>Verwijderen</a><br />
 </div>

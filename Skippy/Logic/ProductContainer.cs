@@ -5,9 +5,9 @@ using DB;
 
 namespace Logic
 {
-    public static class ProductContainer
+    public class ProductContainer
     {
-        public static List<Product> GetAll()
+        public List<Product> GetAll()
         {
             ProductDAL DAL = new ProductDAL();
             List<ProductDTO> productDTOs =  DAL.GetAll();
@@ -18,7 +18,7 @@ namespace Logic
             }
             return products;
         }
-        public static Product GetByID(int id)
+        public Product GetByID(int id)
         {
             ProductDAL DAL = new ProductDAL();
             ProductDTO productDTO = DAL.GetById(id);
@@ -26,20 +26,20 @@ namespace Logic
             return product;
         }
 
-        public static void Delete(int id)
+        public void Delete(int id)
         {
             ProductDAL DAL = new ProductDAL();
             DAL.Delete(id);
         }
 
-        public static void Insert(Product product)
+        public void Insert(Product product)
         {
             ProductDAL DAL = new ProductDAL();
             ProductDTO DTO = product.ToDTO();
             DAL.Insert(DTO);
         }
 
-        public static void Update(Product product)
+        public void Update(Product product)
         {
             ProductDAL DAL = new ProductDAL();
             ProductDTO DTO = product.ToDTO();

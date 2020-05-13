@@ -10,14 +10,15 @@ namespace Skippy.Controllers
 {
     public class ProductsController : Controller
     {
+        ProductContainer productContainer = new ProductContainer();
 
         public IActionResult Index()
         {
-            return View(ProductContainer.GetAll());
+            return View(productContainer.GetAll());
         }
         public IActionResult Product(int id)
         {
-            Product product = ProductContainer.GetByID(id);
+            Product product = productContainer.GetByID(id);
             return View(product);
         }
 
@@ -30,30 +31,27 @@ namespace Skippy.Controllers
         [HttpPost]
         public IActionResult Create(Product product)
         {
-            ProductContainer.Insert(product);
-            return RedirectToAction("Index", ProductContainer.GetAll());
+            productContainer.Insert(product);
+            return RedirectToAction("Index", productContainer.GetAll());
         }
 
         [HttpGet]
         public IActionResult Edit(int id)
         {
-            return View(ProductContainer.GetByID(id));
+            return View(productContainer.GetByID(id));
         }
 
         [HttpPost]
         public IActionResult Edit(Product product)
         {
-            ProductContainer.Update(product);
-            return RedirectToAction("Product", ProductContainer.GetByID(product.id));
+            productContainer.Update(product);
+            return RedirectToAction("Product", productContainer.GetByID(product.id));
         }
-
-
-
 
         public IActionResult Delete(int id)
         {
-            ProductContainer.Delete(id);
-            return RedirectToAction("Index", ProductContainer.GetAll());
+            productContainer.Delete(id);
+            return RedirectToAction("Index", productContainer.GetAll());
         }
     }
 }

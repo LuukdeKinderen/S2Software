@@ -152,7 +152,7 @@ namespace DB
                             OrderDTO newOrder = new OrderDTO
                             {
                                 Id = reader.GetInt32(0),
-                                Betaald = reader.GetByte(1) == 1 ? true : false,
+                                Betaald = reader.GetBool(1),
                                 KlantId = reader.SafeGetInt(2),
                                 Date = reader.GetDateTime(3)
                             };

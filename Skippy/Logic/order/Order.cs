@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using DB;
 using Logic.order;
@@ -35,11 +36,12 @@ namespace Logic
             List<OrderRegelDTO> DTOs = Dal.GetOrderRegels(id);
 
             List<OrderRegel> orderRegels = new List<OrderRegel>();
+            ProductContainer productContainer = new ProductContainer();
             foreach (OrderRegelDTO DTO in DTOs)
             {
                 int aantal = DTO.Aantal;
 
-                Product product = ProductContainer.GetByID(DTO.ProductId);
+                Product product = productContainer.GetByID(DTO.ProductId);
 
                 OrderRegel orderRegel = new OrderRegel(aantal, product);
                 orderRegels.Add(orderRegel);
@@ -53,7 +55,8 @@ namespace Logic
         {
             if (klantId >= 0)
             {
-                Klant klant = KlantContainer.GetByID(klantId);
+                KlantContainer klantContainer = new KlantContainer();
+                Klant klant = klantContainer.GetByID(klantId);
                 return klant;
             }
             else
@@ -62,13 +65,60 @@ namespace Logic
             }
         }
 
-        public void AddOrderRegel(int aantal, Product product)
+        public void AddProduct(int aantal, Product product)
         {
+
+            bool newProduct = true;
+            foreach (OrderRegel regel in GetOrderRegels())
+            {
+                if (regel.product.id == product.id)
+                {
+                    newProduct = false;
+                }
+            }
+
+
             OrderRegel orderRegel = new OrderRegel(aantal, product);
             OrderRegelDTO DTO = orderRegel.ToDTO();
 
+
             OrderDAL DAL = new OrderDAL();
-            DAL.AddOrderRegel(id, DTO);
+            if (newProduct && aantal > 0)
+            {
+                DAL.AddOrderRegel(id, DTO);
+            }
+            else if (!newProduct && aantal > 0)
+            {
+                DAL.UpdateOrderRegel(id, DTO);
+            }
+            else if (!newProduct && aantal == 0)
+            {
+                DAL.DeleteOrderRegel(id, DTO);
+            }
         }
+
+        public decimal TotaalPrijs()
+        {
+            return GetOrderRegels().Sum(regel => regel.Prijs());
+        }
+
+        public void Complete()
+        {
+            OrderDAL DAL = new OrderDAL();
+            DAL.Complete(id);
+        }
+
+        public void Cancel()
+        {
+            OrderDAL DAL = new OrderDAL();
+            DAL.Delete(id);
+        }
+
+        public void AddKlant(int klantId)
+        {
+            OrderDAL DAL = new OrderDAL();
+            DAL.AddKlant(id , klantId);
+        }
+
     }
 }

@@ -9,9 +9,11 @@ namespace Skippy.Controllers
 {
     public class KlantController : Controller
     {
+        KlantContainer klantContainer = new KlantContainer();
+
         public IActionResult Index()
         {
-            return View(KlantContainer.GetAll());
+            return View(klantContainer.GetAll());
         }
 
         [HttpGet]
@@ -23,45 +25,27 @@ namespace Skippy.Controllers
         [HttpPost]
         public IActionResult Create(Klant klant)
         {
-            KlantContainer.Insert(klant);
-            return RedirectToAction("Index", KlantContainer.GetAll());
+            klantContainer.Insert(klant);
+            return RedirectToAction("Index", klantContainer.GetAll());
         }
 
         [HttpGet]
         public IActionResult Edit(int id)
         {
-            return View(KlantContainer.GetByID(id));
+            return View(klantContainer.GetByID(id));
         }
 
         [HttpPost]
         public IActionResult Edit(Klant klant)
         {
-            KlantContainer.Update(klant);
+            klantContainer.Update(klant);
             int id = klant.id;
-            return RedirectToAction("Klant", KlantContainer.GetByID(id));
+            return RedirectToAction("Klant", klantContainer.GetByID(id));
         }
-
-        
 
         public IActionResult Klant(int id)
         {
-            return View(KlantContainer.GetByID(id));
+            return View(klantContainer.GetByID(id));
         }
-
-        //public IActionResult AddProduct(int categorieId, int productId)
-        //{
-        //    Categorie categorie = CategorieContainer.GetByID(categorieId);
-        //    categorie.AddProduct(productId);
-
-        //    return RedirectToAction("Edit", categorie);
-        //}
-
-        //public IActionResult RemoveProduct(int categorieId, int productId)
-        //{
-        //    Categorie categorie = CategorieContainer.GetByID(categorieId);
-        //    categorie.RemoveProduct(productId);
-
-        //    return RedirectToAction("Edit", categorie);
-        //}
     }
 }

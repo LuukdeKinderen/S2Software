@@ -22,5 +22,10 @@ namespace DB.Extentions
                 return reader.GetInt32(colIndex);
             return -1;
         }
+
+        public static bool GetBool(this SqlDataReader reader, int colIndex)
+        {
+            return reader.GetByte(colIndex) == 1 ? true : false;
+        }
     }
 }
