@@ -108,7 +108,13 @@ namespace Logic
             DAL.Complete(id);
         }
 
-        public void Cancel()
+        public void OpRekening()
+        {
+            OrderDAL DAL = new OrderDAL();
+            DAL.OpRekening(id);
+        }
+
+        public void Delete()
         {
             OrderDAL DAL = new OrderDAL();
             DAL.Delete(id);

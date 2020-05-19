@@ -76,13 +76,13 @@ namespace DB
 
         public List<OrderDTO> GetAll()
         {
+            DeleteAllEmpty();
             List<OrderDTO> orders = new List<OrderDTO>();
             try
             {
                 using (SqlConnection connection = this.connection.CreateConnection())
                 {
-                    // Delete orders zonder producten?!
-                    string Querry = string.Format("select * from Orders");
+                    string Querry = string.Format("select * from Orders ORDER BY Id DESC");
                     using (SqlCommand command = new SqlCommand(Querry, connection))
                     {
                         connection.Open();
@@ -107,6 +107,27 @@ namespace DB
             }
             return orders;
         }
+        private void DeleteAllEmpty()
+        {
+            try
+            {
+                using (SqlConnection connection = this.connection.CreateConnection())
+                {
+                    string Querry = "DELETE Orders FROM Orders LEFT JOIN OrderRegel ON Orders.Id = OrderRegel.OrderId WHERE OrderRegel.OrderId IS NULL";
+                    using (SqlCommand command = new SqlCommand(Querry, connection))
+                    {
+                        connection.Open();
+                        command.CommandType = CommandType.Text;
+                        command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (SqlException se)
+            {
+                Console.Write(se.Message);
+            }
+        }
+
 
         public List<OrderRegelDTO> GetOrderRegels(int orderId)
         {
@@ -270,6 +291,29 @@ namespace DB
                         connection.Open();
                         command.Parameters.AddWithValue("@orderId", id);
                         command.Parameters.AddWithValue("@betaald", true);
+                        command.CommandType = CommandType.Text;
+                        command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (SqlException se)
+            {
+                Console.Write(se.Message);
+            }
+        }
+
+        public void OpRekening(int id)
+        {
+            try
+            {
+                using (SqlConnection connection = this.connection.CreateConnection())
+                {
+                    string Querry = "UPDATE Orders SET Betaald = @betaald WHERE Id = @orderId";
+                    using (SqlCommand command = new SqlCommand(Querry, connection))
+                    {
+                        connection.Open();
+                        command.Parameters.AddWithValue("@orderId", id);
+                        command.Parameters.AddWithValue("@betaald", false);
                         command.CommandType = CommandType.Text;
                         command.ExecuteNonQuery();
                     }

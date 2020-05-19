@@ -11,31 +11,31 @@
 }
 else
 {
-    <p>selecteer klant (WIP)</p>
+    <a asp-controller="Klant" asp-action="Index">Selecteer klant</a>
 }
 
-    <table class="table table-sm">
-        <tr>
-            <th>Product</th>
-            <th>Aantal</th>
-            <th>Prijs</th>
-        </tr>
-        @foreach (Logic.order.OrderRegel orderRegel in Model.GetOrderRegels())
-        {
-            <tr>
-                <td>@orderRegel.product.titel</td>
-                <td>@orderRegel.aantal</td>
-                <td>@orderRegel.Prijs().ToString("0.00")</td>
-            </tr>
-        }
-    </table>
-<p>Totaal prijs: @Model.TotaalPrijs().ToString("0.00")</p>
+@Html.Partial("_OrderRegels", Model)
 
-<form asp-controller="Order" asp-action="Complete">
-    <div class="form-group">
-        <input type="submit" value="OK" class="btn btn-primary" />
-    </div>
-</form>
+<div class="row">
+    <form class="col" asp-controller="Order" asp-action="Complete" asp-route-id=@Model.id>
+        <div class="form-group">
+            <input type="submit" value="Afrekenen" class="btn btn-primary w-100" />
+        </div>
+    </form>
+    <form class="col" asp-controller="Order" asp-action="Delete" asp-route-id=@Model.id>
+        <div class="form-group">
+            <input type="submit" value="Cancel" class="btn btn-primary w-100" />
+        </div>
+    </form>
+</div>
 
+@if (klant != null)
+{
+    <form asp-controller="Order" asp-action="OpRekening" asp-route-id=@Model.id>
+        <div class="form-group">
+            <input type="submit" value="Order toevoegen aan rekening" class="btn btn-primary w-100" />
+        </div>
+    </form>
+}
 
 

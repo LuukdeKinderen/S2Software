@@ -4,22 +4,6 @@
     ViewData["Title"] = "Orders";
 }
 <h1>Orders</h1>
-<ul>
-    @foreach (Logic.Order order in Model)
-    {
-        <div class=" col-md-12  ">
-            <a asp-controller="Order"
-               asp-action="Order"
-               asp-route-id=@order.id>
-                <div class="row">
-                    <div class=" col-md-8  ">
-                        <p>#@order.id</p>
-                    </div>
-                    <div class=" col-md-4  ">
-                        <p>@order.date</p>
-                    </div>
-                </div>
-            </a>
-        </div>
-    }
-</ul>
+<div class="rounded bg-white shadow-sm">
+    @Html.Partial("_OrderLijst", Model)
+</div>

@@ -4,32 +4,30 @@
     ViewData["Title"] = Model.naam;
 }
 
-<h1>@Model.naam</h1>
-<p>Orders van @Model.naam</p>
+@addTagHelper *, Skippy
+<div class="row">
+    <div class="col-8">
+        <h1>@Model.naam</h1>
+        <p>Orders van @Model.naam</p>
 
-<div class="rounded bg-white shadow-sm">
-    <div class="row">
-        @foreach (Logic.Order order in Model.GetOrders())
-        {
-            <div class=" col-md-12  ">
-                <a asp-controller="Order"
-                   asp-action="Order"
-                   asp-route-id=@order.id>
-                    <div class="row">
-                        <div class=" col-md-8  ">
-                            <p>#@order.id</p>
-                        </div>
-                        <div class=" col-md-4  ">
-                            <p>@order.date</p>
-                        </div>
-                    </div>
-                </a>
+        <div class="rounded bg-white shadow-sm">
+            @Html.Partial("_OrderLijst", Model.GetOrders())
+        </div>
+        <form asp-controller="Order" asp-action="AddKlant" asp-route-klantId=@Model.id>
+
+            <div class="form-group">
+                <input type="submit" value="Toevoegen aan Order" class="btn btn-primary" />
             </div>
-        }
+        </form>
+        <div>
+            <a asp-action="Edit" asp-route-id=@Model.id>Wijzigen</a><br />
+        </div>
+    </div>
+
+    <div class="col-4">
+        <vc:order />
     </div>
 </div>
 
 
-<div>
-    <a asp-action="Edit" asp-route-id=@Model.id>Wijzigen</a><br />
-</div>
+

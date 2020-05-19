@@ -178,3 +178,5 @@ C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Skippy\Skippy\obj\Debug
 C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Skippy\Skippy\obj\Debug\netcoreapp3.1\Razor\Views\Order\Order.cshtml.g.cs
 C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Skippy\Skippy\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Components\Order\Default.cshtml.g.cs
 C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Skippy\Skippy\obj\Debug\netcoreapp3.1\Razor\Views\Order\Index.cshtml.g.cs
+C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Skippy\Skippy\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_OrderRegels.cshtml.g.cs
+C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Skippy\Skippy\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_OrderLijst.cshtml.g.cs

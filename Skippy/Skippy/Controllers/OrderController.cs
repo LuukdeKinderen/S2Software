@@ -15,6 +15,7 @@ namespace Skippy.Controllers
     {
         OrderContainer orderContainer = new OrderContainer();
         ProductContainer productContainer = new ProductContainer();
+        CategorieContainer categorieContainer = new CategorieContainer();
 
         public IActionResult Index()
         {
@@ -27,17 +28,79 @@ namespace Skippy.Controllers
             return View(order);
         }
 
-        public IActionResult Current()
+        public IActionResult EditOrder(int id)
         {
-            int id = GetOrderId();
+            SetSessionOrderId(id);
+            List<Categorie> categories = categorieContainer.GetAll();
 
-            Order order = orderContainer.GetByID(id);
-
-            return View(order);
-
+            return RedirectToAction("Index", "Categories", categories);
         }
 
-        private int GetOrderId()
+        public IActionResult AddProduct(int aantal, int productId)
+        {
+            int orderId = GetSessionOrderId();
+
+            Order order = orderContainer.GetByID(orderId);
+            Product product = productContainer.GetByID(productId);
+
+            order.AddProduct(aantal, product);
+
+            return RedirectToAction("Product", "Products", product);
+        }
+
+        public IActionResult AddKlant(int klantId)
+        {
+            int orderId = GetSessionOrderId();
+
+            Order order = orderContainer.GetByID(orderId);
+            order.AddKlant(klantId);
+
+
+            List<Categorie> categories = categorieContainer.GetAll();
+
+            return RedirectToAction("Index", "Categories", categories);
+        }
+
+        public IActionResult OpRekening(int id)
+        {
+            Order order = orderContainer.GetByID(id);
+            order.OpRekening();
+            ClearSessionOrderId();
+
+            return RedirectToAction("Order", order);
+        }
+
+
+        public IActionResult Complete(int id)
+        {
+            Order order = orderContainer.GetByID(id);
+            order.Complete();
+            ClearSessionOrderId();
+
+            return RedirectToAction("Order", order);
+        }
+
+        public IActionResult Delete(int id)
+        {
+            Order order = orderContainer.GetByID(id);
+            order.Delete();
+            ClearSessionOrderId();
+
+            return RedirectToAction("Index", orderContainer.GetAll());
+        }
+
+
+        private void SetSessionOrderId(int id)
+        {
+            HttpContext.Session.SetInt32("order", id);
+        }
+
+        private void ClearSessionOrderId()
+        {
+            HttpContext.Session.Remove("order");
+        }
+
+        private int GetSessionOrderId()
         {
             int? orderId = HttpContext.Session.GetInt32("order");
             if (!orderId.HasValue)
@@ -46,49 +109,6 @@ namespace Skippy.Controllers
                 HttpContext.Session.SetInt32("order", id);
             }
             return HttpContext.Session.GetInt32("order").Value;
-        }
-
-        public IActionResult AddProduct(int aantal, int productId)
-        {
-            int orderId = GetOrderId();
-
-            Order order = orderContainer.GetByID(orderId);
-            Product product = productContainer.GetByID(productId);
-
-
-            order.AddProduct(aantal, product);
-
-
-            return RedirectToAction("Product", "Products", product);
-
-        }
-
-        public IActionResult Complete()
-        {
-            int orderId = GetOrderId();
-
-            Order order = orderContainer.GetByID(orderId);
-            order.Complete();
-            ClearSessionOrderId();
-
-            return RedirectToAction("Order", order);
-
-        }
-
-        public IActionResult Delete(int id)
-        {
-
-
-            Order order = orderContainer.GetByID(id);
-            order.Cancel();
-            ClearSessionOrderId();
-
-            return RedirectToAction("Index", orderContainer.GetAll());
-        }
-
-        private void ClearSessionOrderId()
-        {
-            HttpContext.Session.Remove("order");
         }
     }
 }

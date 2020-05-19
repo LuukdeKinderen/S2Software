@@ -1,15 +1,26 @@
 ﻿@model Logic.Order
 
 @{
-    ViewData["Title"] = "Order #" +Model.id;
+    ViewData["Title"] = "Order #" + Model.id;
 }
 
 <h1>Order #@Model.id</h1>
-<p>Betaald: @Model.betaald</p>
+
+@{string betaald = "";}
+@if (Model.betaald)
+{
+     betaald = "voldaan";
+}
+else
+{
+     betaald = "Nog te betalen";
+}
+<p>Betaalstatus: @betaald</p>
+
 @{Logic.Klant klant = Model.GetKlant();}
 @if (klant != null)
 {
-    <p>Naam: @klant.naam</p>
+    <p>Klant naam: @klant.naam</p>
     if (klant.bezorgAdres.Length > 0)
     {
         <p>Factuur adres: @klant.factuurAdres</p>
@@ -22,15 +33,11 @@
 
 
 <div class="rounded bg-white shadow-sm">
-    <ul>
-        @foreach (Logic.order.OrderRegel orderRegel in Model.GetOrderRegels())
-        {
-            <li>@orderRegel.product.titel x @orderRegel.aantal</li>
-        }
-    </ul>
+
+    @Html.Partial("_OrderRegels", Model)
 </div>
 
 
 <div>
-    <a asp-action="Delete" asp-route-id=@Model.id>Verwijderen</a><br />
+    <a asp-action="EditOrder" asp-route-id=@Model.id>Wijzigen</a><br />
 </div>

@@ -13,6 +13,13 @@ namespace Logic
             OrderDAL DAL = new OrderDAL();
             OrderDTO DTO = DAL.GetById(id);
             Order order = new Order(DTO);
+
+            //When order does not excist Create a new order
+            if (DTO.Id == 0)
+            {
+                order = GetByID(CreateNew());
+            }
+
             return order;
         }
 
