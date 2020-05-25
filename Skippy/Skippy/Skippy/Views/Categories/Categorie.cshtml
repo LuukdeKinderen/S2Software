@@ -1,0 +1,33 @@
+﻿@model Logic.Categorie
+@{
+    ViewData["Title"] = Model.titel;
+}
+@addTagHelper *, Skippy
+<div class="row">
+    <div class="col-8">
+        <h1>@Model.titel</h1>
+        <h4>Producten in categorie</h4>
+
+        <div class="rounded bg-white shadow-sm">
+            <ul>
+                @foreach (Logic.Product product in Model.GetProducts())
+                {
+                    <a asp-controller="Products"
+                       asp-action="Product"
+                       asp-route-id=@product.id>
+                        <li>@product.titel</li>
+                    </a>
+
+                }
+            </ul>
+        </div>
+
+
+        <div>
+            <a asp-action="Edit" asp-route-id=@Model.id>Wijzigen</a><br />
+        </div>
+    </div>
+    <div class="col-4">
+        <vc:order />
+    </div>
+</div>

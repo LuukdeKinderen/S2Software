@@ -1,0 +1,41 @@
+﻿@model Logic.Order
+@{
+    ViewData["Title"] = "Default";
+}
+
+<h1>Order: @Model.id</h1>
+@{Logic.Klant klant = Model.GetKlant();}
+@if (klant != null)
+{
+    <p>Klant: @klant.naam</p>
+}
+else
+{
+    <a asp-controller="Klant" asp-action="Index">Selecteer klant</a>
+}
+
+@Html.Partial("_OrderRegels", Model)
+
+<div class="row">
+    <form class="col" asp-controller="Order" asp-action="Complete" asp-route-id=@Model.id>
+        <div class="form-group">
+            <input type="submit" value="Afrekenen" class="btn btn-primary w-100" />
+        </div>
+    </form>
+    <form class="col" asp-controller="Order" asp-action="Delete" asp-route-id=@Model.id>
+        <div class="form-group">
+            <input type="submit" value="Cancel" class="btn btn-primary w-100" />
+        </div>
+    </form>
+</div>
+
+@if (klant != null)
+{
+    <form asp-controller="Order" asp-action="OpRekening" asp-route-id=@Model.id>
+        <div class="form-group">
+            <input type="submit" value="Order toevoegen aan rekening" class="btn btn-primary w-100" />
+        </div>
+    </form>
+}
+
+

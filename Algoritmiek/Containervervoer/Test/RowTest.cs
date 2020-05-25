@@ -22,15 +22,18 @@ namespace Test
         [TestMethod]
         public void When_Container_Is_Cooled_It_Only_Ends_Up_In_First_Stack()
         {
+            //arange
             ShipRow sr = new ShipRow(7);
 
+            //act
             for (int i = 0; i < 30; i++)
             {
                 Container container = ContainerConstructor.CreateContainer(false, true, 30000);
                 sr.AddContainer(container);
             }
 
-            Assert.AreEqual(true, sr.Stacks[0].ContainerCount > 0);
+            //assert
+            Assert.IsTrue(sr.Stacks[0].ContainerCount > 0);
 
             for (int i = 1; i < sr.Stacks.Count; i++)
             {
@@ -63,7 +66,7 @@ namespace Test
         }
 
         [TestMethod]
-        public void Ever_Fourth_Stack_Is_Lower_Than_The_Stack_Before_Or_After_That_If_One_Of_Those_Has_A_Valuable_Container()
+        public void Every_Fourth_Stack_Is_Lower_Than_The_Stack_Before_Or_After_That_If_One_Of_Those_Has_A_Valuable_Container()
         {
             ShipRow sr = new ShipRow(7);
             List<Container> containers = ContainerConstructor.CreateRandomContainers(500);

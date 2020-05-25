@@ -1,0 +1,32 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+@model Logic.Order
+<table class="table table-sm">
+    <tr>
+        <th>Product</th>
+        <th class="text-right">Prijs per stuk</th>
+        <th class="text-right">Aantal</th>
+        <th class="text-right">Prijs</th>
+    </tr>
+    @foreach (Logic.order.OrderRegel orderRegel in Model.GetOrderRegels())
+    {
+        <tr>
+            <td>
+                <a asp-controller="Products" asp-action="product" asp-route-id=@orderRegel.product.id>
+                    @orderRegel.product.titel
+                </a>
+            </td>
+            <td class="text-right">@orderRegel.product.prijs</td>
+            <td class="text-right">@orderRegel.aantal</td>
+            <td class="text-right">@orderRegel.Prijs().ToString("0.00")</td>
+        </tr>
+    }
+    <tr>
+        <td><b>Totaal</b></td>
+        <td></td>
+        <td></td>
+        <td class="text-right">@Model.TotaalPrijs().ToString("0.00")</td>
+    </tr>
+</table>

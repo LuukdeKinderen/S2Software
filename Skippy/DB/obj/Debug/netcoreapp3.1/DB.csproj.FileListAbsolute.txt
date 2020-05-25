@@ -1,8 +1,0 @@
-C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Skippy\DB\bin\Debug\netcoreapp3.1\DB.deps.json
-C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Skippy\DB\bin\Debug\netcoreapp3.1\DB.dll
-C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Skippy\DB\bin\Debug\netcoreapp3.1\DB.pdb
-C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Skippy\DB\obj\Debug\netcoreapp3.1\DB.csprojAssemblyReference.cache
-C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Skippy\DB\obj\Debug\netcoreapp3.1\DB.AssemblyInfoInputs.cache
-C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Skippy\DB\obj\Debug\netcoreapp3.1\DB.AssemblyInfo.cs
-C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Skippy\DB\obj\Debug\netcoreapp3.1\DB.dll
-C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Skippy\DB\obj\Debug\netcoreapp3.1\DB.pdb

@@ -21,9 +21,8 @@ namespace Test
         }
 
         [TestMethod]
-        public void When_BottomLoad_Is_Too_High_Container_Will_Failed_To_Add()
+        public void When_BottomLoad_Is_Too_High_Container_Will_Fail_To_Add()
         {
-            
             Stack s = new Stack();
             s.AddContainer(ContainerConstructor.CreateContainer(false, false, 30000));
             s.AddContainer(ContainerConstructor.CreateContainer(false, false, 30000));
@@ -32,13 +31,13 @@ namespace Test
             s.AddContainer(ContainerConstructor.CreateContainer(false, false, 30000));
             Assert.AreEqual(s.BottomLoad, 120000);
 
-            Container testContainer = ContainerConstructor.CreateContainer(false, false, 30000);
+            Container testContainer = ContainerConstructor.CreateContainer(false, false, 4000);
 
             bool addedContainer = s.AddContainer(testContainer);
             bool canFindContainer = s.Containers.Contains(testContainer);
 
-            Assert.AreEqual(addedContainer, false);
-            Assert.AreEqual(canFindContainer, false);
+            Assert.IsFalse(addedContainer);
+            Assert.IsFalse(canFindContainer);
         }
 
         [TestMethod]
@@ -52,8 +51,28 @@ namespace Test
             bool addedContainer = s.AddContainer(valuable2);
             bool canFindContainer = s.Containers.Contains(valuable2);
 
-            Assert.AreEqual(addedContainer, false);
-            Assert.AreEqual(canFindContainer, false);
+            Assert.IsFalse(addedContainer);
+            Assert.IsFalse(canFindContainer);
+        }
+
+        [TestMethod]
+        public void ValuableContainerIsAlwaysOnTopOfTheStack()
+        {
+            Stack s = new Stack();
+            Container c1 = ContainerConstructor.CreateContainer(false, false, 5000);
+            Container c2 = ContainerConstructor.CreateContainer(false, false, 5000);
+            Container c3 = ContainerConstructor.CreateContainer(false, false, 5000);
+            s.AddContainer(c1);
+            s.AddContainer(c2);
+            s.AddContainer(c3);
+
+
+            Container valuable = ContainerConstructor.CreateContainer(true, false, 5000);
+            s.AddContainer(valuable);
+
+            
+            int indexOfValuable = s.Containers.IndexOf(valuable);
+            Assert.AreEqual(0, indexOfValuable);
         }
 
 
