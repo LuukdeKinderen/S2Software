@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Luukd\\OneDrive\\Documenten\\Fontys\\SS2\\S2Software\\Skippy\\DB\\DB.csproj": {}
+    "C:\\Users\\Luukd\\OneDrive\\Documenten\\Fontys\\SS2\\S2Software\\Skippy\\Skippy\\DB\\DB.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Luukd\\OneDrive\\Documenten\\Fontys\\SS2\\S2Software\\Skippy\\DB\\DB.csproj": {
+    "C:\\Users\\Luukd\\OneDrive\\Documenten\\Fontys\\SS2\\S2Software\\Skippy\\Skippy\\DB\\DB.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Luukd\\OneDrive\\Documenten\\Fontys\\SS2\\S2Software\\Skippy\\DB\\DB.csproj",
+        "projectUniqueName": "C:\\Users\\Luukd\\OneDrive\\Documenten\\Fontys\\SS2\\S2Software\\Skippy\\Skippy\\DB\\DB.csproj",
         "projectName": "DB",
-        "projectPath": "C:\\Users\\Luukd\\OneDrive\\Documenten\\Fontys\\SS2\\S2Software\\Skippy\\DB\\DB.csproj",
+        "projectPath": "C:\\Users\\Luukd\\OneDrive\\Documenten\\Fontys\\SS2\\S2Software\\Skippy\\Skippy\\DB\\DB.csproj",
         "packagesPath": "C:\\Users\\Luukd\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Luukd\\OneDrive\\Documenten\\Fontys\\SS2\\S2Software\\Skippy\\DB\\obj\\",
+        "outputPath": "C:\\Users\\Luukd\\OneDrive\\Documenten\\Fontys\\SS2\\S2Software\\Skippy\\Skippy\\DB\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

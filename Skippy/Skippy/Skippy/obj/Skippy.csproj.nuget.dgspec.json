@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Luukd\\OneDrive\\Documenten\\Fontys\\SS2\\S2Software\\Skippy\\Skippy\\Skippy.csproj": {}
+    "C:\\Users\\Luukd\\OneDrive\\Documenten\\Fontys\\SS2\\S2Software\\Skippy\\Skippy\\Skippy\\Skippy.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Luukd\\OneDrive\\Documenten\\Fontys\\SS2\\S2Software\\Skippy\\DB\\DB.csproj": {
+    "C:\\Users\\Luukd\\OneDrive\\Documenten\\Fontys\\SS2\\S2Software\\Skippy\\Skippy\\DB\\DB.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Luukd\\OneDrive\\Documenten\\Fontys\\SS2\\S2Software\\Skippy\\DB\\DB.csproj",
+        "projectUniqueName": "C:\\Users\\Luukd\\OneDrive\\Documenten\\Fontys\\SS2\\S2Software\\Skippy\\Skippy\\DB\\DB.csproj",
         "projectName": "DB",
-        "projectPath": "C:\\Users\\Luukd\\OneDrive\\Documenten\\Fontys\\SS2\\S2Software\\Skippy\\DB\\DB.csproj",
+        "projectPath": "C:\\Users\\Luukd\\OneDrive\\Documenten\\Fontys\\SS2\\S2Software\\Skippy\\Skippy\\DB\\DB.csproj",
         "packagesPath": "C:\\Users\\Luukd\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Luukd\\OneDrive\\Documenten\\Fontys\\SS2\\S2Software\\Skippy\\DB\\obj\\",
+        "outputPath": "C:\\Users\\Luukd\\OneDrive\\Documenten\\Fontys\\SS2\\S2Software\\Skippy\\Skippy\\DB\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -65,14 +65,14 @@
         }
       }
     },
-    "C:\\Users\\Luukd\\OneDrive\\Documenten\\Fontys\\SS2\\S2Software\\Skippy\\Logic\\Logic.csproj": {
+    "C:\\Users\\Luukd\\OneDrive\\Documenten\\Fontys\\SS2\\S2Software\\Skippy\\Skippy\\Logic\\Logic.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Luukd\\OneDrive\\Documenten\\Fontys\\SS2\\S2Software\\Skippy\\Logic\\Logic.csproj",
+        "projectUniqueName": "C:\\Users\\Luukd\\OneDrive\\Documenten\\Fontys\\SS2\\S2Software\\Skippy\\Skippy\\Logic\\Logic.csproj",
         "projectName": "Logic",
-        "projectPath": "C:\\Users\\Luukd\\OneDrive\\Documenten\\Fontys\\SS2\\S2Software\\Skippy\\Logic\\Logic.csproj",
+        "projectPath": "C:\\Users\\Luukd\\OneDrive\\Documenten\\Fontys\\SS2\\S2Software\\Skippy\\Skippy\\Logic\\Logic.csproj",
         "packagesPath": "C:\\Users\\Luukd\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Luukd\\OneDrive\\Documenten\\Fontys\\SS2\\S2Software\\Skippy\\Logic\\obj\\",
+        "outputPath": "C:\\Users\\Luukd\\OneDrive\\Documenten\\Fontys\\SS2\\S2Software\\Skippy\\Skippy\\Logic\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -91,8 +91,8 @@
         "frameworks": {
           "netcoreapp3.1": {
             "projectReferences": {
-              "C:\\Users\\Luukd\\OneDrive\\Documenten\\Fontys\\SS2\\S2Software\\Skippy\\DB\\DB.csproj": {
-                "projectPath": "C:\\Users\\Luukd\\OneDrive\\Documenten\\Fontys\\SS2\\S2Software\\Skippy\\DB\\DB.csproj"
+              "C:\\Users\\Luukd\\OneDrive\\Documenten\\Fontys\\SS2\\S2Software\\Skippy\\Skippy\\DB\\DB.csproj": {
+                "projectPath": "C:\\Users\\Luukd\\OneDrive\\Documenten\\Fontys\\SS2\\S2Software\\Skippy\\Skippy\\DB\\DB.csproj"
               }
             }
           }
@@ -124,14 +124,14 @@
         }
       }
     },
-    "C:\\Users\\Luukd\\OneDrive\\Documenten\\Fontys\\SS2\\S2Software\\Skippy\\Skippy\\Skippy.csproj": {
+    "C:\\Users\\Luukd\\OneDrive\\Documenten\\Fontys\\SS2\\S2Software\\Skippy\\Skippy\\Skippy\\Skippy.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Luukd\\OneDrive\\Documenten\\Fontys\\SS2\\S2Software\\Skippy\\Skippy\\Skippy.csproj",
+        "projectUniqueName": "C:\\Users\\Luukd\\OneDrive\\Documenten\\Fontys\\SS2\\S2Software\\Skippy\\Skippy\\Skippy\\Skippy.csproj",
         "projectName": "Skippy",
-        "projectPath": "C:\\Users\\Luukd\\OneDrive\\Documenten\\Fontys\\SS2\\S2Software\\Skippy\\Skippy\\Skippy.csproj",
+        "projectPath": "C:\\Users\\Luukd\\OneDrive\\Documenten\\Fontys\\SS2\\S2Software\\Skippy\\Skippy\\Skippy\\Skippy.csproj",
         "packagesPath": "C:\\Users\\Luukd\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Luukd\\OneDrive\\Documenten\\Fontys\\SS2\\S2Software\\Skippy\\Skippy\\obj\\",
+        "outputPath": "C:\\Users\\Luukd\\OneDrive\\Documenten\\Fontys\\SS2\\S2Software\\Skippy\\Skippy\\Skippy\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -150,8 +150,8 @@
         "frameworks": {
           "netcoreapp3.1": {
             "projectReferences": {
-              "C:\\Users\\Luukd\\OneDrive\\Documenten\\Fontys\\SS2\\S2Software\\Skippy\\Logic\\Logic.csproj": {
-                "projectPath": "C:\\Users\\Luukd\\OneDrive\\Documenten\\Fontys\\SS2\\S2Software\\Skippy\\Logic\\Logic.csproj"
+              "C:\\Users\\Luukd\\OneDrive\\Documenten\\Fontys\\SS2\\S2Software\\Skippy\\Skippy\\Logic\\Logic.csproj": {
+                "projectPath": "C:\\Users\\Luukd\\OneDrive\\Documenten\\Fontys\\SS2\\S2Software\\Skippy\\Skippy\\Logic\\Logic.csproj"
               }
             }
           }
