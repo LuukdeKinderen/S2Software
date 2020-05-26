@@ -24,11 +24,11 @@
     ".NETCoreApp,Version=v3.1": {
       "Skippy/1.0.0": {
         "dependencies": {
-          "Logic": "1.0.0",
           "Microsoft.EntityFrameworkCore.SqlServer": "3.1.2",
           "Microsoft.EntityFrameworkCore.Sqlite": "3.1.1",
           "Microsoft.EntityFrameworkCore.Tools": "3.1.1",
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "3.1.2",
+          "Skippy.Logic": "1.0.0",
           "Microsoft.AspNetCore.Antiforgery": "3.1.0.0",
           "Microsoft.AspNetCore.Authentication.Abstractions": "3.1.0.0",
           "Microsoft.AspNetCore.Authentication.Cookies": "3.1.0.0",
@@ -2319,26 +2319,48 @@
           "System.Xml.XmlDocument": "4.3.0"
         }
       },
-      "DB/1.0.0": {
+      "Skippy.Data/1.0.0": {
         "dependencies": {
+          "Skippy.Interface": "1.0.0",
           "System.Data.SqlClient": "4.8.1"
         },
         "runtime": {
-          "DB.dll": {}
+          "Skippy.Data.dll": {}
         },
         "compile": {
-          "DB.dll": {}
+          "Skippy.Data.dll": {}
         }
       },
-      "Logic/1.0.0": {
+      "Skippy.Factory/1.0.0": {
         "dependencies": {
-          "DB": "1.0.0"
+          "Skippy.Data": "1.0.0",
+          "Skippy.Interface": "1.0.0"
         },
         "runtime": {
-          "Logic.dll": {}
+          "Skippy.Factory.dll": {}
         },
         "compile": {
-          "Logic.dll": {}
+          "Skippy.Factory.dll": {}
+        }
+      },
+      "Skippy.Interface/1.0.0": {
+        "runtime": {
+          "Skippy.Interface.dll": {}
+        },
+        "compile": {
+          "Skippy.Interface.dll": {}
+        }
+      },
+      "Skippy.Logic/1.0.0": {
+        "dependencies": {
+          "Skippy.Factory": "1.0.0",
+          "Skippy.Interface": "1.0.0"
+        },
+        "runtime": {
+          "Skippy.Logic.dll": {}
+        },
+        "compile": {
+          "Skippy.Logic.dll": {}
         }
       },
       "Microsoft.AspNetCore.Antiforgery/3.1.0.0": {
@@ -5123,12 +5145,22 @@
       "path": "system.xml.xmlserializer/4.3.0",
       "hashPath": "system.xml.xmlserializer.4.3.0.nupkg.sha512"
     },
-    "DB/1.0.0": {
+    "Skippy.Data/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
     },
-    "Logic/1.0.0": {
+    "Skippy.Factory/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Skippy.Interface/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Skippy.Logic/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

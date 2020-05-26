@@ -1,10 +1,10 @@
-﻿@model Logic.Order
+﻿@model Skippy.Logic.Order
 @{
     ViewData["Title"] = "Default";
 }
 
 <h1>Order: @Model.id</h1>
-@{Logic.Klant klant = Model.GetKlant();}
+@{Skippy.Logic.Klant klant = Model.GetKlant();}
 @if (klant != null)
 {
     <p>Klant: @klant.naam</p>

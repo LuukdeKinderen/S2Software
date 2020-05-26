@@ -1,0 +1,15 @@
+C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Skippy\Skippy\Skippy.Logic\obj\Debug\netcoreapp3.1\Skippy.Logic.csprojAssemblyReference.cache
+C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Skippy\Skippy\Skippy.Logic\obj\Debug\netcoreapp3.1\Skippy.Logic.AssemblyInfoInputs.cache
+C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Skippy\Skippy\Skippy.Logic\obj\Debug\netcoreapp3.1\Skippy.Logic.AssemblyInfo.cs
+C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Skippy\Skippy\Skippy.Logic\bin\Debug\netcoreapp3.1\Skippy.Logic.deps.json
+C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Skippy\Skippy\Skippy.Logic\bin\Debug\netcoreapp3.1\Skippy.Logic.dll
+C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Skippy\Skippy\Skippy.Logic\bin\Debug\netcoreapp3.1\Skippy.Logic.pdb
+C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Skippy\Skippy\Skippy.Logic\bin\Debug\netcoreapp3.1\Skippy.Data.dll
+C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Skippy\Skippy\Skippy.Logic\bin\Debug\netcoreapp3.1\Skippy.Factory.dll
+C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Skippy\Skippy\Skippy.Logic\bin\Debug\netcoreapp3.1\Skippy.Interface.dll
+C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Skippy\Skippy\Skippy.Logic\bin\Debug\netcoreapp3.1\Skippy.Factory.pdb
+C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Skippy\Skippy\Skippy.Logic\bin\Debug\netcoreapp3.1\Skippy.Interface.pdb
+C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Skippy\Skippy\Skippy.Logic\bin\Debug\netcoreapp3.1\Skippy.Data.pdb
+C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Skippy\Skippy\Skippy.Logic\obj\Debug\netcoreapp3.1\Skippy.Logic.csproj.CopyComplete
+C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Skippy\Skippy\Skippy.Logic\obj\Debug\netcoreapp3.1\Skippy.Logic.dll
+C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Skippy\Skippy\Skippy.Logic\obj\Debug\netcoreapp3.1\Skippy.Logic.pdb

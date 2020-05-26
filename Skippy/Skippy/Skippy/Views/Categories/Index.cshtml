@@ -1,4 +1,4 @@
-﻿@model List<Logic.Categorie>
+﻿@model List<Skippy.Logic.Categorie>
 
 @{
     ViewData["Title"] = "Categoriën";
@@ -9,7 +9,7 @@
         <h1>Categorieën</h1>
         <div class="container">
             <div class="row">
-                @foreach (Logic.Categorie categorie in Model)
+                @foreach (Skippy.Logic.Categorie categorie in Model)
                 {
                     <div class=" col-sm-6 col-md-4 ">
                         <a asp-action="Categorie"

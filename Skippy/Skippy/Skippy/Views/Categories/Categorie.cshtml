@@ -1,4 +1,4 @@
-﻿@model Logic.Categorie
+﻿@model Skippy.Logic.Categorie
 @{
     ViewData["Title"] = Model.titel;
 }
@@ -10,7 +10,7 @@
 
         <div class="rounded bg-white shadow-sm">
             <ul>
-                @foreach (Logic.Product product in Model.GetProducts())
+                @foreach (Skippy.Logic.Product product in Model.GetProducts())
                 {
                     <a asp-controller="Products"
                        asp-action="Product"

@@ -1,11 +1,11 @@
-﻿@model List<Logic.Product>
+﻿@model List<Skippy.Logic.Product>
 
 @{
     ViewData["Title"] = "Producten";
 }
 <h1>Producten</h1>
 <ul>
-    @foreach (Logic.Product product in Model)
+    @foreach (Skippy.Logic.Product product in Model)
     {
         <li> <a asp-action="Product" asp-route-id=@product.id>@product.titel</a> </li>
     }

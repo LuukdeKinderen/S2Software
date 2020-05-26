@@ -2700,30 +2700,56 @@
           "lib/netstandard1.3/System.Xml.XmlSerializer.dll": {}
         }
       },
-      "DB/1.0.0": {
+      "Skippy.Data/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v3.1",
         "dependencies": {
+          "Skippy.Interface": "1.0.0",
           "System.Data.SqlClient": "4.8.1"
         },
         "compile": {
-          "bin/placeholder/DB.dll": {}
+          "bin/placeholder/Skippy.Data.dll": {}
         },
         "runtime": {
-          "bin/placeholder/DB.dll": {}
+          "bin/placeholder/Skippy.Data.dll": {}
         }
       },
-      "Logic/1.0.0": {
+      "Skippy.Factory/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v3.1",
         "dependencies": {
-          "DB": "1.0.0"
+          "Skippy.Data": "1.0.0",
+          "Skippy.Interface": "1.0.0"
         },
         "compile": {
-          "bin/placeholder/Logic.dll": {}
+          "bin/placeholder/Skippy.Factory.dll": {}
         },
         "runtime": {
-          "bin/placeholder/Logic.dll": {}
+          "bin/placeholder/Skippy.Factory.dll": {}
+        }
+      },
+      "Skippy.Interface/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "compile": {
+          "bin/placeholder/Skippy.Interface.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Skippy.Interface.dll": {}
+        }
+      },
+      "Skippy.Logic/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "dependencies": {
+          "Skippy.Factory": "1.0.0",
+          "Skippy.Interface": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Skippy.Logic.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Skippy.Logic.dll": {}
         }
       }
     }
@@ -8646,24 +8672,34 @@
         "system.xml.xmlserializer.nuspec"
       ]
     },
-    "DB/1.0.0": {
+    "Skippy.Data/1.0.0": {
       "type": "project",
-      "path": "../DB/DB.csproj",
-      "msbuildProject": "../DB/DB.csproj"
+      "path": "../Skippy.Data/Skippy.Data.csproj",
+      "msbuildProject": "../Skippy.Data/Skippy.Data.csproj"
     },
-    "Logic/1.0.0": {
+    "Skippy.Factory/1.0.0": {
       "type": "project",
-      "path": "../Logic/Logic.csproj",
-      "msbuildProject": "../Logic/Logic.csproj"
+      "path": "../Skippy.Factory/Skippy.Factory.csproj",
+      "msbuildProject": "../Skippy.Factory/Skippy.Factory.csproj"
+    },
+    "Skippy.Interface/1.0.0": {
+      "type": "project",
+      "path": "../Skippy.Interface/Skippy.Interface.csproj",
+      "msbuildProject": "../Skippy.Interface/Skippy.Interface.csproj"
+    },
+    "Skippy.Logic/1.0.0": {
+      "type": "project",
+      "path": "../Skippy.Logic/Skippy.Logic.csproj",
+      "msbuildProject": "../Skippy.Logic/Skippy.Logic.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
-      "Logic >= 1.0.0",
       "Microsoft.EntityFrameworkCore.SqlServer >= 3.1.2",
       "Microsoft.EntityFrameworkCore.Sqlite >= 3.1.1",
       "Microsoft.EntityFrameworkCore.Tools >= 3.1.1",
-      "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 3.1.2"
+      "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 3.1.2",
+      "Skippy.Logic >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -8696,8 +8732,11 @@
       "frameworks": {
         "netcoreapp3.1": {
           "projectReferences": {
-            "C:\\Users\\Luukd\\OneDrive\\Documenten\\Fontys\\SS2\\S2Software\\Skippy\\Skippy\\Logic\\Logic.csproj": {
-              "projectPath": "C:\\Users\\Luukd\\OneDrive\\Documenten\\Fontys\\SS2\\S2Software\\Skippy\\Skippy\\Logic\\Logic.csproj"
+            "C:\\Users\\Luukd\\OneDrive\\Documenten\\Fontys\\SS2\\S2Software\\Skippy\\Skippy\\Logic\\Skippy.Logic.csproj": {
+              "projectPath": "C:\\Users\\Luukd\\OneDrive\\Documenten\\Fontys\\SS2\\S2Software\\Skippy\\Skippy\\Logic\\Skippy.Logic.csproj"
+            },
+            "C:\\Users\\Luukd\\OneDrive\\Documenten\\Fontys\\SS2\\S2Software\\Skippy\\Skippy\\Skippy.Logic\\Skippy.Logic.csproj": {
+              "projectPath": "C:\\Users\\Luukd\\OneDrive\\Documenten\\Fontys\\SS2\\S2Software\\Skippy\\Skippy\\Skippy.Logic\\Skippy.Logic.csproj"
             }
           }
         }

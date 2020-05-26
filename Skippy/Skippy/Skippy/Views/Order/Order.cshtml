@@ -1,4 +1,4 @@
-﻿@model Logic.Order
+﻿@model Skippy.Logic.Order
 
 @{
     ViewData["Title"] = "Order #" + Model.id;
@@ -17,7 +17,7 @@ else
 }
 <p>Betaalstatus: @betaald</p>
 
-@{Logic.Klant klant = Model.GetKlant();}
+@{Skippy.Logic.Klant klant = Model.GetKlant();}
 @if (klant != null)
 {
     <p>Klant naam: @klant.naam</p>

@@ -2,7 +2,7 @@
     For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 *@
 
-@model Logic.Order
+@model Skippy.Logic.Order
 <table class="table table-sm">
     <tr>
         <th>Product</th>
@@ -10,7 +10,7 @@
         <th class="text-right">Aantal</th>
         <th class="text-right">Prijs</th>
     </tr>
-    @foreach (Logic.order.OrderRegel orderRegel in Model.GetOrderRegels())
+    @foreach (Skippy.Logic.OrderRegel orderRegel in Model.GetOrderRegels())
     {
         <tr>
             <td>
