@@ -1,4 +1,5 @@
-﻿using Skippy.Interface;
+﻿using Skippy.Factory;
+using Skippy.Interface;
 
 namespace Skippy.Logic
 {
@@ -32,6 +33,12 @@ namespace Skippy.Logic
                 Omschrijving = omschrijving ?? "",
                 Prijs = prijs
             };
+        }
+
+        public void Update()
+        {
+            IDalProduct DAL = DalFactory.CreateProductDal();
+            DAL.Update(this.ToDTO());
         }
     }
 }

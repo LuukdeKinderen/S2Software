@@ -63,9 +63,14 @@ namespace Skippy.Logic
 
         public void RemoveProduct(int productId)
         {
-
             IDalCategorie DAL = DalFactory.CreateCategorieDal();
             DAL.RemoveProduct(id, productId);
+        }
+
+        public void Update()
+        {
+            IDalCategorie DAL = DalFactory.CreateCategorieDal();
+            DAL.Update(this.ToDTO());
         }
 
 

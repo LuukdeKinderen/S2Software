@@ -44,5 +44,11 @@ namespace Skippy.Logic
 
         }
 
+        public void Delete(int id)
+        {
+            IDalOrder orderDAL = DalFactory.CreateOrderDal();
+            orderDAL.Delete(id);
+        }
+
     }
 }

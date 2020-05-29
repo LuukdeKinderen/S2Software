@@ -21,7 +21,7 @@ namespace Skippy.Controllers
         [HttpPost]
         public IActionResult Create(Categorie categorie)
         {
-            categorieContainer.Insert(categorie);
+            categorieContainer.AddNew(categorie);
             return RedirectToAction("Index", categorieContainer.GetAll());
         }
 
@@ -34,7 +34,7 @@ namespace Skippy.Controllers
         [HttpPost]
         public IActionResult Edit(Categorie categorie)
         {
-            categorieContainer.Update(categorie);
+            categorie.Update();
             return RedirectToAction("Categorie", categorieContainer.GetByID(categorie.id));
         }
 

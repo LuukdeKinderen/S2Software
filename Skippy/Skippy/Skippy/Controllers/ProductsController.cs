@@ -31,7 +31,7 @@ namespace Skippy.Controllers
         [HttpPost]
         public IActionResult Create(Product product)
         {
-            productContainer.Insert(product);
+            productContainer.AddNew(product);
             return RedirectToAction("Index", productContainer.GetAll());
         }
 
@@ -44,7 +44,7 @@ namespace Skippy.Controllers
         [HttpPost]
         public IActionResult Edit(Product product)
         {
-            productContainer.Update(product);
+            product.Update();
             return RedirectToAction("Product", productContainer.GetByID(product.id));
         }
 

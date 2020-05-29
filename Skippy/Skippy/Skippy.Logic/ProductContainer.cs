@@ -31,18 +31,13 @@ namespace Skippy.Logic
             DAL.Delete(id);
         }
 
-        public void Insert(Product product)
+        public void AddNew(Product product)
         {
             IDalProduct DAL = DalFactory.CreateProductDal();
             DtoProduct DTO = product.ToDTO();
             DAL.Insert(DTO);
         }
 
-        public void Update(Product product)
-        {
-            IDalProduct DAL = DalFactory.CreateProductDal();
-            DtoProduct DTO = product.ToDTO();
-            DAL.Update(DTO);
-        }
+
     }
 }

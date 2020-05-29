@@ -49,5 +49,11 @@ namespace Skippy.Logic
             return orders;
         }
 
+        public void Update()
+        {
+            IDalKlant DAL = DalFactory.CreateKlantDal();
+            DAL.Update(this.ToDTO());
+        }
+
     }
 }

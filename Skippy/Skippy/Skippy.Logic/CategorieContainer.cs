@@ -31,18 +31,12 @@ namespace Skippy.Logic
             DAL.Delete(id);
         }
 
-        public void Insert(Categorie categorie)
+        public void AddNew(Categorie categorie)
         {
             IDalCategorie DAL = DalFactory.CreateCategorieDal();
             DtoCategorie DTO = categorie.ToDTO();
             DAL.Insert(DTO);
         }
 
-        public void Update(Categorie categorie)
-        {
-            IDalCategorie DAL = DalFactory.CreateCategorieDal();
-            DtoCategorie DTO = categorie.ToDTO();
-            DAL.Update(DTO);
-        }
     }
 }

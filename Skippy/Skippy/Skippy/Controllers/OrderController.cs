@@ -42,8 +42,9 @@ namespace Skippy.Controllers
 
             Order order = orderContainer.GetByID(orderId);
             Product product = productContainer.GetByID(productId);
+            OrderRegel orderRegel = new OrderRegel(aantal, product);
 
-            order.AddProduct(aantal, product);
+            order.EditOrderRegel(orderRegel);
 
             return RedirectToAction("Product", "Products", product);
         }
@@ -82,8 +83,7 @@ namespace Skippy.Controllers
 
         public IActionResult Delete(int id)
         {
-            Order order = orderContainer.GetByID(id);
-            order.Delete();
+            orderContainer.Delete(id);
             ClearSessionOrderId();
 
             return RedirectToAction("Index", orderContainer.GetAll());

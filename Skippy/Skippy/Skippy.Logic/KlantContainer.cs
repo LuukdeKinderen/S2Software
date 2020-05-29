@@ -26,18 +26,11 @@ namespace Skippy.Logic
         }
 
 
-        public void Insert(Klant klant)
+        public void AddNew(Klant klant)
         {
             IDalKlant DAL = DalFactory.CreateKlantDal();
             DtoKlant DTO = klant.ToDTO();
             DAL.Insert(DTO);
-        }
-
-        public void Update(Klant klant)
-        {
-            IDalKlant DAL = DalFactory.CreateKlantDal();
-            DtoKlant DTO = klant.ToDTO();
-            DAL.Update(DTO);
         }
     }
 }

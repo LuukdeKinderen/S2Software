@@ -65,33 +65,33 @@ namespace Skippy.Logic
             }
         }
 
-        public void AddProduct(int aantal, Product product)
+        public void EditOrderRegel(OrderRegel orderRegel)
         {
 
             bool newProduct = true;
             foreach (OrderRegel regel in GetOrderRegels())
             {
-                if (regel.product.id == product.id)
+                if (regel.product.id == orderRegel.product.id)
                 {
                     newProduct = false;
                 }
             }
 
 
-            OrderRegel orderRegel = new OrderRegel(aantal, product);
+            
             DtoOrderRegel DTO = orderRegel.ToDTO();
 
             IDalOrder orderDAL = DalFactory.CreateOrderDal();
 
-            if (newProduct && aantal > 0)
+            if (newProduct && orderRegel.aantal > 0)
             {
                 orderDAL.AddOrderRegel(id, DTO);
             }
-            else if (!newProduct && aantal > 0)
+            else if (!newProduct && orderRegel.aantal > 0)
             {
                 orderDAL.UpdateOrderRegel(id, DTO);
             }
-            else if (!newProduct && aantal == 0)
+            else if (!newProduct && orderRegel.aantal == 0)
             {
                 orderDAL.DeleteOrderRegel(id, DTO);
             }
@@ -110,15 +110,13 @@ namespace Skippy.Logic
 
         public void OpRekening()
         {
-            IDalOrder orderDAL = DalFactory.CreateOrderDal();
-            orderDAL.SetBetaalStatus(false, id);
+            if (klantId >= 0)
+            {
+                IDalOrder orderDAL = DalFactory.CreateOrderDal();
+                orderDAL.SetBetaalStatus(false, id);
+            }
         }
 
-        public void Delete()
-        {
-            IDalOrder orderDAL = DalFactory.CreateOrderDal();
-            orderDAL.Delete(id);
-        }
 
         public void AddKlant(int klantId)
         {
