@@ -1,0 +1,15 @@
+﻿@model List<Skippy.Logic.Product>
+
+@{
+    ViewData["Title"] = "Producten";
+}
+<h1>Producten</h1>
+<ul>
+    @foreach (Skippy.Logic.Product product in Model)
+    {
+        <li> <a asp-action="Product" asp-route-id=@product.id>@product.titel</a> </li>
+    }
+</ul>
+<div>
+    <a asp-action="Create">Toevoegen</a><br />
+</div>

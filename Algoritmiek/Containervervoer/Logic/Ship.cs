@@ -20,7 +20,7 @@ namespace Logic
         public readonly int xLength;
         public readonly int yLength;
 
-        private int LeftWeight
+        public int LeftWeight
         {
             get
             {
@@ -28,11 +28,11 @@ namespace Logic
                 {
                     int weight = 0;
                     List<ShipRow> rows = GetLeftRows();
-                    for (int i = 0; i <rows.Count-1; i++)
+                    for (int i = 0; i < rows.Count - 1; i++)
                     {
                         weight += rows[i].Weight;
                     }
-                    weight += rows[rows.Count - 1].Weight/2;
+                    weight += rows[rows.Count - 1].Weight / 2;
                     return weight;
                 }
                 else
@@ -41,7 +41,7 @@ namespace Logic
                 }
             }
         }
-        private int RightWeight
+        public int RightWeight
         {
             get
             {
@@ -62,18 +62,31 @@ namespace Logic
                 }
             }
         }
-        private int TotalWeight
+        public int TotalWeight
         {
             get { return shipRows.Sum(row => row.Weight); }
         }
-        private float PercentageOfMaxWeight
+        public float PercentageOfMaxWeight
         {
             get
             {
                 return (float)100 * TotalWeight / maxTotalWeight;
             }
         }
-
+        public float PercentageLeft
+        {
+            get
+            {
+                return (float)100 * LeftWeight / TotalWeight;
+            }
+        }
+        public float PercentageRight
+        {
+            get
+            {
+                return (float)100 * RightWeight / TotalWeight;
+            }
+        }
 
 
         public Ship(int xLength, int yLength)
@@ -85,7 +98,7 @@ namespace Logic
             {
                 shipRows.Add(new ShipRow(this.yLength));
             }
-            maxTotalWeight = MaxTotalWeight(xLength,yLength);
+            maxTotalWeight = MaxTotalWeight(xLength, yLength);
         }
 
 
@@ -174,16 +187,14 @@ namespace Logic
 
         public override string ToString()
         {
-            float percentageLeft = (float)100 * LeftWeight / TotalWeight;
-            float percentageRight = (float)100 * RightWeight / TotalWeight;
             return string.Format
                 (
                 "Total Containers: {0} \nWeight left: {1} Kg , {2}% \nWeight right: {3} Kg , {4}% \nWeight total: {5} Kg , {6}% of Max({7} Kg)",
                 shipRows.Sum(row => row.ContainerCount),
                 LeftWeight,
-                percentageLeft.ToString("00.000"),
+                PercentageLeft.ToString("00.000"),
                 RightWeight,
-                percentageRight.ToString("00.000"),
+                PercentageRight.ToString("00.000"),
                 TotalWeight,
                 PercentageOfMaxWeight.ToString("00.000"),
                 maxTotalWeight

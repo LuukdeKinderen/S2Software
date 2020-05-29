@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Skippy.Data\Skippy.Data.csproj" />
+    <ProjectReference Include="..\Skippy.Interface\Skippy.Interface.csproj" />
+  </ItemGroup>
+
+</Project>

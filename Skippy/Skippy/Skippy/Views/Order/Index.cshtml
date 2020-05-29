@@ -1,0 +1,9 @@
+﻿@model List<Skippy.Logic.Order>
+
+@{
+    ViewData["Title"] = "Orders";
+}
+<h1>Orders</h1>
+<div class="rounded bg-white shadow-sm">
+    @Html.Partial("_OrderLijst", Model)
+</div>
