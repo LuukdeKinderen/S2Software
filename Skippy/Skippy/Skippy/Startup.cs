@@ -34,6 +34,12 @@ namespace Skippy
                 options.Cookie.IsEssential = true;
             });
 
+            services.AddAuthentication("CookieAuth")
+                .AddCookie("CookieAuth", config =>
+                {
+                    config.Cookie.Name = "Auth.Cookie";
+
+                });
             services.AddControllersWithViews();
 
         }
@@ -57,6 +63,8 @@ namespace Skippy
             app.UseRouting();
 
             app.UseSession();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

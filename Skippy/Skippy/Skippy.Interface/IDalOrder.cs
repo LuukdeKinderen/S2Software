@@ -17,8 +17,7 @@ namespace Skippy.Interface
         public void DeleteOrderRegel(int id, DtoOrderRegel orderRegel);
 
         public void Delete(int id);
-        public void SetBetaalStatus( bool status, int id);
-        public void AddKlant(int id, int klantId);
+        public void Update(DtoOrder order);
     }
 }
 

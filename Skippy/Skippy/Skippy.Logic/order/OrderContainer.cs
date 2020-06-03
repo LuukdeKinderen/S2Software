@@ -32,7 +32,6 @@ namespace Skippy.Logic
                 Order order = new Order(DTO);
                 orders.Add(order);
             }
-
             return orders;
         }
 

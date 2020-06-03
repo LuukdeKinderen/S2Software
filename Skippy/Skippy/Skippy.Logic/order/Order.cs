@@ -14,7 +14,6 @@ namespace Skippy.Logic
         public int klantId { get; set; }
         public DateTime date { get; set; }
 
-
         public Order()
         {
             betaald = false;
@@ -28,6 +27,18 @@ namespace Skippy.Logic
             klantId = DTO.KlantId;
             date = DTO.Date;
         }
+
+        public DtoOrder ToDTO()
+        {
+            return new DtoOrder
+            {
+                Id = id,
+                Betaald = betaald,
+                KlantId = klantId,
+                Date = date
+            };
+        }
+
 
         public List<OrderRegel> GetOrderRegels()
         {
@@ -104,24 +115,27 @@ namespace Skippy.Logic
 
         public void Complete()
         {
+            betaald = true;
             IDalOrder orderDAL = DalFactory.CreateOrderDal();
-            orderDAL.SetBetaalStatus(true, id);
+            orderDAL.Update(this.ToDTO());
         }
 
         public void OpRekening()
         {
             if (klantId >= 0)
             {
+                betaald = false;
                 IDalOrder orderDAL = DalFactory.CreateOrderDal();
-                orderDAL.SetBetaalStatus(false, id);
+                orderDAL.Update(this.ToDTO());
             }
         }
 
 
         public void AddKlant(int klantId)
         {
+            this.klantId = klantId;
             IDalOrder orderDAL = DalFactory.CreateOrderDal();
-            orderDAL.AddKlant(id, klantId);
+            orderDAL.Update(this.ToDTO());
         }
 
     }
