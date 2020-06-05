@@ -30,7 +30,7 @@ namespace Skippy.Controllers
             klantContainer.AddNew(klant);
             return RedirectToAction("Index", klantContainer.GetAll());
         }
-
+        [Authorize]
         [HttpGet]
         public IActionResult Edit(int id)
         {

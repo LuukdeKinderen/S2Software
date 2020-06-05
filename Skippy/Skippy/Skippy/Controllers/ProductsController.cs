@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Skippy.Logic;
 using System.Diagnostics;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Skippy.Controllers
 {
@@ -21,7 +22,7 @@ namespace Skippy.Controllers
             Product product = productContainer.GetByID(id);
             return View(product);
         }
-
+        [Authorize]
         [HttpGet]
         public IActionResult Create()
         {
@@ -34,7 +35,7 @@ namespace Skippy.Controllers
             productContainer.AddNew(product);
             return RedirectToAction("Index", productContainer.GetAll());
         }
-
+        [Authorize]
         [HttpGet]
         public IActionResult Edit(int id)
         {
@@ -47,7 +48,7 @@ namespace Skippy.Controllers
             product.Update();
             return RedirectToAction("Product", productContainer.GetByID(product.id));
         }
-
+        [Authorize]
         public IActionResult Delete(int id)
         {
             productContainer.Delete(id);

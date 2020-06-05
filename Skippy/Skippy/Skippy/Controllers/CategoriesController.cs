@@ -1,5 +1,6 @@
 ﻿using Skippy.Logic;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Skippy.Controllers
 {
@@ -11,7 +12,7 @@ namespace Skippy.Controllers
         {
             return View(categorieContainer.GetAll());
         }
-
+        [Authorize]
         [HttpGet]
         public IActionResult Create()
         {
@@ -24,7 +25,7 @@ namespace Skippy.Controllers
             categorieContainer.AddNew(categorie);
             return RedirectToAction("Index", categorieContainer.GetAll());
         }
-
+        [Authorize]
         [HttpGet]
         public IActionResult Edit(int id)
         {
@@ -37,7 +38,7 @@ namespace Skippy.Controllers
             categorie.Update();
             return RedirectToAction("Categorie", categorieContainer.GetByID(categorie.id));
         }
-
+        [Authorize]
         public IActionResult Delete(int id)
         {
             categorieContainer.Delete(id);
@@ -48,7 +49,7 @@ namespace Skippy.Controllers
         {
             return View(categorieContainer.GetByID(id));
         }
-
+        [Authorize]
         public IActionResult AddProduct(int categorieId, int productId)
         {
             Categorie categorie = categorieContainer.GetByID(categorieId);
@@ -56,7 +57,7 @@ namespace Skippy.Controllers
 
             return RedirectToAction("Edit", categorie);
         }
-
+        [Authorize]
         public IActionResult RemoveProduct(int categorieId, int productId)
         {
             Categorie categorie = categorieContainer.GetByID(categorieId);

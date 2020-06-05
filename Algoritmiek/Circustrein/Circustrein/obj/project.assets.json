@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Luukd\\OneDrive\\Documenten\\Fontys\\SS2\\S2Software\\Algoritmiek\\Puzzles\\Circustrein\\Circustrein\\Circustrein.csproj",
+      "projectUniqueName": "C:\\Users\\Luukd\\OneDrive\\Documenten\\Fontys\\SS2\\S2Software\\Algoritmiek\\Circustrein\\Circustrein\\Circustrein.csproj",
       "projectName": "Circustrein",
-      "projectPath": "C:\\Users\\Luukd\\OneDrive\\Documenten\\Fontys\\SS2\\S2Software\\Algoritmiek\\Puzzles\\Circustrein\\Circustrein\\Circustrein.csproj",
+      "projectPath": "C:\\Users\\Luukd\\OneDrive\\Documenten\\Fontys\\SS2\\S2Software\\Algoritmiek\\Circustrein\\Circustrein\\Circustrein.csproj",
       "packagesPath": "C:\\Users\\Luukd\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Luukd\\OneDrive\\Documenten\\Fontys\\SS2\\S2Software\\Algoritmiek\\Puzzles\\Circustrein\\Circustrein\\obj\\",
+      "outputPath": "C:\\Users\\Luukd\\OneDrive\\Documenten\\Fontys\\SS2\\S2Software\\Algoritmiek\\Circustrein\\Circustrein\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

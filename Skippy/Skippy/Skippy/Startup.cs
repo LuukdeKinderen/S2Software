@@ -9,7 +9,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
-
+using Microsoft.AspNetCore.Identity;
+using Skippy.MemoryData;
 
 namespace Skippy
 {
@@ -34,12 +35,26 @@ namespace Skippy
                 options.Cookie.IsEssential = true;
             });
 
-            services.AddAuthentication("CookieAuth")
-                .AddCookie("CookieAuth", config =>
-                {
-                    config.Cookie.Name = "Auth.Cookie";
+            services.AddDbContext<AppDbContext>(options =>
+            {
+                options.UseSqlServer("Data Source=LUUKDEKINDEREN;Initial Catalog=SkippyUsers;Integrated Security=True");
+            });
 
-                });
+            services.AddIdentity<IdentityUser, IdentityRole>(options =>
+            {
+                options.Password.RequiredLength = 4;
+                options.Password.RequireDigit = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+            })
+                .AddEntityFrameworkStores<AppDbContext>()
+                .AddDefaultTokenProviders();
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.Cookie.Name = "Auth.Cookie";
+            });
+
             services.AddControllersWithViews();
 
         }
