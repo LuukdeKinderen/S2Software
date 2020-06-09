@@ -152,7 +152,7 @@ namespace Skippy.Data
                             {
                                 Id = reader.GetInt32(0),
                                 Betaald = reader.GetBool(1),
-                                KlantId = reader.SafeGetInt(2),
+                                KlantId = reader.GetInt32(2),
                                 Date = reader.GetDateTime(3)
                             };
                             orders.Add(newOrder);

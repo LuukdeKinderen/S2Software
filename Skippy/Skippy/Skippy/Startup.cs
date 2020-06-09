@@ -37,7 +37,7 @@ namespace Skippy
 
             services.AddDbContext<AppDbContext>(options =>
             {
-                options.UseSqlServer("Data Source=LUUKDEKINDEREN;Initial Catalog=SkippyUsers;Integrated Security=True");
+                options.UseSqlServer("Server=mssql.fhict.local;Database=dbi429032_skippyuser;User Id=dbi429032_skippyuser;Password=123123q;");
             });
 
             services.AddIdentity<IdentityUser, IdentityRole>(options =>
@@ -53,6 +53,8 @@ namespace Skippy
             services.ConfigureApplicationCookie(options =>
             {
                 options.Cookie.Name = "Auth.Cookie";
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(10);
+                options.LoginPath = "/secret/login";
             });
 
             services.AddControllersWithViews();

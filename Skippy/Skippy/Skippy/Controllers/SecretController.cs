@@ -13,12 +13,12 @@ using Skippy.Models;
 
 namespace Skippy.Controllers
 {
-    public class AccountController : Controller
+    public class SecretController : Controller
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
 
-        public AccountController(
+        public SecretController(
             UserManager<IdentityUser> userManager,
             SignInManager<IdentityUser> signInManager,
             AppDbContext appDbContext

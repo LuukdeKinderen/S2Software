@@ -58,9 +58,12 @@ namespace Skippy.Data
                             {
                                 Id = reader.GetInt32(0),
                                 Betaald = reader.GetBool(1),
-                                KlantId = reader.SafeGetInt(2),
                                 Date = reader.GetDateTime(3)
                             };
+                            if (!reader.IsDBNull(2))
+                            {
+                                newOrder.KlantId = reader.GetInt32(2);
+                            }
                             order = newOrder;
                         }
                     }
@@ -92,9 +95,12 @@ namespace Skippy.Data
                             {
                                 Id = reader.GetInt32(0),
                                 Betaald = reader.GetBool(1),
-                                KlantId = reader.SafeGetInt(2),
                                 Date = reader.GetDateTime(3)
                             };
+                            if (!reader.IsDBNull(2))
+                            {
+                                newOrder.KlantId = reader.GetInt32(2);
+                            }
                             orders.Add(newOrder);
                         }
                     }
@@ -287,13 +293,20 @@ namespace Skippy.Data
             {
                 using (SqlConnection connection = this.connection.CreateConnection())
                 {
-                    string Querry = "UPDATE Orders SET Betaald = @betaald, KlantId = @klantId, date = @date  WHERE Id = @orderId";
+                    string Querry = "UPDATE Orders SET Betaald = @betaald, date = @date  WHERE Id = @orderId";
+                    if (order.KlantId.HasValue)
+                    {
+                        Querry = "UPDATE Orders SET Betaald = @betaald, KlantId = @klantId, date = @date  WHERE Id = @orderId";
+                    }
                     using (SqlCommand command = new SqlCommand(Querry, connection))
                     {
                         connection.Open();
                         command.Parameters.AddWithValue("@orderId", order.Id);
                         command.Parameters.AddWithValue("@betaald", order.Betaald);
-                        command.Parameters.AddWithValue("@klantId", order.KlantId);
+                        if (order.KlantId.HasValue)
+                        {
+                            command.Parameters.AddWithValue("@klantId", order.KlantId);
+                        }
                         command.Parameters.AddWithValue("@date", order.Date);
                         command.CommandType = CommandType.Text;
                         command.ExecuteNonQuery();

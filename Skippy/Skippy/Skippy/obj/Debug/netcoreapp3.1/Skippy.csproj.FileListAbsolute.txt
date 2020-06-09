@@ -374,5 +374,5 @@ C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Skippy\Skippy\Skippy\bi
 C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Skippy\Skippy\Skippy\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Identity.Core.dll
 C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Skippy\Skippy\Skippy\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Identity.Stores.dll
 C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Skippy\Skippy\Skippy\obj\Debug\netcoreapp3.1\Skippy.MvcApplicationPartsAssemblyInfo.cache
-C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Skippy\Skippy\Skippy\obj\Debug\netcoreapp3.1\Razor\Views\Account\Login.cshtml.g.cs
-C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Skippy\Skippy\Skippy\obj\Debug\netcoreapp3.1\Razor\Views\Account\Register.cshtml.g.cs
+C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Skippy\Skippy\Skippy\obj\Debug\netcoreapp3.1\Razor\Views\Secret\Login.cshtml.g.cs
+C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Skippy\Skippy\Skippy\obj\Debug\netcoreapp3.1\Razor\Views\Secret\Register.cshtml.g.cs

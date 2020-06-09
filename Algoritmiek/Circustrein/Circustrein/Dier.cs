@@ -4,13 +4,13 @@ using System.Text;
 
 namespace Circustrein
 {
-    enum Formaat
+    public enum Formaat
     {
         klein= 1,
         middel=3,
         groot=5
     }
-    class Dier
+    public class Dier
     {
         public bool vleesEter{ private set; get; }
         public Formaat formaat { private set; get; }
@@ -20,6 +20,12 @@ namespace Circustrein
         {
             this.vleesEter = vleesEter;
             this.formaat = formaat;
+        }
+
+        public Dier(Random r)
+        {
+            vleesEter = r.Next(2) > 0;
+            formaat = (Formaat)(r.Next(3) * 2 + 1);
         }
 
 

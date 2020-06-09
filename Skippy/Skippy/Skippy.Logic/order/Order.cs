@@ -11,7 +11,7 @@ namespace Skippy.Logic
     {
         public int id { get; set; }
         public bool betaald { get; set; }
-        public int klantId { get; set; }
+        public int? klantId { get; set; }
         public DateTime date { get; set; }
 
         public Order()
@@ -24,7 +24,10 @@ namespace Skippy.Logic
         {
             id = DTO.Id;
             betaald = DTO.Betaald;
-            klantId = DTO.KlantId;
+            if (DTO.KlantId.HasValue)
+            {
+                klantId = DTO.KlantId.Value;
+            }
             date = DTO.Date;
         }
 
@@ -64,10 +67,11 @@ namespace Skippy.Logic
 
         public Klant GetKlant()
         {
-            if (klantId >= 0)
+
+            if (klantId.HasValue)
             {
                 KlantContainer klantContainer = new KlantContainer();
-                Klant klant = klantContainer.GetByID(klantId);
+                Klant klant = klantContainer.GetByID(klantId.Value);
                 return klant;
             }
             else
