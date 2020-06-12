@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Skippy.Logic;
 using System.Diagnostics;
 using Microsoft.AspNetCore.Authorization;
+using Skippy.Models;
 
 namespace Skippy.Controllers
 {
@@ -15,12 +16,19 @@ namespace Skippy.Controllers
 
         public IActionResult Index()
         {
-            return View(productContainer.GetAll());
+            List<ProductViewModel> productViews = new List<ProductViewModel>();
+            foreach (Product product in productContainer.GetAll())
+            {
+                productViews.Add(new ProductViewModel(product));
+            }
+
+            return View(productViews);
         }
         public IActionResult Product(int id)
         {
             Product product = productContainer.GetByID(id);
-            return View(product);
+            ProductViewModel productView = new ProductViewModel(product);
+            return View(productView);
         }
         [Authorize]
         [HttpGet]
@@ -30,29 +38,61 @@ namespace Skippy.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(Product product)
+        public IActionResult Create(ProductViewModel productModel)
         {
-            productContainer.AddNew(product);
-            return RedirectToAction("Index", productContainer.GetAll());
+            Product newProduct = new Product()
+            {
+                titel = productModel.titel,
+                omschrijving = productModel.omschrijving,
+                prijs = productModel.prijs
+            };
+            productContainer.AddNew(newProduct);
+
+            List<ProductViewModel> productViews = new List<ProductViewModel>();
+            foreach (Product product in productContainer.GetAll())
+            {
+                productViews.Add(new ProductViewModel(product));
+            }
+
+            return RedirectToAction("Index", productViews);
         }
         [Authorize]
         [HttpGet]
         public IActionResult Edit(int id)
         {
-            return View(productContainer.GetByID(id));
+            Product product = productContainer.GetByID(id);
+            ProductViewModel productView = new ProductViewModel(product);
+            return View(productView);
         }
 
         [HttpPost]
-        public IActionResult Edit(Product product)
+        public IActionResult Edit(ProductViewModel productModel)
         {
+            Product product = new Product()
+            {
+                titel = productModel.titel,
+                omschrijving = productModel.omschrijving,
+                prijs = productModel.prijs,
+                id = productModel.id
+            };
             product.Update();
-            return RedirectToAction("Product", productContainer.GetByID(product.id));
+
+            product = productContainer.GetByID(product.id);
+            productModel = new ProductViewModel(product);
+
+            return RedirectToAction("Product", productModel);
         }
         [Authorize]
         public IActionResult Delete(int id)
         {
             productContainer.Delete(id);
-            return RedirectToAction("Index", productContainer.GetAll());
+
+            List<ProductViewModel> productViews = new List<ProductViewModel>();
+            foreach (Product product in productContainer.GetAll())
+            {
+                productViews.Add(new ProductViewModel(product));
+            }
+            return RedirectToAction("Index", productViews);
         }
     }
 }

@@ -35,7 +35,7 @@ namespace Skippy.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login(UserModel loginModel)
+        public async Task<IActionResult> Login(UserViewModel loginModel)
         {
 
 
@@ -58,11 +58,11 @@ namespace Skippy.Controllers
         [HttpGet]
         public IActionResult Register()
         {
-            return View(new UserModel());
+            return View(new UserViewModel());
         }
 
         [HttpPost]
-        public async Task<IActionResult> Register(UserModel loginModel)
+        public async Task<IActionResult> Register(UserViewModel loginModel)
         {
 
             var user = new IdentityUser

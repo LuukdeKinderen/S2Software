@@ -47,10 +47,11 @@ namespace Skippy.Data
             {
                 using (SqlConnection connection = this.connection.CreateConnection())
                 {
-                    string Querry = string.Format("select * from Orders where Id={0}", id);
+                    string Querry = "select * from Orders where Id=@id";
                     using (SqlCommand command = new SqlCommand(Querry, connection))
                     {
                         connection.Open();
+                        command.Parameters.AddWithValue("@id", id);
                         var reader = command.ExecuteReader();
                         while (reader.Read())
                         {

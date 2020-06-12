@@ -18,7 +18,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Logic\Skippy.Logic.csproj" />
     <ProjectReference Include="..\Skippy.Logic\Skippy.Logic.csproj" />
   </ItemGroup>
 

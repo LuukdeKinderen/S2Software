@@ -1,34 +1,26 @@
-﻿@model Skippy.Logic.Order
+﻿@model OrderViewModel
 
 @{
     ViewData["Title"] = "Order #" + Model.id;
 }
 
 <h1>Order #@Model.id</h1>
+<p>Betaalstatus: @Model.betaalStatus </p>
 
-@{string betaald = "";}
-@if (Model.betaald)
-{
-     betaald = "voldaan";
-}
-else
-{
-     betaald = "Nog te betalen";
-}
-<p>Betaalstatus: @betaald</p>
 
-@{Skippy.Logic.Klant klant = Model.GetKlant();}
-@if (klant != null)
+@if (Model.klantId.HasValue)
 {
-    <p>Klant naam: @klant.naam</p>
-    if (klant.bezorgAdres.Length > 0)
-    {
-        <p>Factuur adres: @klant.factuurAdres</p>
-    }
-    if (klant.bezorgAdres.Length > 0)
-    {
-        <p>Bezorg adres: @klant.bezorgAdres</p>
-    }
+    <p>
+        <span>Klant naam: @Model.klantNaam</span><br />
+        @if (Model.klantFactuurAdres.Length > 0)
+        {
+        <span>Factuur adres: @Model.klantFactuurAdres</span><br />
+        }
+        @if (Model.klantBezorgAdres.Length > 0)
+        {
+        <span>Bezorg adres: @Model.klantBezorgAdres</span>
+        }
+    </p>
 }
 
 

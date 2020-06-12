@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Skippy.Logic;
+using Skippy.Models;
 
 namespace Skippy.Controllers
 {
@@ -14,7 +12,8 @@ namespace Skippy.Controllers
 
         public IActionResult Index()
         {
-            return View(klantContainer.GetAll());
+            List<KlantViewModel> klantViewModels = ModelFactory.AllKlantViewModels();
+            return View(klantViewModels);
         }
 
         [Authorize]
@@ -25,29 +24,54 @@ namespace Skippy.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(Klant klant)
+        public IActionResult Create(KlantViewModel klantModel)
         {
-            klantContainer.AddNew(klant);
-            return RedirectToAction("Index", klantContainer.GetAll());
+            Klant newKlant = new Klant()
+            {
+                bezorgAdres = klantModel.bezorgAdres,
+                factuurAdres = klantModel.factuurAdres,
+                naam = klantModel.naam,
+            };
+            klantContainer.AddNew(newKlant);
+
+
+            List<KlantViewModel> klantViewModels = ModelFactory.AllKlantViewModels();
+            return RedirectToAction("Index", klantViewModels);
         }
+
+
         [Authorize]
         [HttpGet]
         public IActionResult Edit(int id)
         {
-            return View(klantContainer.GetByID(id));
+            Klant klant = klantContainer.GetByID(id);
+            KlantViewModel klantModel = ModelFactory.KlantViewModel(klant);
+            return View(klantModel);
         }
 
         [HttpPost]
-        public IActionResult Edit(Klant klant)
+        public IActionResult Edit(KlantViewModel klantModel)
         {
+            Klant klant = new Klant()
+            {
+                bezorgAdres = klantModel.bezorgAdres,
+                factuurAdres = klantModel.factuurAdres,
+                naam = klantModel.naam,
+                id = klantModel.id
+            };
             klant.Update();
-            int id = klant.id;
-            return RedirectToAction("Klant", klantContainer.GetByID(id));
+
+            klant = klantContainer.GetByID(klant.id);
+            klantModel = ModelFactory.KlantViewModelWithOrders(klant);
+
+            return RedirectToAction("Klant", klantModel);
         }
 
         public IActionResult Klant(int id)
         {
-            return View(klantContainer.GetByID(id));
+            Klant klant = klantContainer.GetByID(id);
+            KlantViewModel klantModel = ModelFactory.KlantViewModelWithOrders(klant);
+            return View(klantModel);
         }
     }
 }

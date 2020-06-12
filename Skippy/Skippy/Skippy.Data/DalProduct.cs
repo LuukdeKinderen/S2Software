@@ -15,14 +15,14 @@ namespace Skippy.Data
             {
                 using (SqlConnection connection = this.connection.CreateConnection())
                 {
-                    string Querry = "insert into Products ( Titel, Prijs, Omschrijving) values(@param1,@param2,@param3)";
+                    string Querry = "insert into Products ( Titel, Prijs, Omschrijving) values(@titel,@prijs,@omschrijving)";
                     using (SqlCommand command = new SqlCommand(Querry, connection))
                     {
                         connection.Open();
 
-                        command.Parameters.AddWithValue("@param1", product.Titel);
-                        command.Parameters.AddWithValue("@param2", product.Prijs);
-                        command.Parameters.AddWithValue("@param3", product.Omschrijving);
+                        command.Parameters.AddWithValue("@titel", product.Titel);
+                        command.Parameters.AddWithValue("@prijs", product.Prijs);
+                        command.Parameters.AddWithValue("@omschrijving", product.Omschrijving);
                         command.CommandType = CommandType.Text;
                         int rowsAdded = command.ExecuteNonQuery();
                     }
@@ -74,10 +74,11 @@ namespace Skippy.Data
             {
                 using (SqlConnection connection = this.connection.CreateConnection())
                 {
-                    string Querry = string.Format("select * from Products where Id={0}", id);
+                    string Querry = "select * from Products where Id=@id"; 
                     using (SqlCommand command = new SqlCommand(Querry, connection))
                     {
                         connection.Open();
+                        command.Parameters.AddWithValue("@id", id);
                         var reader = command.ExecuteReader();
                         while (reader.Read())
                         {
@@ -102,34 +103,11 @@ namespace Skippy.Data
 
         public void Delete(int id)
         {
-            DeleteCategorieRef(id);
             try
             {
                 using (SqlConnection connection = this.connection.CreateConnection())
                 {
-                    string Querry = "DELETE FROM Products WHERE Id=@id";
-                    using (SqlCommand command = new SqlCommand(Querry, connection))
-                    {
-                        connection.Open();
-                        command.Parameters.AddWithValue("@id", id);
-                        command.CommandType = CommandType.Text;
-                        command.ExecuteNonQuery();
-                    }
-                }
-            }
-            catch (SqlException se)
-            {
-                Console.Write(se.Message);
-            }
-        }
-
-        private void DeleteCategorieRef(int id)
-        {
-            try
-            {
-                using (SqlConnection connection = this.connection.CreateConnection())
-                {
-                    string Querry = "DELETE FROM Categorie_Product WHERE ProductId=@id";
+                    string Querry = "DELETE FROM Categorie_Product WHERE ProductId=@id; DELETE FROM Products WHERE Id=@id";
                     using (SqlCommand command = new SqlCommand(Querry, connection))
                     {
                         connection.Open();

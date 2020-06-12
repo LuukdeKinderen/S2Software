@@ -1,6 +1,6 @@
 ﻿
 
-@model List<Skippy.Logic.Order>
+@model List<OrderViewModel>
 @if (Model.Count > 0)
 {
     <table data-link="row" class="table table-sm">
@@ -11,7 +11,7 @@
             <th>Betaalstatus</th>
             <th class="text-right">Totaalprijs</th>
         </tr>
-        @foreach (Skippy.Logic.Order order in Model)
+        @foreach (OrderViewModel order in Model)
         {
             <tr>
                 <td>
@@ -20,29 +20,19 @@
                     </a>
                 </td>
                 <td>@order.date</td>
-                @{Skippy.Logic.Klant klant = order.GetKlant();}
-                @if (klant != null)
-                {
-                    <td>
-                        <a asp-controller="Klant" asp-action="Klant" asp-route-id=@klant.id>
-                            @klant.naam
-                        </a>
-                    </td>
-                }
-                else
-                {
-                    <td></td>
-                }
-                @if (order.betaald)
-                {
-                    <td>Voldaan</td>
-                }
-                else
-                {
-                    <td>Nog te betalen</td>
-                }
-                <td class="text-right">@order.TotaalPrijs()</td>
 
+                <td>
+                    @if (order.klantId.HasValue)
+                    {
+                        <a asp-controller="Klant" asp-action="Klant" asp-route-id=@order.klantId.Value>
+                            @order.klantNaam
+                        </a>
+                    }
+                </td>
+                <td>
+                    @order.betaalStatus
+                </td>
+                <td class="text-right">@order.totaalPrijs</td>
             </tr>
 
         }

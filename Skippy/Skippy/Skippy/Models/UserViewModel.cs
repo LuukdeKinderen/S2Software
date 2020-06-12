@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Skippy.Models
 {
-    public class UserModel
+    public class UserViewModel
     {
         public string login { get; set; }
         public string password { get; set; }

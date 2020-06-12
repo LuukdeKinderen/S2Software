@@ -8915,9 +8915,6 @@
       "frameworks": {
         "netcoreapp3.1": {
           "projectReferences": {
-            "C:\\Users\\Luukd\\OneDrive\\Documenten\\Fontys\\SS2\\S2Software\\Skippy\\Skippy\\Logic\\Skippy.Logic.csproj": {
-              "projectPath": "C:\\Users\\Luukd\\OneDrive\\Documenten\\Fontys\\SS2\\S2Software\\Skippy\\Skippy\\Logic\\Skippy.Logic.csproj"
-            },
             "C:\\Users\\Luukd\\OneDrive\\Documenten\\Fontys\\SS2\\S2Software\\Skippy\\Skippy\\Skippy.Logic\\Skippy.Logic.csproj": {
               "projectPath": "C:\\Users\\Luukd\\OneDrive\\Documenten\\Fontys\\SS2\\S2Software\\Skippy\\Skippy\\Skippy.Logic\\Skippy.Logic.csproj"
             }
