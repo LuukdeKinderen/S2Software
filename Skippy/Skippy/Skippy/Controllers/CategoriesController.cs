@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using Skippy.Models;
 using System.Collections.Generic;
+using Skippy.Models.Mappers;
 
 namespace Skippy.Controllers
 {
@@ -13,7 +14,7 @@ namespace Skippy.Controllers
 
         public IActionResult Index()
         {
-            return View(ModelFactory.AllCategorieViewModels());
+            return View(CategorieMapper.AllCategorieViewModels());
         }
 
         [Authorize]
@@ -26,13 +27,11 @@ namespace Skippy.Controllers
         [HttpPost]
         public IActionResult Create(CategorieViewModel categorieModel)
         {
-            Categorie newCategorie = new Categorie()
-            {
-                titel = categorieModel.titel
-            };
+            Categorie newCategorie = CategorieMapper.Categorie(categorieModel);
+
             categorieContainer.AddNew(newCategorie);
 
-            return RedirectToAction("Index", ModelFactory.AllCategorieViewModels());
+            return RedirectToAction("Index", CategorieMapper.AllCategorieViewModels());
         }
 
         [Authorize]
@@ -41,7 +40,7 @@ namespace Skippy.Controllers
         {
             Categorie categorie = categorieContainer.GetByID(id);
 
-            CategorieViewModel categorieViewModel = ModelFactory.CategorieEditViewModel(categorie);
+            CategorieViewModel categorieViewModel = CategorieMapper.CategorieEditViewModel(categorie);
 
             return View(categorieViewModel);
         }
@@ -49,14 +48,10 @@ namespace Skippy.Controllers
         [HttpPost]
         public IActionResult Edit(CategorieViewModel categorieModel)
         {
-            Categorie categorie = new Categorie()
-            {
-                id = categorieModel.id,
-                titel = categorieModel.titel
-            };
+            Categorie categorie = CategorieMapper.Categorie(categorieModel);
             categorie.Update();
             categorie = categorieContainer.GetByID(categorie.id);
-            categorieModel = ModelFactory.CategorieEditViewModel(categorie);
+            categorieModel = CategorieMapper.CategorieEditViewModel(categorie);
             return RedirectToAction("Categorie", categorieModel);
         }
 
@@ -65,14 +60,14 @@ namespace Skippy.Controllers
         {
             categorieContainer.Delete(id);
 
-            return RedirectToAction("Index", ModelFactory.AllCategorieViewModels());
+            return RedirectToAction("Index", CategorieMapper.AllCategorieViewModels());
         }
 
         public IActionResult Categorie(int id)
         {
             Categorie categorie = categorieContainer.GetByID(id);
 
-            CategorieViewModel categorieViewModel = ModelFactory.CategorieViewModel(categorie);
+            CategorieViewModel categorieViewModel = CategorieMapper.CategorieViewModel(categorie);
 
             return View(categorieViewModel);
         }
@@ -83,7 +78,7 @@ namespace Skippy.Controllers
             Categorie categorie = categorieContainer.GetByID(categorieId);
             categorie.AddProduct(productId);
 
-            CategorieViewModel categorieViewModel = ModelFactory.CategorieEditViewModel(categorie);
+            CategorieViewModel categorieViewModel = CategorieMapper.CategorieEditViewModel(categorie);
 
             return RedirectToAction("Edit", categorieViewModel);
         }
@@ -93,7 +88,7 @@ namespace Skippy.Controllers
             Categorie categorie = categorieContainer.GetByID(categorieId);
             categorie.RemoveProduct(productId);
 
-            CategorieViewModel categorieViewModel = ModelFactory.CategorieEditViewModel(categorie);
+            CategorieViewModel categorieViewModel = CategorieMapper.CategorieEditViewModel(categorie);
 
             return RedirectToAction("Edit", categorieViewModel);
         }

@@ -6,6 +6,7 @@ using Skippy.Logic;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Skippy.Models;
+using Skippy.Models.Mappers;
 
 namespace Skippy.ViewComponents
 {
@@ -17,7 +18,7 @@ namespace Skippy.ViewComponents
         {
             int id = GetOrderId();
             Logic.Order order = orderContainer.GetByID(id);
-            OrderViewModel orderView = ModelFactory.OrderViewModel(order);
+            OrderViewModel orderView = OrderMapper.OrderViewModel(order);
             return View(orderView);
         }
 

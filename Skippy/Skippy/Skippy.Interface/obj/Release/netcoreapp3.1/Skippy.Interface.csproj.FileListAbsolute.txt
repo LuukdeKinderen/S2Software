@@ -1,0 +1,8 @@
+C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Skippy\Skippy\Skippy.Interface\bin\Release\netcoreapp3.1\Skippy.Interface.deps.json
+C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Skippy\Skippy\Skippy.Interface\bin\Release\netcoreapp3.1\Skippy.Interface.dll
+C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Skippy\Skippy\Skippy.Interface\bin\Release\netcoreapp3.1\Skippy.Interface.pdb
+C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Skippy\Skippy\Skippy.Interface\obj\Release\netcoreapp3.1\Skippy.Interface.csprojAssemblyReference.cache
+C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Skippy\Skippy\Skippy.Interface\obj\Release\netcoreapp3.1\Skippy.Interface.AssemblyInfoInputs.cache
+C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Skippy\Skippy\Skippy.Interface\obj\Release\netcoreapp3.1\Skippy.Interface.AssemblyInfo.cs
+C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Skippy\Skippy\Skippy.Interface\obj\Release\netcoreapp3.1\Skippy.Interface.dll
+C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Skippy\Skippy\Skippy.Interface\obj\Release\netcoreapp3.1\Skippy.Interface.pdb

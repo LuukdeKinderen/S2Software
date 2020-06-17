@@ -12,13 +12,7 @@ namespace Skippy.Models
         public string omschrijving { get; set; }
         public decimal prijs { get; set; }
 
-        public ProductViewModel(Logic.Product product)
-        {
-            id = product.id;
-            titel = product.titel;
-            omschrijving = product.omschrijving;
-            prijs = product.prijs;
-        }
+
         public ProductViewModel()
         {
 

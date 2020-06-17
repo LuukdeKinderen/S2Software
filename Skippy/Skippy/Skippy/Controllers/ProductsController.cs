@@ -7,6 +7,7 @@ using Skippy.Logic;
 using System.Diagnostics;
 using Microsoft.AspNetCore.Authorization;
 using Skippy.Models;
+using Skippy.Models.Mappers;
 
 namespace Skippy.Controllers
 {
@@ -16,18 +17,14 @@ namespace Skippy.Controllers
 
         public IActionResult Index()
         {
-            List<ProductViewModel> productViews = new List<ProductViewModel>();
-            foreach (Product product in productContainer.GetAll())
-            {
-                productViews.Add(new ProductViewModel(product));
-            }
+            List<ProductViewModel> productViews = ProductMapper.AllProductViewModels();
 
             return View(productViews);
         }
         public IActionResult Product(int id)
         {
             Product product = productContainer.GetByID(id);
-            ProductViewModel productView = new ProductViewModel(product);
+            ProductViewModel productView = ProductMapper.ProductViewModel(product);
             return View(productView);
         }
         [Authorize]
@@ -40,19 +37,11 @@ namespace Skippy.Controllers
         [HttpPost]
         public IActionResult Create(ProductViewModel productModel)
         {
-            Product newProduct = new Product()
-            {
-                titel = productModel.titel,
-                omschrijving = productModel.omschrijving,
-                prijs = productModel.prijs
-            };
+            Product newProduct = ProductMapper.Product(productModel);
+
             productContainer.AddNew(newProduct);
 
-            List<ProductViewModel> productViews = new List<ProductViewModel>();
-            foreach (Product product in productContainer.GetAll())
-            {
-                productViews.Add(new ProductViewModel(product));
-            }
+            List<ProductViewModel> productViews = ProductMapper.AllProductViewModels();
 
             return RedirectToAction("Index", productViews);
         }
@@ -61,24 +50,19 @@ namespace Skippy.Controllers
         public IActionResult Edit(int id)
         {
             Product product = productContainer.GetByID(id);
-            ProductViewModel productView = new ProductViewModel(product);
+            ProductViewModel productView = ProductMapper.ProductViewModel(product);
             return View(productView);
         }
 
         [HttpPost]
         public IActionResult Edit(ProductViewModel productModel)
         {
-            Product product = new Product()
-            {
-                titel = productModel.titel,
-                omschrijving = productModel.omschrijving,
-                prijs = productModel.prijs,
-                id = productModel.id
-            };
+            Product product = ProductMapper.Product(productModel);
+
             product.Update();
 
             product = productContainer.GetByID(product.id);
-            productModel = new ProductViewModel(product);
+            productModel = ProductMapper.ProductViewModel(product);
 
             return RedirectToAction("Product", productModel);
         }
@@ -87,11 +71,8 @@ namespace Skippy.Controllers
         {
             productContainer.Delete(id);
 
-            List<ProductViewModel> productViews = new List<ProductViewModel>();
-            foreach (Product product in productContainer.GetAll())
-            {
-                productViews.Add(new ProductViewModel(product));
-            }
+            List<ProductViewModel> productViews = ProductMapper.AllProductViewModels();
+
             return RedirectToAction("Index", productViews);
         }
     }

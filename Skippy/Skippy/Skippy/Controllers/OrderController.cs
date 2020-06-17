@@ -7,6 +7,7 @@ using Skippy.Logic;
 using System.Diagnostics;
 using Microsoft.AspNetCore.Http;
 using Skippy.Models;
+using Skippy.Models.Mappers;
 
 namespace Skippy.Controllers
 {
@@ -21,14 +22,14 @@ namespace Skippy.Controllers
         public IActionResult Index()
         {
 
-            List<OrderViewModel> orderViews = ModelFactory.AllOrderViewModels();
+            List<OrderViewModel> orderViews = OrderMapper.AllOrderViewModels();
             return View(orderViews);
         }
 
         public IActionResult Order(int id)
         {
             Order order = orderContainer.GetByID(id);
-            OrderViewModel orderModel = ModelFactory.OrderViewModel(order);
+            OrderViewModel orderModel = OrderMapper.OrderViewModel(order);
             return View(orderModel);
         }
 
@@ -36,7 +37,7 @@ namespace Skippy.Controllers
         {
             SetSessionOrderId(id);
 
-            return RedirectToAction("Index", "Categories", ModelFactory.AllCategorieViewModels());
+            return RedirectToAction("Index", "Categories", CategorieMapper.AllCategorieViewModels());
         }
 
         public IActionResult AddProduct(int aantal, int productId)
@@ -49,7 +50,7 @@ namespace Skippy.Controllers
 
             order.EditOrderRegel(orderRegel);
 
-            ProductViewModel productView = new ProductViewModel(product);
+            ProductViewModel productView = ProductMapper.ProductViewModel(product);
 
             return RedirectToAction("Product", "Products", productView);
         }
@@ -62,7 +63,7 @@ namespace Skippy.Controllers
             order.AddKlant(klantId);
 
 
-            return RedirectToAction("Index", "Categories", ModelFactory.AllCategorieViewModels());
+            return RedirectToAction("Index", "Categories", CategorieMapper.AllCategorieViewModels());
         }
 
         public IActionResult OpRekening(int id)
@@ -71,7 +72,7 @@ namespace Skippy.Controllers
             order.OpRekening();
             ClearSessionOrderId();
 
-            OrderViewModel orderView = ModelFactory.OrderViewModel(order);
+            OrderViewModel orderView = OrderMapper.OrderViewModel(order);
 
             return RedirectToAction("Order", orderView);
         }
@@ -83,7 +84,7 @@ namespace Skippy.Controllers
             order.Complete();
             ClearSessionOrderId();
 
-            OrderViewModel orderView = ModelFactory.OrderViewModel(order);
+            OrderViewModel orderView = OrderMapper.OrderViewModel(order);
 
             return RedirectToAction("Order", orderView);
         }
@@ -94,7 +95,7 @@ namespace Skippy.Controllers
 
             ClearSessionOrderId();
 
-            return RedirectToAction("Index", ModelFactory.AllOrderViewModels());
+            return RedirectToAction("Index", OrderMapper.AllOrderViewModels());
         }
 
 

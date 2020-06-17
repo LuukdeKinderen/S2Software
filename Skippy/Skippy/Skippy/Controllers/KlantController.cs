@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Skippy.Logic;
 using Skippy.Models;
+using Skippy.Models.Mappers;
 
 namespace Skippy.Controllers
 {
@@ -12,7 +13,7 @@ namespace Skippy.Controllers
 
         public IActionResult Index()
         {
-            List<KlantViewModel> klantViewModels = ModelFactory.AllKlantViewModels();
+            List<KlantViewModel> klantViewModels = KlantMapper.AllKlantViewModels();
             return View(klantViewModels);
         }
 
@@ -26,16 +27,12 @@ namespace Skippy.Controllers
         [HttpPost]
         public IActionResult Create(KlantViewModel klantModel)
         {
-            Klant newKlant = new Klant()
-            {
-                bezorgAdres = klantModel.bezorgAdres,
-                factuurAdres = klantModel.factuurAdres,
-                naam = klantModel.naam,
-            };
+            Klant newKlant = KlantMapper.Klant(klantModel);
+
             klantContainer.AddNew(newKlant);
 
 
-            List<KlantViewModel> klantViewModels = ModelFactory.AllKlantViewModels();
+            List<KlantViewModel> klantViewModels = KlantMapper.AllKlantViewModels();
             return RedirectToAction("Index", klantViewModels);
         }
 
@@ -45,24 +42,19 @@ namespace Skippy.Controllers
         public IActionResult Edit(int id)
         {
             Klant klant = klantContainer.GetByID(id);
-            KlantViewModel klantModel = ModelFactory.KlantViewModel(klant);
+            KlantViewModel klantModel = KlantMapper.KlantViewModel(klant);
             return View(klantModel);
         }
 
         [HttpPost]
         public IActionResult Edit(KlantViewModel klantModel)
         {
-            Klant klant = new Klant()
-            {
-                bezorgAdres = klantModel.bezorgAdres,
-                factuurAdres = klantModel.factuurAdres,
-                naam = klantModel.naam,
-                id = klantModel.id
-            };
+            Klant klant = KlantMapper.Klant(klantModel);
+
             klant.Update();
 
             klant = klantContainer.GetByID(klant.id);
-            klantModel = ModelFactory.KlantViewModelWithOrders(klant);
+            klantModel = KlantMapper.KlantViewModelWithOrders(klant);
 
             return RedirectToAction("Klant", klantModel);
         }
@@ -70,7 +62,7 @@ namespace Skippy.Controllers
         public IActionResult Klant(int id)
         {
             Klant klant = klantContainer.GetByID(id);
-            KlantViewModel klantModel = ModelFactory.KlantViewModelWithOrders(klant);
+            KlantViewModel klantModel = KlantMapper.KlantViewModelWithOrders(klant);
             return View(klantModel);
         }
     }
