@@ -47,10 +47,11 @@ namespace Skippy.Data
             {
                 using (SqlConnection connection = this.connection.CreateConnection())
                 {
-                    string Querry = string.Format("select * from Orders where Id={0}", id);
+                    string Querry = "select * from Orders where Id=@id";
                     using (SqlCommand command = new SqlCommand(Querry, connection))
                     {
                         connection.Open();
+                        command.Parameters.AddWithValue("@id", id);
                         var reader = command.ExecuteReader();
                         while (reader.Read())
                         {
@@ -58,9 +59,12 @@ namespace Skippy.Data
                             {
                                 Id = reader.GetInt32(0),
                                 Betaald = reader.GetBool(1),
-                                KlantId = reader.SafeGetInt(2),
                                 Date = reader.GetDateTime(3)
                             };
+                            if (!reader.IsDBNull(2))
+                            {
+                                newOrder.KlantId = reader.GetInt32(2);
+                            }
                             order = newOrder;
                         }
                     }
@@ -92,9 +96,12 @@ namespace Skippy.Data
                             {
                                 Id = reader.GetInt32(0),
                                 Betaald = reader.GetBool(1),
-                                KlantId = reader.SafeGetInt(2),
                                 Date = reader.GetDateTime(3)
                             };
+                            if (!reader.IsDBNull(2))
+                            {
+                                newOrder.KlantId = reader.GetInt32(2);
+                            }
                             orders.Add(newOrder);
                         }
                     }
@@ -280,41 +287,28 @@ namespace Skippy.Data
             }
         }
 
-        public void SetBetaalStatus(bool status, int id)
-        {
-            try
-            {
-                using (SqlConnection connection = this.connection.CreateConnection())
-                {
-                    string Querry = "UPDATE Orders SET Betaald = @betaald WHERE Id = @orderId";
-                    using (SqlCommand command = new SqlCommand(Querry, connection))
-                    {
-                        connection.Open();
-                        command.Parameters.AddWithValue("@orderId", id);
-                        command.Parameters.AddWithValue("@betaald", status);
-                        command.CommandType = CommandType.Text;
-                        command.ExecuteNonQuery();
-                    }
-                }
-            }
-            catch (SqlException se)
-            {
-                Console.Write(se.Message);
-            }
-        }
 
-        public void AddKlant(int orderId, int klantId)
+        public void Update(DtoOrder order)
         {
             try
             {
                 using (SqlConnection connection = this.connection.CreateConnection())
                 {
-                    string Querry = "UPDATE Orders SET KlantId = @klantId WHERE Id = @orderId";
+                    string Querry = "UPDATE Orders SET Betaald = @betaald, date = @date  WHERE Id = @orderId";
+                    if (order.KlantId.HasValue)
+                    {
+                        Querry = "UPDATE Orders SET Betaald = @betaald, KlantId = @klantId, date = @date  WHERE Id = @orderId";
+                    }
                     using (SqlCommand command = new SqlCommand(Querry, connection))
                     {
                         connection.Open();
-                        command.Parameters.AddWithValue("@orderId", orderId);
-                        command.Parameters.AddWithValue("@klantId", klantId);
+                        command.Parameters.AddWithValue("@orderId", order.Id);
+                        command.Parameters.AddWithValue("@betaald", order.Betaald);
+                        if (order.KlantId.HasValue)
+                        {
+                            command.Parameters.AddWithValue("@klantId", order.KlantId);
+                        }
+                        command.Parameters.AddWithValue("@date", order.Date);
                         command.CommandType = CommandType.Text;
                         command.ExecuteNonQuery();
                     }
@@ -326,6 +320,4 @@ namespace Skippy.Data
             }
         }
     }
-
-
 }

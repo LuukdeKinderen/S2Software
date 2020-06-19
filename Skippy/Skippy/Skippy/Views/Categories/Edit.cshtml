@@ -1,4 +1,4 @@
-﻿@model Skippy.Logic.Categorie
+﻿@model CategorieViewModel
 
 @{
     ViewData["Title"] = "Wijzig";
@@ -20,7 +20,7 @@
 
             <h4>Producten niet in categorie</h4>
             <ul>
-                @foreach (Skippy.Logic.Product product in Model.GetProducts())
+                @foreach (ProductViewModel product in Model.products)
                 {
                     <li>@product.titel <a asp-action="RemoveProduct" asp-route-categorieId=@Model.id asp-route-productId=@product.id>Verwijderen</a></li>
                 }
@@ -28,7 +28,7 @@
 
             <h4>Producten niet in categorie</h4>
             <ul>
-                @foreach (Skippy.Logic.Product product in Model.GetProductsNotInCategorie())
+                @foreach (ProductViewModel product in Model.productsNotInCategorie)
                 {
                     <li>@product.titel <a asp-action="AddProduct" asp-route-categorieId=@Model.id asp-route-productId=@product.id>Toevoegen</a></li>
                 }

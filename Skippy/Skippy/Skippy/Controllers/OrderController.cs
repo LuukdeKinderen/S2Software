@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using Skippy.Logic;
 using System.Diagnostics;
 using Microsoft.AspNetCore.Http;
+using Skippy.Models;
+using Skippy.Models.Mappers;
 
 namespace Skippy.Controllers
 {
@@ -15,25 +17,26 @@ namespace Skippy.Controllers
     {
         OrderContainer orderContainer = new OrderContainer();
         ProductContainer productContainer = new ProductContainer();
-        CategorieContainer categorieContainer = new CategorieContainer();
 
         public IActionResult Index()
         {
-            return View(orderContainer.GetAll());
+
+            List<OrderViewModel> orderViews = OrderMapper.AllOrderViewModels();
+            return View(orderViews);
         }
 
         public IActionResult Order(int id)
         {
             Order order = orderContainer.GetByID(id);
-            return View(order);
+            OrderViewModel orderModel = OrderMapper.OrderViewModel(order);
+            return View(orderModel);
         }
 
         public IActionResult EditOrder(int id)
         {
             SetSessionOrderId(id);
-            List<Categorie> categories = categorieContainer.GetAll();
 
-            return RedirectToAction("Index", "Categories", categories);
+            return RedirectToAction("Index", "Categories", CategorieMapper.AllCategorieViewModels());
         }
 
         public IActionResult AddProduct(int aantal, int productId)
@@ -46,7 +49,9 @@ namespace Skippy.Controllers
 
             order.EditOrderRegel(orderRegel);
 
-            return RedirectToAction("Product", "Products", product);
+            ProductViewModel productView = ProductMapper.ProductViewModel(product);
+
+            return RedirectToAction("Product", "Products", productView);
         }
 
         public IActionResult AddKlant(int klantId)
@@ -57,9 +62,7 @@ namespace Skippy.Controllers
             order.AddKlant(klantId);
 
 
-            List<Categorie> categories = categorieContainer.GetAll();
-
-            return RedirectToAction("Index", "Categories", categories);
+            return RedirectToAction("Index", "Categories", CategorieMapper.AllCategorieViewModels());
         }
 
         public IActionResult OpRekening(int id)
@@ -68,7 +71,9 @@ namespace Skippy.Controllers
             order.OpRekening();
             ClearSessionOrderId();
 
-            return RedirectToAction("Order", order);
+            OrderViewModel orderView = OrderMapper.OrderViewModel(order);
+
+            return RedirectToAction("Order", orderView);
         }
 
 
@@ -78,15 +83,18 @@ namespace Skippy.Controllers
             order.Complete();
             ClearSessionOrderId();
 
-            return RedirectToAction("Order", order);
+            OrderViewModel orderView = OrderMapper.OrderViewModel(order);
+
+            return RedirectToAction("Order", orderView);
         }
 
         public IActionResult Delete(int id)
         {
             orderContainer.Delete(id);
+
             ClearSessionOrderId();
 
-            return RedirectToAction("Index", orderContainer.GetAll());
+            return RedirectToAction("Index", OrderMapper.AllOrderViewModels());
         }
 
 

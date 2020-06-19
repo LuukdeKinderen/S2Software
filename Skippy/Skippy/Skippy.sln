@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Skippy.Factory", "Skippy.Fa
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Skippy.Interface", "Skippy.Interface\Skippy.Interface.csproj", "{1920DD8C-DA07-46D7-93A7-FB23E26AFC20}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Skippy.Logic", "Skippy.Logic\Skippy.Logic.csproj", "{CAE73895-C4AC-4AC7-914A-8CCAEEA45B02}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Skippy.Logic", "Skippy.Logic\Skippy.Logic.csproj", "{CAE73895-C4AC-4AC7-914A-8CCAEEA45B02}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

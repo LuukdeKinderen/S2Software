@@ -1,46 +1,48 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Circustrein
 {
-    class Wagon
+    public class Wagon
     {
         private List<Dier> dieren = new List<Dier>();
+        public IReadOnlyList<Dier> wagonDieren { get { return dieren.AsReadOnly(); } }
+
+        public readonly int maxWaarde;
+        public int Waarde { get { return dieren.Sum(dier => (int)dier.formaat); } }
+
         public Wagon()
         {
-
+            maxWaarde = 10;
         }
 
-        public bool AddDier(Dier dier)
+        public bool TryAndAddDier(Dier dier)
         {
-            
-            if (Waarde() + (int)dier.formaat > 10)
+            if (WaardeLimiet(dier))
             {
                 return false;
             }
-            foreach(Dier d in dieren)
+
+            foreach (Dier d in dieren)
             {
                 if (!bijElkaar(d, dier))
                 {
                     return false;
                 }
             }
+
             dieren.Add(dier);
             return true;
         }
 
-        private int Waarde()
+        private bool WaardeLimiet(Dier dier)
         {
-            int waarde = 0;
-            foreach (Dier dier in dieren)
-            {
-                waarde += (int)dier.formaat;
-            }
-            return waarde;
+            return Waarde + (int)dier.formaat > maxWaarde;
         }
 
-        bool bijElkaar(Dier dierEen, Dier dierTwee)
+        private bool bijElkaar(Dier dierEen, Dier dierTwee)
         {
             if (dierEen.vleesEter && dierEen.formaat >= dierTwee.formaat)
             {
@@ -57,12 +59,12 @@ namespace Circustrein
         {
 
             string str = "";
-            foreach(Dier dier in dieren)
+            foreach (Dier dier in dieren)
             {
                 str += dier.ToString();
             }
 
-            str += "Beladingswaarde: " + Waarde().ToString() + "\n\n\n\n\n";
+            str += "Beladingswaarde: " + Waarde.ToString() + "\n\n\n";
             return str;
         }
     }

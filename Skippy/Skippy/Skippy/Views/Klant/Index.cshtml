@@ -1,4 +1,4 @@
-﻿@model List<Skippy.Logic.Klant>
+﻿@model List<KlantViewModel>
 @{
     ViewData["Title"] = "Klanten";
 }
@@ -6,24 +6,14 @@
 <h1>Klanten</h1>
 <div class="container">
     <ul>
-        @foreach (Skippy.Logic.Klant klant in Model)
+        @foreach (KlantViewModel klant in Model)
         {
-
             <a asp-action="Klant"
                asp-route-id=@klant.id>
-
-
                 <li>@klant.naam</li>
-
-
             </a>
-
         }
     </ul>
 </div>
 
-<div>
 
-    @Html.ActionLink("Toevoegen", "Create")<br />
-
-</div>

@@ -4,7 +4,7 @@ namespace Skippy.Data
 {
     class DatabaseConnection
     {
-        string connectionString = "Server=LUUKDEKINDEREN;Database=Skippy;Trusted_Connection=true;";
+        string connectionString = "Server=mssql.fhict.local;Database=dbi429032_skippy;User Id = dbi429032_skippy; Password=*** *** *;";
 
 
         public SqlConnection CreateConnection()

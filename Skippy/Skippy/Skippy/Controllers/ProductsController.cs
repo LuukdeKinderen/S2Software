@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Skippy.Logic;
 using System.Diagnostics;
+using Microsoft.AspNetCore.Authorization;
+using Skippy.Models;
+using Skippy.Models.Mappers;
 
 namespace Skippy.Controllers
 {
@@ -14,14 +17,17 @@ namespace Skippy.Controllers
 
         public IActionResult Index()
         {
-            return View(productContainer.GetAll());
+            List<ProductViewModel> productViews = ProductMapper.AllProductViewModels();
+
+            return View(productViews);
         }
         public IActionResult Product(int id)
         {
             Product product = productContainer.GetByID(id);
-            return View(product);
+            ProductViewModel productView = ProductMapper.ProductViewModel(product);
+            return View(productView);
         }
-
+        [Authorize]
         [HttpGet]
         public IActionResult Create()
         {
@@ -29,29 +35,45 @@ namespace Skippy.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(Product product)
+        public IActionResult Create(ProductViewModel productModel)
         {
-            productContainer.AddNew(product);
-            return RedirectToAction("Index", productContainer.GetAll());
-        }
+            Product newProduct = ProductMapper.Product(productModel);
 
+            productContainer.AddNew(newProduct);
+
+            List<ProductViewModel> productViews = ProductMapper.AllProductViewModels();
+
+            return RedirectToAction("Index", productViews);
+        }
+        [Authorize]
         [HttpGet]
         public IActionResult Edit(int id)
         {
-            return View(productContainer.GetByID(id));
+            Product product = productContainer.GetByID(id);
+            ProductViewModel productView = ProductMapper.ProductViewModel(product);
+            return View(productView);
         }
 
         [HttpPost]
-        public IActionResult Edit(Product product)
+        public IActionResult Edit(ProductViewModel productModel)
         {
-            product.Update();
-            return RedirectToAction("Product", productContainer.GetByID(product.id));
-        }
+            Product product = ProductMapper.Product(productModel);
 
+            product.Update();
+
+            product = productContainer.GetByID(product.id);
+            productModel = ProductMapper.ProductViewModel(product);
+
+            return RedirectToAction("Product", productModel);
+        }
+        [Authorize]
         public IActionResult Delete(int id)
         {
             productContainer.Delete(id);
-            return RedirectToAction("Index", productContainer.GetAll());
+
+            List<ProductViewModel> productViews = ProductMapper.AllProductViewModels();
+
+            return RedirectToAction("Index", productViews);
         }
     }
 }

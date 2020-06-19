@@ -1,4 +1,4 @@
-﻿Skippy.Logicmodel Logic.Product
+﻿@model ProductViewModel
 
 @{
     ViewData["Title"] = Model.titel;
@@ -22,14 +22,14 @@
                     </div>
                     <div class="col-4">
                         <div class="form-group position-absolute" style="bottom:0">
-                            <input type="submit" value="Toevoegen" class="btn btn-primary" />
+                            <input type="submit" value="Aanpassen" class="btn btn-primary" />
                         </div>
                     </div>
                 </div>
             </form>
         </div>
         <div>
-            <a asp-action="Edit" asp-route-id=@Model.id>Wijzigen</a><br />
+            <a asp-action="Edit" asp-route-id=@Model.id>Product wijzigen</a><br />
         </div>
     </div>
 

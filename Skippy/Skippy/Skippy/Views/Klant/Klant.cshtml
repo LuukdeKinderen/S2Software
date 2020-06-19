@@ -1,4 +1,4 @@
-﻿@model Skippy.Logic.Klant
+﻿@model KlantViewModel
 
 @{
     ViewData["Title"] = Model.naam;
@@ -11,16 +11,16 @@
         <p>Orders van @Model.naam</p>
 
         <div class="rounded bg-white shadow-sm">
-            @Html.Partial("_OrderLijst", Model.GetOrders())
+            @Html.Partial("_OrderLijst", Model.orders)
         </div>
         <form asp-controller="Order" asp-action="AddKlant" asp-route-klantId=@Model.id>
 
             <div class="form-group">
-                <input type="submit" value="Toevoegen aan Order" class="btn btn-primary" />
+                <input type="submit" value="Toevoegen aan huidige Order" class="btn btn-primary" />
             </div>
         </form>
         <div>
-            <a asp-action="Edit" asp-route-id=@Model.id>Wijzigen</a><br />
+            <a asp-action="Edit" asp-route-id=@Model.id>Klant wijzigen</a><br />
         </div>
     </div>
 

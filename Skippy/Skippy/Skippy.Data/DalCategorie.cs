@@ -8,7 +8,7 @@ namespace Skippy.Data
 {
     public class DalCategorie : IDalCategorie
     {
-        private DatabaseConnection connection = new DatabaseConnection();
+        private readonly DatabaseConnection connection = new DatabaseConnection();
         public void Insert(DtoCategorie categorie)
         {
             try
@@ -99,7 +99,7 @@ namespace Skippy.Data
             {
                 using (SqlConnection connection = this.connection.CreateConnection())
                 {
-                    string Querry = "DELETE FROM Categories WHERE Id=@id";
+                    string Querry = "DELETE FROM Categorie_Product WHERE CategorieId = @id; DELETE FROM Categories WHERE Id=@id";
                     using (SqlCommand command = new SqlCommand(Querry, connection))
                     {
                         connection.Open();
@@ -215,7 +215,7 @@ namespace Skippy.Data
             return productDTOs;
         }
 
-        public void AddProduct(int categorieId,int productId)
+        public void AddProduct(int categorieId, int productId)
         {
             try
             {

@@ -9,3 +9,5 @@ In deze Repo vind je projecten en opdrachten waarmee ik alle leerdoelen van seme
 6. Je ontwerpt, bouwt en bevraagt een relationeel databasesysteem en integreert dit met een applicatie.
 7. Je verbetert en toont de kwaliteit van je software continue aan, gebruikmakend van standaard technieken en hulpmiddelen
 
+[Live versie van Skippy](https://i429032core.venus.fhict.nl/)
+*Kan zijn dat site later wordt overschreven*

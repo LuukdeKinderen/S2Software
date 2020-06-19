@@ -1,5 +1,9 @@
 ﻿using Skippy.Logic;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
+using Skippy.Models;
+using System.Collections.Generic;
+using Skippy.Models.Mappers;
 
 namespace Skippy.Controllers
 {
@@ -7,11 +11,13 @@ namespace Skippy.Controllers
     {
         CategorieContainer categorieContainer = new CategorieContainer();
 
+
         public IActionResult Index()
         {
-            return View(categorieContainer.GetAll());
+            return View(CategorieMapper.AllCategorieViewModels());
         }
 
+        [Authorize]
         [HttpGet]
         public IActionResult Create()
         {
@@ -19,50 +25,73 @@ namespace Skippy.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(Categorie categorie)
+        public IActionResult Create(CategorieViewModel categorieModel)
         {
-            categorieContainer.AddNew(categorie);
-            return RedirectToAction("Index", categorieContainer.GetAll());
+            Categorie newCategorie = CategorieMapper.Categorie(categorieModel);
+
+            categorieContainer.AddNew(newCategorie);
+
+            return RedirectToAction("Index", CategorieMapper.AllCategorieViewModels());
         }
 
+        [Authorize]
         [HttpGet]
         public IActionResult Edit(int id)
         {
-            return View(categorieContainer.GetByID(id));
+            Categorie categorie = categorieContainer.GetByID(id);
+
+            CategorieViewModel categorieViewModel = CategorieMapper.CategorieEditViewModel(categorie);
+
+            return View(categorieViewModel);
         }
 
         [HttpPost]
-        public IActionResult Edit(Categorie categorie)
+        public IActionResult Edit(CategorieViewModel categorieModel)
         {
+            Categorie categorie = CategorieMapper.Categorie(categorieModel);
             categorie.Update();
-            return RedirectToAction("Categorie", categorieContainer.GetByID(categorie.id));
+            categorie = categorieContainer.GetByID(categorie.id);
+            categorieModel = CategorieMapper.CategorieEditViewModel(categorie);
+            return RedirectToAction("Categorie", categorieModel);
         }
 
+        [Authorize]
         public IActionResult Delete(int id)
         {
             categorieContainer.Delete(id);
-            return RedirectToAction("Index", categorieContainer.GetAll());
+
+            return RedirectToAction("Index", CategorieMapper.AllCategorieViewModels());
         }
 
         public IActionResult Categorie(int id)
         {
-            return View(categorieContainer.GetByID(id));
+            Categorie categorie = categorieContainer.GetByID(id);
+
+            CategorieViewModel categorieViewModel = CategorieMapper.CategorieViewModel(categorie);
+
+            return View(categorieViewModel);
         }
 
+        [Authorize]
         public IActionResult AddProduct(int categorieId, int productId)
         {
             Categorie categorie = categorieContainer.GetByID(categorieId);
             categorie.AddProduct(productId);
 
-            return RedirectToAction("Edit", categorie);
-        }
+            CategorieViewModel categorieViewModel = CategorieMapper.CategorieEditViewModel(categorie);
 
+            return RedirectToAction("Edit", categorieViewModel);
+        }
+        [Authorize]
         public IActionResult RemoveProduct(int categorieId, int productId)
         {
             Categorie categorie = categorieContainer.GetByID(categorieId);
             categorie.RemoveProduct(productId);
 
-            return RedirectToAction("Edit", categorie);
+            CategorieViewModel categorieViewModel = CategorieMapper.CategorieEditViewModel(categorie);
+
+            return RedirectToAction("Edit", categorieViewModel);
         }
+
     }
 }
