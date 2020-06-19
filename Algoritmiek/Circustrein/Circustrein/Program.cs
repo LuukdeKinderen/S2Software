@@ -8,9 +8,26 @@ namespace Circustrein
     {
         static void Main(string[] args)
         {
+            int amount = 0;
+            bool correct = false;
+            while (!correct)
+            {
+                Console.WriteLine("Hoeveel random dieren wil je verdelen?");
+                string input = Console.ReadLine();
+                if (int.TryParse(input, out int inputAmount))
+                {
+                    amount = inputAmount;
+                    correct = true;
+                }
+                else
+                {
+                    Console.Clear();
+                    Console.WriteLine("Vul een geldig getal in");
+                }
+            }
 
 
-            List<Dier> dieren = DierFactory.randomDieren(10);
+            List<Dier> dieren = DierFactory.randomDieren(amount);
             Printer.PrintDieren("random gegenereerde dieren: ", dieren);
 
 

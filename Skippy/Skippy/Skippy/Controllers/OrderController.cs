@@ -17,7 +17,6 @@ namespace Skippy.Controllers
     {
         OrderContainer orderContainer = new OrderContainer();
         ProductContainer productContainer = new ProductContainer();
-        CategorieContainer categorieContainer = new CategorieContainer();
 
         public IActionResult Index()
         {

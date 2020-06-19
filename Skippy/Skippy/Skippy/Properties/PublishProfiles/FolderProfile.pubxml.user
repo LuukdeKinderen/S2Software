@@ -344,13 +344,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/16/2020 10:29:42</publishTime>
     </File>
     <File Include="Skippy.deps.json">
-      <publishTime>06/16/2020 12:33:24</publishTime>
+      <publishTime>06/18/2020 15:40:03</publishTime>
     </File>
     <File Include="Skippy.dll">
-      <publishTime>06/16/2020 12:33:14</publishTime>
+      <publishTime>06/18/2020 15:39:33</publishTime>
     </File>
     <File Include="Skippy.exe">
-      <publishTime>06/16/2020 12:33:14</publishTime>
+      <publishTime>06/18/2020 15:39:33</publishTime>
     </File>
     <File Include="Skippy.Factory.dll">
       <publishTime>06/16/2020 10:29:43</publishTime>
@@ -371,16 +371,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/16/2020 10:29:43</publishTime>
     </File>
     <File Include="Skippy.pdb">
-      <publishTime>06/16/2020 12:33:14</publishTime>
+      <publishTime>06/18/2020 15:39:33</publishTime>
     </File>
     <File Include="Skippy.runtimeconfig.json">
       <publishTime>06/16/2020 09:52:37</publishTime>
     </File>
     <File Include="Skippy.Views.dll">
-      <publishTime>06/16/2020 12:33:18</publishTime>
+      <publishTime>06/18/2020 15:39:35</publishTime>
     </File>
     <File Include="Skippy.Views.pdb">
-      <publishTime>06/16/2020 12:33:18</publishTime>
+      <publishTime>06/18/2020 15:39:35</publishTime>
     </File>
     <File Include="SQLitePCLRaw.batteries_v2.dll">
       <publishTime>11/01/2019 17:24:10</publishTime>
@@ -440,7 +440,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/12/2019 17:08:36</publishTime>
     </File>
     <File Include="web.config">
-      <publishTime>06/16/2020 12:33:24</publishTime>
+      <publishTime>06/18/2020 15:40:04</publishTime>
     </File>
     <File Include="wwwroot/css/my.css">
       <publishTime>05/12/2020 10:16:33</publishTime>

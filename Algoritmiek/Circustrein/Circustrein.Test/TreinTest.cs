@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Circustrein.Test
@@ -13,50 +12,50 @@ namespace Circustrein.Test
         public void ErZijnGeenLegeWagonsNaHetIndelenVanDieren()
         {
             //Arrange
-            List<Dier> dieren = DierFactory.randomDieren(10);
+
+            List<Dier> dieren = new List<Dier>
+            {
+                new Dier(false,Formaat.groot),
+                new Dier(false,Formaat.groot),
+                new Dier(false,Formaat.groot),
+                new Dier(false,Formaat.groot),
+                new Dier(false,Formaat.groot),
+            };
             Trein trein = new Trein();
+            trein.AddDieren(dieren);
 
             //Act
-            trein.AddDieren(dieren);
             trein.VerdeelDieren();
 
 
             //Assert
-            foreach (Wagon wagon in trein.treinWagons)
-            {
-                Assert.IsTrue(wagon.Waarde > 0);
-            }
+            Assert.IsTrue(trein.treinWagons[0].Waarde > 0);
+            Assert.IsTrue(trein.treinWagons[1].Waarde > 0);
+            Assert.IsTrue(trein.treinWagons[2].Waarde > 0);
+
         }
 
 
         [TestMethod]
-        public void AlleDierenZijnIngedeeldInEenWagon()
+        public void TreinMaaktZelfWagonsAan()
         {
             //Arrange
-            List<Dier> dieren = DierFactory.randomDieren(10);
+            Dier dier1 = new Dier(true, Formaat.klein);
+            Dier dier2 = new Dier(false, Formaat.klein);
+            List<Dier> dieren = new List<Dier>()
+            {
+                dier1,
+                dier2,
+            };
             Trein trein = new Trein();
+            trein.AddDieren(dieren);
+
 
             //Act
-            trein.AddDieren(dieren);
             trein.VerdeelDieren();
 
-
             //Assert
-            foreach (Dier dier in dieren)
-            {
-                bool found = false;
-                foreach (Wagon wagon in trein.treinWagons)
-                {
-                    List<Dier> wagonDieren = new List<Dier>(wagon.wagonDieren);
-                    if (wagonDieren.IndexOf(dier) >= 0)
-                    {
-                        found = true;
-                    }
-                }
-                Assert.IsTrue(found);
-            }
+            Assert.AreEqual(trein.treinWagons.Count, 2);
         }
-
-
     }
 }

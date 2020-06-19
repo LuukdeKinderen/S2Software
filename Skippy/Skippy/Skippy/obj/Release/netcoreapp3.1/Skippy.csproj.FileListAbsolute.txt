@@ -194,3 +194,4 @@ C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Skippy\Skippy\Skippy\ob
 C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Skippy\Skippy\Skippy\obj\Release\netcoreapp3.1\Skippy.csproj.CopyComplete
 C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Skippy\Skippy\Skippy\obj\Release\netcoreapp3.1\Skippy.dll
 C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Skippy\Skippy\Skippy\obj\Release\netcoreapp3.1\Skippy.pdb
+C:\Users\Luukd\OneDrive\Documenten\Fontys\SS2\S2Software\Skippy\Skippy\Skippy\obj\Release\netcoreapp3.1\Razor\Views\Secret\Index.cshtml.g.cs

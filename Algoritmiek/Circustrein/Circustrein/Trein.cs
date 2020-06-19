@@ -47,11 +47,11 @@ namespace Circustrein
         {
             string str = "";
 
-            str += "Dieren per Trein: \n";
+            str += "Dieren per Wagon: \n";
             for (int t = 0; t < trein.Count; t++)
             {
 
-                str += string.Format("trein {0}: \n", t);
+                str += string.Format("wagon {0}: \n", t);
                 str += string.Format("{0}\n", trein[t].ToString());
             }
 

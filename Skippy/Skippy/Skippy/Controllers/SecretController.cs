@@ -6,6 +6,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Skippy.MemoryData;
@@ -26,6 +27,12 @@ namespace Skippy.Controllers
         {
             _userManager = userManager;
             _signInManager = signInManager;
+        }
+
+        [Authorize]
+        public IActionResult Index()
+        {
+            return View();
         }
 
         [HttpGet]
@@ -49,18 +56,20 @@ namespace Skippy.Controllers
 
                 if (signInResult.Succeeded)
                 {
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index");
                 }
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index");
         }
 
+        [Authorize]
         [HttpGet]
         public IActionResult Register()
         {
             return View(new UserViewModel());
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> Register(UserViewModel loginModel)
         {
@@ -76,17 +85,17 @@ namespace Skippy.Controllers
 
                 if (signInResult.Succeeded)
                 {
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index");
                 }
             }
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index");
         }
 
         public async Task<IActionResult> LogOut()
         {
             await _signInManager.SignOutAsync();
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index");
         }
 
 

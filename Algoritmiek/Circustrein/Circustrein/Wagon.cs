@@ -64,7 +64,7 @@ namespace Circustrein
                 str += dier.ToString();
             }
 
-            str += "Beladingswaarde: " + Waarde.ToString() + "\n\n\n\n\n";
+            str += "Beladingswaarde: " + Waarde.ToString() + "\n\n\n";
             return str;
         }
     }

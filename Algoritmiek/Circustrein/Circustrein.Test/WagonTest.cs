@@ -13,9 +13,9 @@ namespace Circustrein.Test
             Dier plantEterKlein = new Dier(false, Formaat.klein);
             Dier vleesEterGroot = new Dier(true, Formaat.groot);
             Wagon wagon = new Wagon();
+            wagon.TryAndAddDier(plantEterKlein);
 
             //Act
-            wagon.TryAndAddDier(plantEterKlein);
             bool result = wagon.TryAndAddDier(vleesEterGroot);
 
             //Assert
@@ -30,9 +30,9 @@ namespace Circustrein.Test
             Dier vleesEterMiddelEen = new Dier(true, Formaat.middel);
             Dier vleesEterMiddelTwee = new Dier(true, Formaat.middel);
             Wagon wagon = new Wagon();
+            wagon.TryAndAddDier(vleesEterMiddelEen);
 
             //Act
-            wagon.TryAndAddDier(vleesEterMiddelEen);
             bool result = wagon.TryAndAddDier(vleesEterMiddelTwee);
 
             //Assert
@@ -47,9 +47,9 @@ namespace Circustrein.Test
             Dier plantEterGroot = new Dier(false, Formaat.groot);
             Dier vleesEterklein = new Dier(true, Formaat.klein);
             Wagon wagon = new Wagon();
+            wagon.TryAndAddDier(vleesEterklein);
 
             //Act
-            wagon.TryAndAddDier(vleesEterklein);
             bool result = wagon.TryAndAddDier(plantEterGroot);
             
             //Assert
@@ -65,12 +65,15 @@ namespace Circustrein.Test
             Dier plantGrootTwee = new Dier(false, Formaat.groot);
             Dier plantGrootDrie = new Dier(false, Formaat.groot);
             Wagon wagon = new Wagon();
-
-            //Act
+            
             wagon.TryAndAddDier(plantGrootEen);
             wagon.TryAndAddDier(plantGrootTwee);
+            
             int beginWaarde = wagon.Waarde;
             int newWaarde = wagon.Waarde + (int)plantGrootDrie.formaat;
+
+
+            //Act
             bool result = wagon.TryAndAddDier(plantGrootDrie);
 
             //Assert

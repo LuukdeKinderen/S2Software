@@ -5,7 +5,8 @@ using System.Text;
 namespace Circustrein
 {
     public static class Printer
-    { public static void PrintDieren(string message, List<Dier> dieren)
+    {
+        public static void PrintDieren(string message, List<Dier> dieren)
         {
             Console.WriteLine(message);
             foreach (Dier dier in dieren)

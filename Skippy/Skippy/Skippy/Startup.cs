@@ -37,7 +37,7 @@ namespace Skippy
 
             services.AddDbContext<AppDbContext>(options =>
             {
-                options.UseSqlServer("Server=mssql.fhict.local;Database=dbi429032_skippyuser;User Id=dbi429032_skippyuser;Password=123123q;");
+                options.UseSqlServer("Server=mssql.fhict.local;Database=dbi429032_skippyuser;User Id=dbi429032_skippyuser;Password=*** *** *;");
             });
 
             services.AddIdentity<IdentityUser, IdentityRole>(options =>
